@@ -1,19 +1,19 @@
 {
   "site": {
-    "brandName": "Licenza",
-    "brandTagline": "اشتراكات برامج أصلية",
+    "brandName": "RJ Tech",
+    "brandTagline": "اشتراكات عالمية بأسعار تنافسية",
     "logoUrl": "",
-    "heroTitle": "أدوات الإبداع والهندسة، باشتراك أصلي وموثوق",
+    "heroTitle": "أدوات الإبداع والهندسة، باشتراكات و أسعار تنافسية",
     "heroSubtitle": "فوتوشوب، إليستريتور، بريمير، أوتوكاد وكل برامج Adobe و Autodesk بأسعار محلية وتفعيل فوري، مع دعم مباشر بعد كل عملية شراء.",
     "heroImage": "",
-    "adminPasswordHash": "240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9",
+    "adminPasswordHash": "5d830044066c031c1a7e73e5b52448bfa65c90fedb152ea64c0d1ed276906ca6",
     "telegramUsername": "your_telegram_username",
-    "facebookPageUrl": "https://facebook.com/yourpage",
+    "facebookPageUrl": "https://www.facebook.com/profile.php?id=61594083745646",
     "messengerLink": "https://m.me/yourpage",
     "whatsappNumber": "",
-    "aboutText": "نحن متجر متخصص في توفير اشتراكات برامج Adobe و Autodesk الأصلية لعملائنا في المنطقة، بأسعار تناسب السوق المحلي وطرق دفع مبسطة. كل اشتراك يُفعَّل يدويًا من فريقنا خلال دقائق من تأكيد الطلب.",
-    "footerText": "جميع الأسماء والعلامات التجارية (Adobe، Autodesk) ملك لأصحابها. هذا المتجر معيد بيع اشتراكات وليس تابعًا رسميًا للشركتين.",
-    "supportHours": "متوفرون يوميًا من 9 صباحًا حتى 11 مساءً"
+    "aboutText": "نحن متجر متخصص في توفير اشتراكات برامج Adobe و Autodesk لعملائنا في المنطقة، بأسعار تناسب السوق المحلي وطرق دفع مبسطة. كل اشتراك يُفعَّل يدويًا من فريقنا خلال دقائق من تأكيد الطلب.",
+    "footerText": "جميع الأسماء والعلامات التجارية (Adobe، Autodesk) ملك لأصحابها. هذا المتجر معيد بيع اشتراكات وليس تابعًا رسميًا للشركات.",
+    "supportHours": "متوفرون يوميًا من 10 صباحًا حتى 6 مساءً"
   },
   "banners": [
     {
