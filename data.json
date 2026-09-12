@@ -1,0 +1,117 @@
+{
+  "site": {
+    "brandName": "Licenza",
+    "brandTagline": "اشتراكات برامج أصلية",
+    "logoUrl": "",
+    "heroTitle": "أدوات الإبداع والهندسة، باشتراك أصلي وموثوق",
+    "heroSubtitle": "فوتوشوب، إليستريتور، بريمير، أوتوكاد وكل برامج Adobe و Autodesk بأسعار محلية وتفعيل فوري، مع دعم مباشر بعد كل عملية شراء.",
+    "heroImage": "",
+    "adminPasswordHash": "240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9",
+    "telegramUsername": "your_telegram_username",
+    "facebookPageUrl": "https://facebook.com/yourpage",
+    "messengerLink": "https://m.me/yourpage",
+    "whatsappNumber": "",
+    "aboutText": "نحن متجر متخصص في توفير اشتراكات برامج Adobe و Autodesk الأصلية لعملائنا في المنطقة، بأسعار تناسب السوق المحلي وطرق دفع مبسطة. كل اشتراك يُفعَّل يدويًا من فريقنا خلال دقائق من تأكيد الطلب.",
+    "footerText": "جميع الأسماء والعلامات التجارية (Adobe، Autodesk) ملك لأصحابها. هذا المتجر معيد بيع اشتراكات وليس تابعًا رسميًا للشركتين.",
+    "supportHours": "متوفرون يوميًا من 9 صباحًا حتى 11 مساءً"
+  },
+  "banners": [
+    {
+      "title": "عروض بداية الموسم",
+      "subtitle": "خصم يصل إلى 20% على باقات Adobe السنوية",
+      "badge": "لفترة محدودة"
+    },
+    {
+      "title": "باقة الطلاب والمهندسين",
+      "subtitle": "أسعار خاصة لحاملي البطاقة الجامعية على AutoCAD و Revit",
+      "badge": "جديد"
+    }
+  ],
+  "products": [
+    {
+      "id": "ps-1m",
+      "brand": "Adobe",
+      "swatch": "#31A8FF",
+      "name": "Photoshop",
+      "description": "تحرير الصور الاحترافي، اشتراك فردي مفعّل على حسابك الخاص.",
+      "duration": "شهر واحد",
+      "price": "2200",
+      "oldPrice": "2800",
+      "currency": "دج",
+      "badge": "الأكثر طلبًا"
+    },
+    {
+      "id": "cc-all-12m",
+      "brand": "Adobe",
+      "swatch": "#DA1F26",
+      "name": "Creative Cloud - جميع التطبيقات",
+      "description": "أكثر من 20 برنامج من Adobe بما فيها فوتوشوب وإليستريتور وبريمير.",
+      "duration": "12 شهرًا",
+      "price": "13500",
+      "oldPrice": "16900",
+      "currency": "دج",
+      "badge": "أفضل قيمة"
+    },
+    {
+      "id": "ai-1m",
+      "brand": "Adobe",
+      "swatch": "#FF9A00",
+      "name": "Illustrator",
+      "description": "تصميم فيكتور احترافي للشعارات والهوية البصرية.",
+      "duration": "شهر واحد",
+      "price": "2200",
+      "oldPrice": "",
+      "currency": "دج",
+      "badge": ""
+    },
+    {
+      "id": "pr-1m",
+      "brand": "Adobe",
+      "swatch": "#00005B",
+      "name": "Premiere Pro",
+      "description": "مونتاج فيديو احترافي بجودة سينمائية.",
+      "duration": "شهر واحد",
+      "price": "2200",
+      "oldPrice": "",
+      "currency": "دج",
+      "badge": ""
+    },
+    {
+      "id": "acad-12m",
+      "brand": "Autodesk",
+      "swatch": "#E51937",
+      "name": "AutoCAD",
+      "description": "الرسم الهندسي ثنائي وثلاثي الأبعاد لجميع التخصصات.",
+      "duration": "12 شهرًا",
+      "price": "18500",
+      "oldPrice": "22000",
+      "currency": "دج",
+      "badge": "طلاب وموظفون"
+    },
+    {
+      "id": "revit-12m",
+      "brand": "Autodesk",
+      "swatch": "#00A6E8",
+      "name": "Revit",
+      "description": "نمذجة معلومات البناء BIM للمهندسين المعماريين.",
+      "duration": "12 شهرًا",
+      "price": "19500",
+      "oldPrice": "",
+      "currency": "دج",
+      "badge": ""
+    },
+    {
+      "id": "3dsmax-12m",
+      "brand": "Autodesk",
+      "swatch": "#00CC6A",
+      "name": "3ds Max",
+      "description": "نمذجة ثلاثية الأبعاد ورندر احترافي.",
+      "duration": "12 شهرًا",
+      "price": "19500",
+      "oldPrice": "",
+      "currency": "دج",
+      "badge": ""
+    }
+  ],
+  "orders": []
+}

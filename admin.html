@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>لوحة التحكم — Licenza</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#10151f; --ink-2:#182236; --paper:#f5f6f2; --paper-2:#ffffff;
+    --text:#12161c; --muted:#5b6472; --signal:#ff6a3d; --line:rgba(18,22,28,0.12);
+    --ok:#1e9e5a; --err:#d33d3d;
+    --font-ar:'IBM Plex Sans Arabic', sans-serif; --font-en:'Space Grotesk', sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:var(--font-ar); background:var(--paper); color:var(--text); line-height:1.6;}
+  .en{font-family:var(--font-en);}
+  a{color:inherit;}
+  button{font-family:inherit; cursor:pointer;}
+  input,textarea,select{font-family:inherit;}
+
+  /* ---------- login screen ---------- */
+  #loginScreen{
+    min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px;
+  }
+  .login-box{
+    background:var(--paper-2); border:1px solid var(--line); border-radius:16px; padding:36px;
+    max-width:380px; width:100%;
+  }
+  .login-box h1{font-size:20px; margin-bottom:6px;}
+  .login-box p{font-size:13.5px; color:var(--muted); margin-bottom:24px;}
+  .field{margin-bottom:16px;}
+  .field label{display:block; font-size:13px; font-weight:600; margin-bottom:6px;}
+  .field input, .field textarea{
+    width:100%; padding:11px 14px; border-radius:10px; border:1px solid var(--line);
+    font-size:14.5px; background:var(--paper);
+  }
+  .field textarea{resize:vertical; min-height:80px;}
+  .field small{display:block; color:var(--muted); font-size:12px; margin-top:5px;}
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    padding:12px 22px; border-radius:10px; font-size:14.5px; font-weight:600; border:none;
+  }
+  .btn-primary{background:var(--ink); color:#fff; width:100%;}
+  .btn-primary:hover{background:#222e47;}
+  .btn-ghost{background:transparent; border:1px solid var(--line); color:var(--text);}
+  .btn-danger{background:#fdeceb; color:var(--err);}
+  .msg{font-size:13.5px; margin-top:12px; padding:10px 14px; border-radius:8px; display:none;}
+  .msg.show{display:block;}
+  .msg.err{background:#fdeceb; color:var(--err);}
+  .msg.ok{background:#e8f7ee; color:var(--ok);}
+
+  /* ---------- app shell ---------- */
+  #app{display:none;}
+  header{
+    position:sticky; top:0; z-index:20; background:var(--paper-2); border-bottom:1px solid var(--line);
+  }
+  .topbar{
+    max-width:1100px; margin:0 auto; padding:16px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;
+  }
+  .topbar h1{font-size:17px; font-weight:700;}
+  .topbar h1 span{color:var(--muted); font-weight:500; font-size:13px; display:block; margin-top:2px;}
+  .topbar-actions{display:flex; gap:10px; align-items:center; flex-wrap:wrap;}
+  .status-dot{width:8px; height:8px; border-radius:50%; background:var(--muted); display:inline-block;}
+  .status-dot.connected{background:var(--ok);}
+
+  main{max-width:1100px; margin:0 auto; padding:28px 24px 80px;}
+  .tabs{display:flex; gap:8px; margin-bottom:26px; flex-wrap:wrap; border-bottom:1px solid var(--line);}
+  .tab-btn{
+    padding:12px 6px; margin-left:20px; font-size:14.5px; font-weight:600; color:var(--muted);
+    border:none; background:none; border-bottom:2px solid transparent; margin-bottom:-1px;
+  }
+  .tab-btn.active{color:var(--ink); border-bottom-color:var(--signal);}
+  .panel{display:none;}
+  .panel.active{display:block;}
+
+  .card{background:var(--paper-2); border:1px solid var(--line); border-radius:14px; padding:24px; margin-bottom:20px;}
+  .card h3{font-size:15.5px; margin-bottom:16px;}
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  .grid3{display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px;}
+  @media(max-width:720px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  .product-item, .banner-item{
+    border:1px solid var(--line); border-radius:12px; padding:18px; margin-bottom:14px; position:relative;
+  }
+  .item-head{display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;}
+  .item-head strong{font-size:14px;}
+  .remove-btn{
+    font-size:12.5px; font-weight:600; color:var(--err); background:none; border:none;
+  }
+  .add-btn{
+    width:100%; padding:13px; border:1.5px dashed var(--line); border-radius:12px; background:none;
+    color:var(--muted); font-weight:600; font-size:14px;
+  }
+  .add-btn:hover{border-color:var(--muted);}
+
+  .save-bar{
+    position:fixed; bottom:0; right:0; left:0; background:var(--paper-2); border-top:1px solid var(--line);
+    padding:14px 24px; display:flex; justify-content:center; gap:12px; z-index:30;
+  }
+  .save-bar-inner{max-width:1100px; width:100%; display:flex; justify-content:space-between; align-items:center; gap:14px; flex-wrap:wrap;}
+  .save-note{font-size:13px; color:var(--muted);}
+  .swatch-input{display:flex; align-items:center; gap:10px;}
+  .swatch-preview{width:38px; height:38px; border-radius:8px; border:1px solid var(--line); flex-shrink:0;}
+</style>
+</head>
+<body>
+
+<!-- ============ شاشة الدخول ============ -->
+<div id="loginScreen">
+  <div class="login-box">
+    <h1>لوحة تحكم المالك</h1>
+    <p>أدخل كلمة المرور للوصول إلى إعدادات الموقع.<br>كلمة المرور الافتراضية: <strong class="en">admin123</strong> (غيّرها من التبويب "الإعدادات العامة" فور دخولك).</p>
+    <div class="field">
+      <label for="pwInput">كلمة المرور</label>
+      <input type="password" id="pwInput" placeholder="••••••••">
+    </div>
+    <button class="btn btn-primary" id="loginBtn">دخول</button>
+    <div class="msg err" id="loginMsg"></div>
+  </div>
+</div>
+
+<!-- ============ التطبيق ============ -->
+<div id="app">
+  <header>
+    <div class="topbar">
+      <h1>لوحة تحكم المالك <span id="connStatusText">غير متصل بـ GitHub — التعديلات ستُحفظ محليًا فقط حتى تُهيّئ الاتصال</span></h1>
+      <div class="topbar-actions">
+        <span class="status-dot" id="connDot"></span>
+        <button class="btn btn-ghost" id="downloadBtn">تنزيل data.json</button>
+        <button class="btn btn-primary" id="saveGithubBtn">حفظ ونشر على الموقع</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="general">الإعدادات العامة</button>
+      <button class="tab-btn" data-tab="products">البرامج والأسعار</button>
+      <button class="tab-btn" data-tab="banners">الإعلانات</button>
+      <button class="tab-btn" data-tab="sync">الاتصال بـ GitHub</button>
+    </div>
+
+    <!-- ---------- عام ---------- -->
+    <div class="panel active" id="panel-general">
+      <div class="card">
+        <h3>الهوية والعنوان</h3>
+        <div class="grid2">
+          <div class="field"><label>اسم المتجر</label><input id="f-brandName"></div>
+          <div class="field"><label>الشعار النصي (Tagline)</label><input id="f-brandTagline"></div>
+        </div>
+        <div class="field"><label>رابط صورة الشعار (Logo URL) — اختياري</label><input id="f-logoUrl" placeholder="https://..."></div>
+        <div class="field"><label>عنوان الصفحة الرئيسية (Hero)</label><input id="f-heroTitle"></div>
+        <div class="field"><label>الوصف تحت العنوان الرئيسي</label><textarea id="f-heroSubtitle"></textarea></div>
+      </div>
+
+      <div class="card">
+        <h3>نبذة عن المتجر والدعم</h3>
+        <div class="field"><label>نص "من نحن"</label><textarea id="f-aboutText"></textarea></div>
+        <div class="field"><label>ساعات الدعم</label><input id="f-supportHours"></div>
+        <div class="field"><label>نص أسفل الصفحة (Footer)</label><textarea id="f-footerText"></textarea></div>
+      </div>
+
+      <div class="card">
+        <h3>روابط التواصل</h3>
+        <div class="grid2">
+          <div class="field"><label>معرّف تيليجرام (بدون @)</label><input id="f-telegramUsername" class="en"></div>
+          <div class="field"><label>رابط ماسنجر (m.me/...)</label><input id="f-messengerLink" class="en"></div>
+        </div>
+        <div class="field"><label>رابط صفحة فيسبوك</label><input id="f-facebookPageUrl" class="en"></div>
+      </div>
+
+      <div class="card">
+        <h3>تغيير كلمة مرور لوحة التحكم</h3>
+        <div class="grid2">
+          <div class="field"><label>كلمة المرور الجديدة</label><input type="password" id="f-newPassword" placeholder="اتركها فارغة إذا لا تريد التغيير"></div>
+          <div class="field"><label>تأكيد كلمة المرور</label><input type="password" id="f-newPassword2"></div>
+        </div>
+        <small style="color:var(--muted); font-size:12.5px;">ملاحظة أمان: هذه الحماية أساسية مناسبة لثني الزوار العاديين، وليست بديلاً عن حماية خادم حقيقية. لا تستخدم كلمة مرور تستخدمها في حسابات أخرى.</small>
+      </div>
+    </div>
+
+    <!-- ---------- المنتجات ---------- -->
+    <div class="panel" id="panel-products">
+      <div id="productsList"></div>
+      <button class="add-btn" id="addProductBtn">+ إضافة برنامج جديد</button>
+    </div>
+
+    <!-- ---------- الإعلانات ---------- -->
+    <div class="panel" id="panel-banners">
+      <div id="bannersList"></div>
+      <button class="add-btn" id="addBannerBtn">+ إضافة إعلان جديد</button>
+    </div>
+
+    <!-- ---------- الاتصال بـ GitHub ---------- -->
+    <div class="panel" id="panel-sync">
+      <div class="card">
+        <h3>ربط لوحة التحكم بمستودع GitHub</h3>
+        <p style="font-size:13.5px; color:var(--muted); margin-bottom:18px;">
+          لكي يحفظ زر "حفظ ونشر" تعديلاتك مباشرة على الموقع الحي، تحتاج لإنشاء
+          <strong>Personal Access Token</strong> من نوع Fine-grained من حسابك في GitHub، بصلاحية Contents: Read and write على مستودع الموقع فقط. الرمز يُحفظ في متصفحك فقط ولا يُرسل لأي جهة غير GitHub.
+        </p>
+        <div class="grid3">
+          <div class="field"><label>اسم المستخدم / المؤسسة</label><input id="f-ghOwner" class="en" placeholder="username"></div>
+          <div class="field"><label>اسم المستودع</label><input id="f-ghRepo" class="en" placeholder="my-site"></div>
+          <div class="field"><label>الفرع (Branch)</label><input id="f-ghBranch" class="en" placeholder="main" value="main"></div>
+        </div>
+        <div class="field"><label>مسار ملف البيانات</label><input id="f-ghPath" class="en" value="data.json"></div>
+        <div class="field"><label>GitHub Token</label><input type="password" id="f-ghToken" class="en" placeholder="github_pat_..."></div>
+        <button class="btn btn-ghost" id="testConnBtn">اختبار الاتصال</button>
+        <button class="btn btn-danger" id="forgetTokenBtn" style="margin-inline-start:8px;">نسيان الرمز من هذا المتصفح</button>
+        <div class="msg" id="syncMsg"></div>
+      </div>
+    </div>
+  </main>
+
+  <div class="save-bar">
+    <div class="save-bar-inner">
+      <span class="save-note" id="saveNote">آخر حفظ محلي: —</span>
+      <div style="display:flex; gap:10px;">
+        <button class="btn btn-ghost" id="downloadBtn2">تنزيل data.json</button>
+        <button class="btn btn-primary" id="saveGithubBtn2">حفظ ونشر على الموقع</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const DEFAULT_DATA = {
+  "site": {
+    "brandName": "Licenza",
+    "brandTagline": "اشتراكات برامج أصلية",
+    "logoUrl": "",
+    "heroTitle": "أدوات الإبداع والهندسة، باشتراك أصلي وموثوق",
+    "heroSubtitle": "فوتوشوب، إليستريتور، بريمير، أوتوكاد وكل برامج Adobe و Autodesk بأسعار محلية وتفعيل فوري، مع دعم مباشر بعد كل عملية شراء.",
+    "heroImage": "",
+    "adminPasswordHash": "240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9",
+    "telegramUsername": "your_telegram_username",
+    "facebookPageUrl": "https://facebook.com/yourpage",
+    "messengerLink": "https://m.me/yourpage",
+    "whatsappNumber": "",
+    "aboutText": "نحن متجر متخصص في توفير اشتراكات برامج Adobe و Autodesk الأصلية لعملائنا في المنطقة، بأسعار تناسب السوق المحلي وطرق دفع مبسطة. كل اشتراك يُفعَّل يدويًا من فريقنا خلال دقائق من تأكيد الطلب.",
+    "footerText": "جميع الأسماء والعلامات التجارية (Adobe، Autodesk) ملك لأصحابها. هذا المتجر معيد بيع اشتراكات وليس تابعًا رسميًا للشركتين.",
+    "supportHours": "متوفرون يوميًا من 9 صباحًا حتى 11 مساءً"
+  },
+  "banners": [
+    {
+      "title": "عروض بداية الموسم",
+      "subtitle": "خصم يصل إلى 20% على باقات Adobe السنوية",
+      "badge": "لفترة محدودة"
+    },
+    {
+      "title": "باقة الطلاب والمهندسين",
+      "subtitle": "أسعار خاصة لحاملي البطاقة الجامعية على AutoCAD و Revit",
+      "badge": "جديد"
+    }
+  ],
+  "products": [
+    {
+      "id": "ps-1m",
+      "brand": "Adobe",
+      "swatch": "#31A8FF",
+      "name": "Photoshop",
+      "description": "تحرير الصور الاحترافي، اشتراك فردي مفعّل على حسابك الخاص.",
+      "duration": "شهر واحد",
+      "price": "2200",
+      "oldPrice": "2800",
+      "currency": "دج",
+      "badge": "الأكثر طلبًا"
+    },
+    {
+      "id": "cc-all-12m",
+      "brand": "Adobe",
+      "swatch": "#DA1F26",
+      "name": "Creative Cloud - جميع التطبيقات",
+      "description": "أكثر من 20 برنامج من Adobe بما فيها فوتوشوب وإليستريتور وبريمير.",
+      "duration": "12 شهرًا",
+      "price": "13500",
+      "oldPrice": "16900",
+      "currency": "دج",
+      "badge": "أفضل قيمة"
+    },
+    {
+      "id": "ai-1m",
+      "brand": "Adobe",
+      "swatch": "#FF9A00",
+      "name": "Illustrator",
+      "description": "تصميم فيكتور احترافي للشعارات والهوية البصرية.",
+      "duration": "شهر واحد",
+      "price": "2200",
+      "oldPrice": "",
+      "currency": "دج",
+      "badge": ""
+    },
+    {
+      "id": "pr-1m",
+      "brand": "Adobe",
+      "swatch": "#00005B",
+      "name": "Premiere Pro",
+      "description": "مونتاج فيديو احترافي بجودة سينمائية.",
+      "duration": "شهر واحد",
+      "price": "2200",
+      "oldPrice": "",
+      "currency": "دج",
+      "badge": ""
+    },
+    {
+      "id": "acad-12m",
+      "brand": "Autodesk",
+      "swatch": "#E51937",
+      "name": "AutoCAD",
+      "description": "الرسم الهندسي ثنائي وثلاثي الأبعاد لجميع التخصصات.",
+      "duration": "12 شهرًا",
+      "price": "18500",
+      "oldPrice": "22000",
+      "currency": "دج",
+      "badge": "طلاب وموظفون"
+    },
+    {
+      "id": "revit-12m",
+      "brand": "Autodesk",
+      "swatch": "#00A6E8",
+      "name": "Revit",
+      "description": "نمذجة معلومات البناء BIM للمهندسين المعماريين.",
+      "duration": "12 شهرًا",
+      "price": "19500",
+      "oldPrice": "",
+      "currency": "دج",
+      "badge": ""
+    },
+    {
+      "id": "3dsmax-12m",
+      "brand": "Autodesk",
+      "swatch": "#00CC6A",
+      "name": "3ds Max",
+      "description": "نمذجة ثلاثية الأبعاد ورندر احترافي.",
+      "duration": "12 شهرًا",
+      "price": "19500",
+      "oldPrice": "",
+      "currency": "دج",
+      "badge": ""
+    }
+  ],
+  "orders": []
+};
+let SITE = JSON.parse(JSON.stringify(DEFAULT_DATA));
+
+/* ---------------- تشفير كلمة المرور ---------------- */
+async function sha256(text){
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+
+/* ---------------- تحميل البيانات الحالية ---------------- */
+async function loadData(){
+  try{
+    const res = await fetch('data.json', {cache:'no-store'});
+    if(res.ok) SITE = await res.json();
+  }catch(e){}
+  // استرجاع نسخة محلية أحدث إن وجدت
+  const local = localStorage.getItem('licenza_draft');
+  if(local){
+    try{ SITE = JSON.parse(local); }catch(e){}
+  }
+}
+
+/* ---------------- الدخول ---------------- */
+document.getElementById('loginBtn').addEventListener('click', async ()=>{
+  await loadData();
+  const pw = document.getElementById('pwInput').value;
+  const hash = await sha256(pw);
+  const msg = document.getElementById('loginMsg');
+  if(hash === SITE.site.adminPasswordHash){
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    fillForm();
+    loadGithubConfig();
+  } else {
+    msg.textContent = 'كلمة المرور غير صحيحة';
+    msg.classList.add('show');
+  }
+});
+document.getElementById('pwInput').addEventListener('keydown', e=>{
+  if(e.key==='Enter') document.getElementById('loginBtn').click();
+});
+
+/* ---------------- تعبئة النموذج ---------------- */
+function fillForm(){
+  const s = SITE.site;
+  const map = {
+    'f-brandName':s.brandName, 'f-brandTagline':s.brandTagline, 'f-logoUrl':s.logoUrl,
+    'f-heroTitle':s.heroTitle, 'f-heroSubtitle':s.heroSubtitle, 'f-aboutText':s.aboutText,
+    'f-supportHours':s.supportHours, 'f-footerText':s.footerText,
+    'f-telegramUsername':s.telegramUsername, 'f-messengerLink':s.messengerLink, 'f-facebookPageUrl':s.facebookPageUrl
+  };
+  for(const [id,val] of Object.entries(map)){ document.getElementById(id).value = val || ''; }
+  renderProducts();
+  renderBanners();
+}
+
+function readGeneralForm(){
+  const s = SITE.site;
+  s.brandName = document.getElementById('f-brandName').value.trim();
+  s.brandTagline = document.getElementById('f-brandTagline').value.trim();
+  s.logoUrl = document.getElementById('f-logoUrl').value.trim();
+  s.heroTitle = document.getElementById('f-heroTitle').value.trim();
+  s.heroSubtitle = document.getElementById('f-heroSubtitle').value.trim();
+  s.aboutText = document.getElementById('f-aboutText').value.trim();
+  s.supportHours = document.getElementById('f-supportHours').value.trim();
+  s.footerText = document.getElementById('f-footerText').value.trim();
+  s.telegramUsername = document.getElementById('f-telegramUsername').value.trim();
+  s.messengerLink = document.getElementById('f-messengerLink').value.trim();
+  s.facebookPageUrl = document.getElementById('f-facebookPageUrl').value.trim();
+}
+
+/* ---------------- المنتجات ---------------- */
+function renderProducts(){
+  const wrap = document.getElementById('productsList');
+  wrap.innerHTML = SITE.products.map((p,i)=>`
+    <div class="product-item" data-index="${i}">
+      <div class="item-head">
+        <strong>${p.name || 'برنامج جديد'}</strong>
+        <button class="remove-btn" onclick="removeProduct(${i})">حذف</button>
+      </div>
+      <div class="grid3">
+        <div class="field"><label>العلامة</label>
+          <select onchange="updateProduct(${i},'brand',this.value)">
+            <option value="Adobe" ${p.brand==='Adobe'?'selected':''}>Adobe</option>
+            <option value="Autodesk" ${p.brand==='Autodesk'?'selected':''}>Autodesk</option>
+          </select>
+        </div>
+        <div class="field"><label>اسم البرنامج</label><input value="${esc(p.name)}" onchange="updateProduct(${i},'name',this.value)"></div>
+        <div class="field"><label>لون مميز</label>
+          <div class="swatch-input">
+            <span class="swatch-preview" style="background:${p.swatch}"></span>
+            <input class="en" value="${esc(p.swatch)}" onchange="updateProduct(${i},'swatch',this.value)">
+          </div>
+        </div>
+      </div>
+      <div class="field"><label>الوصف</label><input value="${esc(p.description)}" onchange="updateProduct(${i},'description',this.value)"></div>
+      <div class="grid3">
+        <div class="field"><label>المدة</label><input value="${esc(p.duration)}" onchange="updateProduct(${i},'duration',this.value)"></div>
+        <div class="field"><label>السعر الحالي</label><input class="en" value="${esc(p.price)}" onchange="updateProduct(${i},'price',this.value)"></div>
+        <div class="field"><label>السعر قبل الخصم (اختياري)</label><input class="en" value="${esc(p.oldPrice)}" onchange="updateProduct(${i},'oldPrice',this.value)"></div>
+      </div>
+      <div class="grid2">
+        <div class="field"><label>العملة</label><input value="${esc(p.currency)}" onchange="updateProduct(${i},'currency',this.value)"></div>
+        <div class="field"><label>شارة (مثال: الأكثر طلبًا) — اختياري</label><input value="${esc(p.badge)}" onchange="updateProduct(${i},'badge',this.value)"></div>
+      </div>
+    </div>
+  `).join('');
+}
+function updateProduct(i, key, val){ SITE.products[i][key] = val; if(key==='name'||key==='swatch') renderProducts(); }
+function removeProduct(i){ if(confirm('حذف هذا البرنامج؟')){ SITE.products.splice(i,1); renderProducts(); } }
+document.getElementById('addProductBtn').addEventListener('click', ()=>{
+  SITE.products.push({id:'p-'+Date.now(), brand:'Adobe', swatch:'#31A8FF', name:'', description:'', duration:'شهر واحد', price:'', oldPrice:'', currency:'دج', badge:''});
+  renderProducts();
+});
+
+/* ---------------- الإعلانات ---------------- */
+function renderBanners(){
+  const wrap = document.getElementById('bannersList');
+  wrap.innerHTML = SITE.banners.map((b,i)=>`
+    <div class="banner-item">
+      <div class="item-head">
+        <strong>${b.title || 'إعلان جديد'}</strong>
+        <button class="remove-btn" onclick="removeBanner(${i})">حذف</button>
+      </div>
+      <div class="grid3">
+        <div class="field"><label>الشارة</label><input value="${esc(b.badge)}" onchange="updateBanner(${i},'badge',this.value)"></div>
+        <div class="field" style="grid-column: span 2;"><label>العنوان</label><input value="${esc(b.title)}" onchange="updateBanner(${i},'title',this.value)"></div>
+      </div>
+      <div class="field"><label>الوصف</label><input value="${esc(b.subtitle)}" onchange="updateBanner(${i},'subtitle',this.value)"></div>
+    </div>
+  `).join('');
+}
+function updateBanner(i,key,val){ SITE.banners[i][key]=val; if(key==='title') renderBanners(); }
+function removeBanner(i){ if(confirm('حذف هذا الإعلان؟')){ SITE.banners.splice(i,1); renderBanners(); } }
+document.getElementById('addBannerBtn').addEventListener('click', ()=>{
+  SITE.banners.push({title:'', subtitle:'', badge:'جديد'});
+  renderBanners();
+});
+
+function esc(v){ return (v===undefined||v===null) ? '' : String(v).replace(/"/g,'&quot;'); }
+
+/* ---------------- التبويبات ---------------- */
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('panel-'+btn.dataset.tab).classList.add('active');
+  });
+});
+
+/* ---------------- الحفظ المحلي (مسودة) ---------------- */
+async function collectAndValidate(){
+  readGeneralForm();
+  const pw1 = document.getElementById('f-newPassword').value;
+  const pw2 = document.getElementById('f-newPassword2').value;
+  if(pw1 || pw2){
+    if(pw1.length < 6){ alert('كلمة المرور الجديدة يجب أن تكون 6 أحرف على الأقل'); return false; }
+    if(pw1 !== pw2){ alert('كلمتا المرور غير متطابقتين'); return false; }
+    SITE.site.adminPasswordHash = await sha256(pw1);
+    document.getElementById('f-newPassword').value = '';
+    document.getElementById('f-newPassword2').value = '';
+  }
+  localStorage.setItem('licenza_draft', JSON.stringify(SITE));
+  document.getElementById('saveNote').textContent = 'آخر حفظ محلي: ' + new Date().toLocaleTimeString('ar-DZ');
+  return true;
+}
+
+function downloadJson(){
+  const blob = new Blob([JSON.stringify(SITE, null, 2)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'data.json';
+  a.click();
+}
+document.getElementById('downloadBtn').addEventListener('click', async ()=>{ if(await collectAndValidate()) downloadJson(); });
+document.getElementById('downloadBtn2').addEventListener('click', async ()=>{ if(await collectAndValidate()) downloadJson(); });
+
+/* ---------------- الاتصال بـ GitHub ---------------- */
+function loadGithubConfig(){
+  const cfg = JSON.parse(localStorage.getItem('licenza_gh_config') || '{}');
+  document.getElementById('f-ghOwner').value = cfg.owner || '';
+  document.getElementById('f-ghRepo').value = cfg.repo || '';
+  document.getElementById('f-ghBranch').value = cfg.branch || 'main';
+  document.getElementById('f-ghPath').value = cfg.path || 'data.json';
+  document.getElementById('f-ghToken').value = cfg.token || '';
+  updateConnStatus(!!cfg.token);
+}
+function readGithubConfig(){
+  return {
+    owner: document.getElementById('f-ghOwner').value.trim(),
+    repo: document.getElementById('f-ghRepo').value.trim(),
+    branch: document.getElementById('f-ghBranch').value.trim() || 'main',
+    path: document.getElementById('f-ghPath').value.trim() || 'data.json',
+    token: document.getElementById('f-ghToken').value.trim()
+  };
+}
+function saveGithubConfig(cfg){ localStorage.setItem('licenza_gh_config', JSON.stringify(cfg)); }
+function updateConnStatus(connected){
+  document.getElementById('connDot').classList.toggle('connected', connected);
+  document.getElementById('connStatusText').textContent = connected
+    ? 'متصل بمستودع GitHub — الحفظ سيُنشر مباشرة على الموقع'
+    : 'غير متصل بـ GitHub — التعديلات ستُحفظ محليًا فقط حتى تُهيّئ الاتصال';
+}
+function showSyncMsg(text, ok){
+  const el = document.getElementById('syncMsg');
+  el.textContent = text;
+  el.className = 'msg show ' + (ok ? 'ok' : 'err');
+}
+
+async function githubGetSha(cfg){
+  const url = `https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/${cfg.path}?ref=${cfg.branch}`;
+  const res = await fetch(url, { headers:{ Authorization:`Bearer ${cfg.token}`, Accept:'application/vnd.github+json' } });
+  if(res.status === 404) return null;
+  if(!res.ok) throw new Error('تعذّر الوصول إلى الملف (تحقق من اسم المستودع والفرع)');
+  const data = await res.json();
+  return data.sha;
+}
+
+document.getElementById('testConnBtn').addEventListener('click', async ()=>{
+  const cfg = readGithubConfig();
+  saveGithubConfig(cfg);
+  try{
+    const sha = await githubGetSha(cfg);
+    showSyncMsg(sha ? 'الاتصال ناجح، الملف موجود وجاهز للتحديث.' : 'الاتصال ناجح، لكن لم يُعثر على data.json في هذا المسار (سيُنشأ عند أول حفظ).', true);
+    updateConnStatus(true);
+  }catch(err){
+    showSyncMsg('فشل الاتصال: ' + err.message, false);
+    updateConnStatus(false);
+  }
+});
+
+document.getElementById('forgetTokenBtn').addEventListener('click', ()=>{
+  localStorage.removeItem('licenza_gh_config');
+  document.getElementById('f-ghToken').value = '';
+  updateConnStatus(false);
+  showSyncMsg('تم نسيان الرمز من هذا المتصفح.', true);
+});
+
+async function saveToGithub(){
+  if(!(await collectAndValidate())) return;
+  const cfg = readGithubConfig();
+  if(!cfg.owner || !cfg.repo || !cfg.token){
+    alert('أكمل بيانات الاتصال بـ GitHub من تبويب "الاتصال بـ GitHub" أولاً، أو استخدم زر "تنزيل data.json" للحفظ اليدوي.');
+    return;
+  }
+  saveGithubConfig(cfg);
+  try{
+    const sha = await githubGetSha(cfg);
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(SITE, null, 2))));
+    const url = `https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/${cfg.path}`;
+    const body = {
+      message: 'تحديث محتوى الموقع من لوحة التحكم',
+      content, branch: cfg.branch
+    };
+    if(sha) body.sha = sha;
+    const res = await fetch(url, {
+      method:'PUT',
+      headers:{ Authorization:`Bearer ${cfg.token}`, Accept:'application/vnd.github+json', 'Content-Type':'application/json' },
+      body: JSON.stringify(body)
+    });
+    if(!res.ok){
+      const errData = await res.json().catch(()=>({}));
+      throw new Error(errData.message || 'فشل الحفظ');
+    }
+    updateConnStatus(true);
+    alert('تم الحفظ بنجاح! سيظهر التحديث على الموقع خلال دقيقة تقريبًا بعد إعادة النشر التلقائي.');
+  }catch(err){
+    alert('تعذّر الحفظ على GitHub: ' + err.message + '\n\nيمكنك استخدام زر "تنزيل data.json" ورفع الملف يدويًا كحل بديل.');
+  }
+}
+document.getElementById('saveGithubBtn').addEventListener('click', saveToGithub);
+document.getElementById('saveGithubBtn2').addEventListener('click', saveToGithub);
+</script>
+</body>
+</html>
