@@ -3,112 +3,102 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>لوحة التحكم — Licenza</title>
+<title>لوحة التحكم — RJ Tech</title>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#10151f; --ink-2:#182236; --paper:#f5f6f2; --paper-2:#ffffff;
-    --text:#12161c; --muted:#5b6472; --signal:#ff6a3d; --line:rgba(18,22,28,0.12);
-    --ok:#1e9e5a; --err:#d33d3d;
+    --bg:#0a0b0f; --bg-soft:#111319; --panel:#15171f; --panel-2:#1b1e27;
+    --border:rgba(255,255,255,0.08); --border-hover:rgba(255,255,255,0.18);
+    --text:#eef0f4; --muted:#8b93a7; --muted-2:#5c6478;
+    --accent:#ff5a3c; --accent-2:#ff7a5c; --blue:#3b82f6;
+    --ok:#2fd07a; --err:#ff5a5a;
     --font-ar:'IBM Plex Sans Arabic', sans-serif; --font-en:'Space Grotesk', sans-serif;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
-  body{font-family:var(--font-ar); background:var(--paper); color:var(--text); line-height:1.6;}
+  body{font-family:var(--font-ar); background:var(--bg); color:var(--text); line-height:1.6;}
   .en{font-family:var(--font-en);}
   a{color:inherit;}
   button{font-family:inherit; cursor:pointer;}
   input,textarea,select{font-family:inherit;}
 
-  /* ---------- login screen ---------- */
-  #loginScreen{
-    min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px;
-  }
-  .login-box{
-    background:var(--paper-2); border:1px solid var(--line); border-radius:16px; padding:36px;
-    max-width:380px; width:100%;
-  }
-  .login-box h1{font-size:20px; margin-bottom:6px;}
+  #loginScreen{min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px;}
+  .login-box{background:var(--panel); border:1px solid var(--border); border-radius:16px; padding:36px; max-width:380px; width:100%;}
+  .logo-mark{width:44px; height:44px; margin-bottom:18px; clip-path:polygon(22% 0, 100% 0, 100% 78%, 78% 100%, 0 100%, 0 22%); background:linear-gradient(135deg, var(--accent) 0%, var(--accent) 50%, var(--blue) 50%, var(--blue) 100%); display:flex; align-items:center; justify-content:center;}
+  .logo-mark span{font-family:var(--font-en); font-weight:700; font-size:15px; color:#0a0b0f;}
+  .login-box h1{font-size:20px; margin-bottom:6px; color:var(--text);}
   .login-box p{font-size:13.5px; color:var(--muted); margin-bottom:24px;}
   .field{margin-bottom:16px;}
-  .field label{display:block; font-size:13px; font-weight:600; margin-bottom:6px;}
-  .field input, .field textarea{
-    width:100%; padding:11px 14px; border-radius:10px; border:1px solid var(--line);
-    font-size:14.5px; background:var(--paper);
-  }
+  .field label{display:block; font-size:13px; font-weight:600; margin-bottom:6px; color:var(--text);}
+  .field input, .field textarea{width:100%; padding:11px 14px; border-radius:10px; border:1px solid var(--border); font-size:14.5px; background:var(--bg-soft); color:var(--text);}
+  .field input::placeholder, .field textarea::placeholder{color:var(--muted-2);}
   .field textarea{resize:vertical; min-height:80px;}
   .field small{display:block; color:var(--muted); font-size:12px; margin-top:5px;}
-  .btn{
-    display:inline-flex; align-items:center; justify-content:center; gap:8px;
-    padding:12px 22px; border-radius:10px; font-size:14.5px; font-weight:600; border:none;
-  }
-  .btn-primary{background:var(--ink); color:#fff; width:100%;}
-  .btn-primary:hover{background:#222e47;}
-  .btn-ghost{background:transparent; border:1px solid var(--line); color:var(--text);}
-  .btn-danger{background:#fdeceb; color:var(--err);}
+  .btn{display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:12px 22px; border-radius:10px; font-size:14.5px; font-weight:700; border:none;}
+  .btn-primary{background:var(--accent); color:#170a05; width:100%;}
+  .btn-primary:hover{background:var(--accent-2);}
+  .btn-ghost{background:var(--panel-2); border:1px solid var(--border); color:var(--text);}
+  .btn-ghost:hover{border-color:var(--border-hover);}
+  .btn-danger{background:rgba(255,90,90,0.12); color:var(--err);}
   .msg{font-size:13.5px; margin-top:12px; padding:10px 14px; border-radius:8px; display:none;}
   .msg.show{display:block;}
-  .msg.err{background:#fdeceb; color:var(--err);}
-  .msg.ok{background:#e8f7ee; color:var(--ok);}
+  .msg.err{background:rgba(255,90,90,0.12); color:var(--err);}
+  .msg.ok{background:rgba(47,208,122,0.12); color:var(--ok);}
 
-  /* ---------- app shell ---------- */
   #app{display:none;}
-  header{
-    position:sticky; top:0; z-index:20; background:var(--paper-2); border-bottom:1px solid var(--line);
-  }
-  .topbar{
-    max-width:1100px; margin:0 auto; padding:16px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;
-  }
-  .topbar h1{font-size:17px; font-weight:700;}
+  header{position:sticky; top:0; z-index:20; background:rgba(10,11,15,0.9); backdrop-filter:blur(10px); border-bottom:1px solid var(--border);}
+  .topbar{max-width:1100px; margin:0 auto; padding:16px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;}
+  .topbar h1{font-size:17px; font-weight:700; color:var(--text);}
   .topbar h1 span{color:var(--muted); font-weight:500; font-size:13px; display:block; margin-top:2px;}
   .topbar-actions{display:flex; gap:10px; align-items:center; flex-wrap:wrap;}
-  .status-dot{width:8px; height:8px; border-radius:50%; background:var(--muted); display:inline-block;}
+  .status-dot{width:8px; height:8px; border-radius:50%; background:var(--muted-2); display:inline-block;}
   .status-dot.connected{background:var(--ok);}
 
-  main{max-width:1100px; margin:0 auto; padding:28px 24px 80px;}
-  .tabs{display:flex; gap:8px; margin-bottom:26px; flex-wrap:wrap; border-bottom:1px solid var(--line);}
-  .tab-btn{
-    padding:12px 6px; margin-left:20px; font-size:14.5px; font-weight:600; color:var(--muted);
-    border:none; background:none; border-bottom:2px solid transparent; margin-bottom:-1px;
-  }
-  .tab-btn.active{color:var(--ink); border-bottom-color:var(--signal);}
+  main{max-width:1100px; margin:0 auto; padding:28px 24px 90px;}
+  .tabs{display:flex; gap:8px; margin-bottom:26px; flex-wrap:wrap; border-bottom:1px solid var(--border);}
+  .tab-btn{padding:12px 6px; margin-left:20px; font-size:14.5px; font-weight:600; color:var(--muted); border:none; background:none; border-bottom:2px solid transparent; margin-bottom:-1px;}
+  .tab-btn.active{color:var(--text); border-bottom-color:var(--accent);}
   .panel{display:none;}
   .panel.active{display:block;}
 
-  .card{background:var(--paper-2); border:1px solid var(--line); border-radius:14px; padding:24px; margin-bottom:20px;}
-  .card h3{font-size:15.5px; margin-bottom:16px;}
+  .card{background:var(--panel); border:1px solid var(--border); border-radius:14px; padding:24px; margin-bottom:20px;}
+  .card h3{font-size:15.5px; margin-bottom:16px; color:var(--text);}
+  .card > p.hint{font-size:13px; color:var(--muted); margin-bottom:18px; margin-top:-8px;}
   .grid2{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
   .grid3{display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px;}
   @media(max-width:720px){.grid2,.grid3{grid-template-columns:1fr;}}
 
-  .product-item, .banner-item{
-    border:1px solid var(--line); border-radius:12px; padding:18px; margin-bottom:14px; position:relative;
-  }
+  .product-item, .banner-item, .brand-item{border:1px solid var(--border); border-radius:12px; padding:18px; margin-bottom:14px; background:var(--panel-2);}
   .item-head{display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;}
-  .item-head strong{font-size:14px;}
-  .remove-btn{
-    font-size:12.5px; font-weight:600; color:var(--err); background:none; border:none;
-  }
-  .add-btn{
-    width:100%; padding:13px; border:1.5px dashed var(--line); border-radius:12px; background:none;
-    color:var(--muted); font-weight:600; font-size:14px;
-  }
-  .add-btn:hover{border-color:var(--muted);}
+  .item-head strong{font-size:14px; color:var(--text);}
+  .remove-btn{font-size:12.5px; font-weight:600; color:var(--err); background:none; border:none;}
+  .add-btn{width:100%; padding:13px; border:1.5px dashed var(--border); border-radius:12px; background:none; color:var(--muted); font-weight:600; font-size:14px;}
+  .add-btn:hover{border-color:var(--border-hover); color:var(--text);}
 
-  .save-bar{
-    position:fixed; bottom:0; right:0; left:0; background:var(--paper-2); border-top:1px solid var(--line);
-    padding:14px 24px; display:flex; justify-content:center; gap:12px; z-index:30;
-  }
+  .save-bar{position:fixed; bottom:0; right:0; left:0; background:rgba(10,11,15,0.92); backdrop-filter:blur(10px); border-top:1px solid var(--border); padding:14px 24px; display:flex; justify-content:center; gap:12px; z-index:30;}
   .save-bar-inner{max-width:1100px; width:100%; display:flex; justify-content:space-between; align-items:center; gap:14px; flex-wrap:wrap;}
   .save-note{font-size:13px; color:var(--muted);}
   .swatch-input{display:flex; align-items:center; gap:10px;}
-  .swatch-preview{width:38px; height:38px; border-radius:8px; border:1px solid var(--line); flex-shrink:0;}
+  .swatch-preview{width:38px; height:38px; border-radius:8px; border:1px solid var(--border); flex-shrink:0;}
+
+  select{color:var(--text);}
+  select option{background:var(--bg-soft); color:var(--text);}
+
+  /* image uploader */
+  .image-uploader{display:flex; gap:14px; align-items:center; margin-bottom:16px;}
+  .image-preview{width:90px; height:90px; border-radius:10px; border:1px solid var(--border); background:var(--bg-soft); overflow:hidden; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:11px; color:var(--muted-2); text-align:center;}
+  .image-preview img{width:100%; height:100%; object-fit:cover;}
+  .image-actions{display:flex; flex-direction:column; gap:8px;}
+  .image-actions input[type=file]{display:none;}
+  .upload-label{display:inline-flex; align-items:center; gap:6px; padding:9px 16px; border-radius:8px; background:var(--panel); border:1px solid var(--border); font-size:13px; font-weight:600; cursor:pointer; color:var(--text);}
+  .upload-label:hover{border-color:var(--border-hover);}
+  .image-size-note{font-size:11.5px; color:var(--muted-2);}
 </style>
 </head>
 <body>
 
-<!-- ============ شاشة الدخول ============ -->
 <div id="loginScreen">
   <div class="login-box">
+    <div class="logo-mark"><span>RJ</span></div>
     <h1>لوحة تحكم المالك</h1>
     <p>أدخل كلمة المرور للوصول إلى إعدادات الموقع.<br>كلمة المرور الافتراضية: <strong class="en">admin123</strong> (غيّرها من التبويب "الإعدادات العامة" فور دخولك).</p>
     <div class="field">
@@ -120,7 +110,6 @@
   </div>
 </div>
 
-<!-- ============ التطبيق ============ -->
 <div id="app">
   <header>
     <div class="topbar">
@@ -136,6 +125,7 @@
   <main>
     <div class="tabs">
       <button class="tab-btn active" data-tab="general">الإعدادات العامة</button>
+      <button class="tab-btn" data-tab="brands">الماركات</button>
       <button class="tab-btn" data-tab="products">البرامج والأسعار</button>
       <button class="tab-btn" data-tab="banners">الإعلانات</button>
       <button class="tab-btn" data-tab="sync">الاتصال بـ GitHub</button>
@@ -149,7 +139,7 @@
           <div class="field"><label>اسم المتجر</label><input id="f-brandName"></div>
           <div class="field"><label>الشعار النصي (Tagline)</label><input id="f-brandTagline"></div>
         </div>
-        <div class="field"><label>رابط صورة الشعار (Logo URL) — اختياري</label><input id="f-logoUrl" placeholder="https://..."></div>
+        <div class="field"><label>رابط صورة الشعار (Logo URL) — اختياري، اتركه فارغًا لاستخدام الشعار الافتراضي</label><input id="f-logoUrl" placeholder="https://..."></div>
         <div class="field"><label>عنوان الصفحة الرئيسية (Hero)</label><input id="f-heroTitle"></div>
         <div class="field"><label>الوصف تحت العنوان الرئيسي</label><textarea id="f-heroSubtitle"></textarea></div>
       </div>
@@ -176,12 +166,25 @@
           <div class="field"><label>كلمة المرور الجديدة</label><input type="password" id="f-newPassword" placeholder="اتركها فارغة إذا لا تريد التغيير"></div>
           <div class="field"><label>تأكيد كلمة المرور</label><input type="password" id="f-newPassword2"></div>
         </div>
-        <small style="color:var(--muted); font-size:12.5px;">ملاحظة أمان: هذه الحماية أساسية مناسبة لثني الزوار العاديين، وليست بديلاً عن حماية خادم حقيقية. لا تستخدم كلمة مرور تستخدمها في حسابات أخرى.</small>
+        <small>ملاحظة أمان: هذه الحماية أساسية مناسبة لثني الزوار العاديين، وليست بديلاً عن حماية خادم حقيقية.</small>
       </div>
+    </div>
+
+    <!-- ---------- الماركات ---------- -->
+    <div class="panel" id="panel-brands">
+      <div class="card">
+        <h3>ماركات المتجر</h3>
+        <p class="hint">أضف أي عدد من الماركات (مثال: Adobe، Autodesk، Microsoft، Canva...). كل ماركة لها لون مميز يظهر في البطاقات والفلاتر.</p>
+      </div>
+      <div id="brandsList"></div>
+      <button class="add-btn" id="addBrandBtn">+ إضافة ماركة جديدة</button>
     </div>
 
     <!-- ---------- المنتجات ---------- -->
     <div class="panel" id="panel-products">
+      <div class="card">
+        <p class="hint" style="margin-top:0;">لا يوجد أي حد لعدد البرامج التي يمكنك إضافتها — أضف بقدر ما تريد.</p>
+      </div>
       <div id="productsList"></div>
       <button class="add-btn" id="addProductBtn">+ إضافة برنامج جديد</button>
     </div>
@@ -196,7 +199,7 @@
     <div class="panel" id="panel-sync">
       <div class="card">
         <h3>ربط لوحة التحكم بمستودع GitHub</h3>
-        <p style="font-size:13.5px; color:var(--muted); margin-bottom:18px;">
+        <p class="hint">
           لكي يحفظ زر "حفظ ونشر" تعديلاتك مباشرة على الموقع الحي، تحتاج لإنشاء
           <strong>Personal Access Token</strong> من نوع Fine-grained من حسابك في GitHub، بصلاحية Contents: Read and write على مستودع الموقع فقط. الرمز يُحفظ في متصفحك فقط ولا يُرسل لأي جهة غير GitHub.
         </p>
@@ -210,6 +213,10 @@
         <button class="btn btn-ghost" id="testConnBtn">اختبار الاتصال</button>
         <button class="btn btn-danger" id="forgetTokenBtn" style="margin-inline-start:8px;">نسيان الرمز من هذا المتصفح</button>
         <div class="msg" id="syncMsg"></div>
+      </div>
+      <div class="card">
+        <h3>ملاحظة حول حجم الصور</h3>
+        <p class="hint" style="margin-bottom:0;">كل صورة تُرفع تُضغط وتُصغَّر تلقائيًا داخل متصفحك قبل الحفظ للحفاظ على سرعة الموقع. مع ذلك، كل صورة تضيف تقريبًا 60-150 كيلوبايت لملف data.json. إن وصل عدد المنتجات المصوّرة لعدة عشرات، قد يصبح التحميل عبر GitHub API أبطأ قليلاً — الأداء على الموقع نفسه يبقى سريعًا لأن الصور مضغوطة أصلاً.</p>
       </div>
     </div>
   </main>
@@ -228,21 +235,23 @@
 <script>
 const DEFAULT_DATA = {
   "site": {
-    "brandName": "Licenza",
-    "brandTagline": "اشتراكات برامج أصلية",
+    "brandName": "RJ Tech",
+    "brandTagline": "اشتراكات برمجيات أصلية",
     "logoUrl": "",
     "heroTitle": "أدوات الإبداع والهندسة، باشتراك أصلي وموثوق",
-    "heroSubtitle": "فوتوشوب، إليستريتور، بريمير، أوتوكاد وكل برامج Adobe و Autodesk بأسعار محلية وتفعيل فوري، مع دعم مباشر بعد كل عملية شراء.",
-    "heroImage": "",
+    "heroSubtitle": "فوتوشوب، إليستريتور، أوتوكاد وعشرات البرامج الأصلية من أفضل الماركات العالمية، بأسعار محلية وتفعيل فوري ودعم مباشر بعد كل عملية شراء.",
     "adminPasswordHash": "240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9",
     "telegramUsername": "your_telegram_username",
     "facebookPageUrl": "https://facebook.com/yourpage",
     "messengerLink": "https://m.me/yourpage",
-    "whatsappNumber": "",
-    "aboutText": "نحن متجر متخصص في توفير اشتراكات برامج Adobe و Autodesk الأصلية لعملائنا في المنطقة، بأسعار تناسب السوق المحلي وطرق دفع مبسطة. كل اشتراك يُفعَّل يدويًا من فريقنا خلال دقائق من تأكيد الطلب.",
-    "footerText": "جميع الأسماء والعلامات التجارية (Adobe، Autodesk) ملك لأصحابها. هذا المتجر معيد بيع اشتراكات وليس تابعًا رسميًا للشركتين.",
+    "aboutText": "نحن متجر متخصص في توفير اشتراكات برامج أصلية لعملائنا في المنطقة، بأسعار تناسب السوق المحلي وطرق دفع مبسطة. كل اشتراك يُفعَّل يدويًا من فريقنا خلال دقائق من تأكيد الطلب.",
+    "footerText": "جميع الأسماء والعلامات التجارية المذكورة ملك لأصحابها. هذا المتجر معيد بيع اشتراكات وليس تابعًا رسميًا لأي من الشركات المذكورة.",
     "supportHours": "متوفرون يوميًا من 9 صباحًا حتى 11 مساءً"
   },
+  "brands": [
+    { "id": "adobe", "name": "Adobe", "color": "#FF3B3B" },
+    { "id": "autodesk", "name": "Autodesk", "color": "#3B82F6" }
+  ],
   "banners": [
     {
       "title": "عروض بداية الموسم",
@@ -258,90 +267,103 @@ const DEFAULT_DATA = {
   "products": [
     {
       "id": "ps-1m",
-      "brand": "Adobe",
-      "swatch": "#31A8FF",
+      "brandId": "adobe",
       "name": "Photoshop",
       "description": "تحرير الصور الاحترافي، اشتراك فردي مفعّل على حسابك الخاص.",
+      "longDescription": "فوتوشوب هو المعيار العالمي في تحرير الصور والتصميم الجرافيكي، يستخدمه المصممون والمصورون المحترفون حول العالم. مع هذا الاشتراك تحصل على أحدث إصدار مع كل التحديثات والميزات المدعومة بالذكاء الاصطناعي، مفعّلًا بالكامل على حسابك الخاص.",
+      "features": ["تفعيل رسمي على بريدك الإلكتروني الخاص", "جميع التحديثات مشمولة طوال مدة الاشتراك", "يعمل على ويندوز وماك", "دعم فني عند أي مشكلة في التفعيل"],
       "duration": "شهر واحد",
       "price": "2200",
       "oldPrice": "2800",
       "currency": "دج",
-      "badge": "الأكثر طلبًا"
+      "badge": "الأكثر طلبًا",
+      "image": ""
     },
     {
       "id": "cc-all-12m",
-      "brand": "Adobe",
-      "swatch": "#DA1F26",
+      "brandId": "adobe",
       "name": "Creative Cloud - جميع التطبيقات",
       "description": "أكثر من 20 برنامج من Adobe بما فيها فوتوشوب وإليستريتور وبريمير.",
+      "longDescription": "باقة Creative Cloud الكاملة تمنحك وصولًا لأكثر من 20 تطبيقًا من Adobe في مكان واحد: فوتوشوب، إليستريتور، بريمير برو، أفتر إفكتس، إنديزاين وغيرها. الخيار الأمثل للمصممين والمبدعين الذين يحتاجون أكثر من أداة واحدة.",
+      "features": ["أكثر من 20 تطبيق Adobe في اشتراك واحد", "100 جيجابايت تخزين سحابي", "تفعيل على حسابك الشخصي", "أفضل قيمة مقابل السعر مقارنة بالاشتراك الفردي"],
       "duration": "12 شهرًا",
       "price": "13500",
       "oldPrice": "16900",
       "currency": "دج",
-      "badge": "أفضل قيمة"
+      "badge": "أفضل قيمة",
+      "image": ""
     },
     {
       "id": "ai-1m",
-      "brand": "Adobe",
-      "swatch": "#FF9A00",
+      "brandId": "adobe",
       "name": "Illustrator",
       "description": "تصميم فيكتور احترافي للشعارات والهوية البصرية.",
+      "longDescription": "إليستريتور هو برنامج الرسم الاتجاهي (Vector) الأول عالميًا، مثالي لتصميم الشعارات والأيقونات والهوية البصرية بجودة تكبير غير محدودة.",
+      "features": ["تفعيل رسمي على بريدك الإلكتروني", "متوافق مع جميع ملفات Adobe الأخرى", "تحديثات مستمرة", "دعم فني كامل"],
       "duration": "شهر واحد",
       "price": "2200",
       "oldPrice": "",
       "currency": "دج",
-      "badge": ""
+      "badge": "",
+      "image": ""
     },
     {
       "id": "pr-1m",
-      "brand": "Adobe",
-      "swatch": "#00005B",
+      "brandId": "adobe",
       "name": "Premiere Pro",
       "description": "مونتاج فيديو احترافي بجودة سينمائية.",
+      "longDescription": "بريمير برو هو برنامج المونتاج الاحترافي المعتمد في صناعة الأفلام والمحتوى الرقمي، يدعم جميع صيغ الفيديو الحديثة ويعمل بسلاسة حتى مع مشاريع 4K.",
+      "features": ["دعم كامل لمقاطع 4K و8K", "أدوات تصحيح ألوان احترافية", "تكامل مباشر مع باقي برامج Adobe", "تفعيل على حسابك الخاص"],
       "duration": "شهر واحد",
       "price": "2200",
       "oldPrice": "",
       "currency": "دج",
-      "badge": ""
+      "badge": "",
+      "image": ""
     },
     {
       "id": "acad-12m",
-      "brand": "Autodesk",
-      "swatch": "#E51937",
+      "brandId": "autodesk",
       "name": "AutoCAD",
       "description": "الرسم الهندسي ثنائي وثلاثي الأبعاد لجميع التخصصات.",
+      "longDescription": "أوتوكاد هو المرجع الأول في الرسم الهندسي بمختلف تخصصاته: معماري، ميكانيكي، كهربائي ومدني. يدعم الرسم ثنائي وثلاثي الأبعاد بدقة احترافية.",
+      "features": ["ترخيص أصلي سنوي كامل", "يشمل جميع أدوات الرسم 2D و3D", "تحديثات Autodesk الرسمية", "مناسب للطلاب والمهندسين الممارسين"],
       "duration": "12 شهرًا",
       "price": "18500",
       "oldPrice": "22000",
       "currency": "دج",
-      "badge": "طلاب وموظفون"
+      "badge": "طلاب وموظفون",
+      "image": ""
     },
     {
       "id": "revit-12m",
-      "brand": "Autodesk",
-      "swatch": "#00A6E8",
+      "brandId": "autodesk",
       "name": "Revit",
       "description": "نمذجة معلومات البناء BIM للمهندسين المعماريين.",
+      "longDescription": "Revit هو برنامج نمذجة معلومات البناء (BIM) الأكثر استخدامًا عالميًا من طرف المهندسين المعماريين والإنشائيين، يتيح تصميم وتوثيق المشاريع بنموذج ثلاثي الأبعاد متكامل.",
+      "features": ["ترخيص أصلي سنوي كامل", "تصميم معماري وإنشائي متكامل", "تحديثات Autodesk الرسمية", "دعم فني عند التفعيل"],
       "duration": "12 شهرًا",
       "price": "19500",
       "oldPrice": "",
       "currency": "دج",
-      "badge": ""
+      "badge": "",
+      "image": ""
     },
     {
       "id": "3dsmax-12m",
-      "brand": "Autodesk",
-      "swatch": "#00CC6A",
+      "brandId": "autodesk",
       "name": "3ds Max",
       "description": "نمذجة ثلاثية الأبعاد ورندر احترافي.",
+      "longDescription": "3ds Max هو أحد أقوى برامج النمذجة ثلاثية الأبعاد والرندر، يستخدم في التصميم المعماري، الألعاب، والمؤثرات البصرية.",
+      "features": ["ترخيص أصلي سنوي كامل", "أدوات نمذجة ورندر احترافية", "تحديثات Autodesk الرسمية", "تفعيل على حسابك الخاص"],
       "duration": "12 شهرًا",
       "price": "19500",
       "oldPrice": "",
       "currency": "دج",
-      "badge": ""
+      "badge": "",
+      "image": ""
     }
-  ],
-  "orders": []
+  ]
 };
 let SITE = JSON.parse(JSON.stringify(DEFAULT_DATA));
 
@@ -351,17 +373,42 @@ async function sha256(text){
   return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
 }
 
+/* ---------------- ضغط وتصغير الصور داخل المتصفح ---------------- */
+function compressImage(file, maxDim=900, quality=0.78){
+  return new Promise((resolve, reject)=>{
+    if(!file.type.startsWith('image/')){ reject(new Error('الملف ليس صورة')); return; }
+    const reader = new FileReader();
+    reader.onload = e => {
+      const img = new Image();
+      img.onload = () => {
+        let w = img.width, h = img.height;
+        if(w > h){ if(w > maxDim){ h = Math.round(h * maxDim / w); w = maxDim; } }
+        else { if(h > maxDim){ w = Math.round(w * maxDim / h); h = maxDim; } }
+        const canvas = document.createElement('canvas');
+        canvas.width = w; canvas.height = h;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, w, h);
+        resolve(canvas.toDataURL('image/jpeg', quality));
+      };
+      img.onerror = () => reject(new Error('تعذّر قراءة الصورة'));
+      img.src = e.target.result;
+    };
+    reader.onerror = () => reject(new Error('تعذّر قراءة الملف'));
+    reader.readAsDataURL(file);
+  });
+}
+
 /* ---------------- تحميل البيانات الحالية ---------------- */
 async function loadData(){
   try{
     const res = await fetch('data.json', {cache:'no-store'});
     if(res.ok) SITE = await res.json();
   }catch(e){}
-  // استرجاع نسخة محلية أحدث إن وجدت
-  const local = localStorage.getItem('licenza_draft');
+  const local = localStorage.getItem('rjtech_draft');
   if(local){
     try{ SITE = JSON.parse(local); }catch(e){}
   }
+  if(!SITE.brands) SITE.brands = [];
 }
 
 /* ---------------- الدخول ---------------- */
@@ -394,6 +441,7 @@ function fillForm(){
     'f-telegramUsername':s.telegramUsername, 'f-messengerLink':s.messengerLink, 'f-facebookPageUrl':s.facebookPageUrl
   };
   for(const [id,val] of Object.entries(map)){ document.getElementById(id).value = val || ''; }
+  renderBrands();
   renderProducts();
   renderBanners();
 }
@@ -413,7 +461,48 @@ function readGeneralForm(){
   s.facebookPageUrl = document.getElementById('f-facebookPageUrl').value.trim();
 }
 
+/* ---------------- الماركات ---------------- */
+function renderBrands(){
+  const wrap = document.getElementById('brandsList');
+  wrap.innerHTML = SITE.brands.map((b,i)=>`
+    <div class="brand-item">
+      <div class="item-head">
+        <strong>${b.name || 'ماركة جديدة'}</strong>
+        <button class="remove-btn" onclick="removeBrand(${i})">حذف</button>
+      </div>
+      <div class="grid2">
+        <div class="field"><label>اسم الماركة</label><input value="${esc(b.name)}" onchange="updateBrand(${i},'name',this.value)"></div>
+        <div class="field"><label>اللون المميز</label>
+          <div class="swatch-input">
+            <span class="swatch-preview" style="background:${b.color}"></span>
+            <input class="en" value="${esc(b.color)}" onchange="updateBrand(${i},'color',this.value)">
+          </div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+function slugify(name){
+  return 'b-' + (name||'').trim().toLowerCase().replace(/[^a-z0-9أ-ي]+/gi,'-').replace(/(^-|-$)/g,'') + '-' + Date.now().toString(36).slice(-4);
+}
+function updateBrand(i,key,val){ SITE.brands[i][key]=val; if(key==='name'||key==='color') { renderBrands(); renderProducts(); } }
+function removeBrand(i){
+  const b = SITE.brands[i];
+  const used = SITE.products.some(p=>p.brandId===b.id);
+  if(used && !confirm('هذه الماركة مستخدمة في بعض البرامج، حذفها سيترك تلك البرامج بدون ماركة. متابعة؟')) return;
+  SITE.brands.splice(i,1);
+  renderBrands(); renderProducts();
+}
+document.getElementById('addBrandBtn').addEventListener('click', ()=>{
+  const name = 'ماركة جديدة';
+  SITE.brands.push({id: slugify(name), name:'', color:'#ff5a3c'});
+  renderBrands();
+});
+
 /* ---------------- المنتجات ---------------- */
+function brandOptions(selectedId){
+  return SITE.brands.map(b=>`<option value="${b.id}" ${b.id===selectedId?'selected':''}>${esc(b.name)}</option>`).join('');
+}
 function renderProducts(){
   const wrap = document.getElementById('productsList');
   wrap.innerHTML = SITE.products.map((p,i)=>`
@@ -422,38 +511,61 @@ function renderProducts(){
         <strong>${p.name || 'برنامج جديد'}</strong>
         <button class="remove-btn" onclick="removeProduct(${i})">حذف</button>
       </div>
-      <div class="grid3">
-        <div class="field"><label>العلامة</label>
-          <select onchange="updateProduct(${i},'brand',this.value)">
-            <option value="Adobe" ${p.brand==='Adobe'?'selected':''}>Adobe</option>
-            <option value="Autodesk" ${p.brand==='Autodesk'?'selected':''}>Autodesk</option>
-          </select>
-        </div>
-        <div class="field"><label>اسم البرنامج</label><input value="${esc(p.name)}" onchange="updateProduct(${i},'name',this.value)"></div>
-        <div class="field"><label>لون مميز</label>
-          <div class="swatch-input">
-            <span class="swatch-preview" style="background:${p.swatch}"></span>
-            <input class="en" value="${esc(p.swatch)}" onchange="updateProduct(${i},'swatch',this.value)">
-          </div>
+
+      <div class="image-uploader">
+        <div class="image-preview" id="prev-${i}">${p.image ? `<img src="${p.image}">` : 'لا توجد صورة'}</div>
+        <div class="image-actions">
+          <label class="upload-label">
+            رفع صورة من الحاسوب
+            <input type="file" accept="image/*" onchange="handleImageUpload(${i}, this)">
+          </label>
+          ${p.image ? `<button class="remove-btn" onclick="removeProductImage(${i})">إزالة الصورة</button>` : ''}
+          <span class="image-size-note">تُضغط وتُصغَّر تلقائيًا (حتى 900px) للحفاظ على سرعة الموقع</span>
         </div>
       </div>
-      <div class="field"><label>الوصف</label><input value="${esc(p.description)}" onchange="updateProduct(${i},'description',this.value)"></div>
+
+      <div class="grid3">
+        <div class="field"><label>الماركة</label>
+          <select onchange="updateProduct(${i},'brandId',this.value)">${brandOptions(p.brandId)}</select>
+        </div>
+        <div class="field"><label>اسم البرنامج</label><input value="${esc(p.name)}" onchange="updateProduct(${i},'name',this.value)"></div>
+        <div class="field"><label>شارة (مثال: الأكثر طلبًا) — اختياري</label><input value="${esc(p.badge)}" onchange="updateProduct(${i},'badge',this.value)"></div>
+      </div>
+
+      <div class="field"><label>وصف قصير (يظهر في بطاقة المنتج)</label><input value="${esc(p.description)}" onchange="updateProduct(${i},'description',this.value)"></div>
+      <div class="field"><label>وصف تفصيلي (يظهر عند فتح المنتج) — اختياري</label><textarea onchange="updateProduct(${i},'longDescription',this.value)">${esc(p.longDescription)}</textarea></div>
+      <div class="field"><label>مزايا البرنامج (كل ميزة في سطر) — اختياري</label><textarea onchange="updateProductFeatures(${i},this.value)">${(p.features||[]).join('\n')}</textarea></div>
+
       <div class="grid3">
         <div class="field"><label>المدة</label><input value="${esc(p.duration)}" onchange="updateProduct(${i},'duration',this.value)"></div>
         <div class="field"><label>السعر الحالي</label><input class="en" value="${esc(p.price)}" onchange="updateProduct(${i},'price',this.value)"></div>
         <div class="field"><label>السعر قبل الخصم (اختياري)</label><input class="en" value="${esc(p.oldPrice)}" onchange="updateProduct(${i},'oldPrice',this.value)"></div>
       </div>
-      <div class="grid2">
-        <div class="field"><label>العملة</label><input value="${esc(p.currency)}" onchange="updateProduct(${i},'currency',this.value)"></div>
-        <div class="field"><label>شارة (مثال: الأكثر طلبًا) — اختياري</label><input value="${esc(p.badge)}" onchange="updateProduct(${i},'badge',this.value)"></div>
-      </div>
+      <div class="field" style="max-width:200px;"><label>العملة</label><input value="${esc(p.currency)}" onchange="updateProduct(${i},'currency',this.value)"></div>
     </div>
   `).join('');
 }
-function updateProduct(i, key, val){ SITE.products[i][key] = val; if(key==='name'||key==='swatch') renderProducts(); }
+function updateProduct(i, key, val){ SITE.products[i][key] = val; if(key==='name') renderProducts(); }
+function updateProductFeatures(i, val){ SITE.products[i].features = val.split('\n').map(s=>s.trim()).filter(Boolean); }
+async function handleImageUpload(i, input){
+  const file = input.files[0];
+  if(!file) return;
+  const preview = document.getElementById(`prev-${i}`);
+  preview.textContent = 'جارٍ الضغط...';
+  try{
+    const dataUrl = await compressImage(file, 900, 0.78);
+    SITE.products[i].image = dataUrl;
+    renderProducts();
+  }catch(err){
+    alert('تعذّر معالجة الصورة: ' + err.message);
+    renderProducts();
+  }
+}
+function removeProductImage(i){ SITE.products[i].image = ''; renderProducts(); }
 function removeProduct(i){ if(confirm('حذف هذا البرنامج؟')){ SITE.products.splice(i,1); renderProducts(); } }
 document.getElementById('addProductBtn').addEventListener('click', ()=>{
-  SITE.products.push({id:'p-'+Date.now(), brand:'Adobe', swatch:'#31A8FF', name:'', description:'', duration:'شهر واحد', price:'', oldPrice:'', currency:'دج', badge:''});
+  const firstBrand = SITE.brands[0] ? SITE.brands[0].id : '';
+  SITE.products.push({id:'p-'+Date.now(), brandId:firstBrand, name:'', description:'', longDescription:'', features:[], duration:'شهر واحد', price:'', oldPrice:'', currency:'دج', badge:'', image:''});
   renderProducts();
 });
 
@@ -505,7 +617,7 @@ async function collectAndValidate(){
     document.getElementById('f-newPassword').value = '';
     document.getElementById('f-newPassword2').value = '';
   }
-  localStorage.setItem('licenza_draft', JSON.stringify(SITE));
+  localStorage.setItem('rjtech_draft', JSON.stringify(SITE));
   document.getElementById('saveNote').textContent = 'آخر حفظ محلي: ' + new Date().toLocaleTimeString('ar-DZ');
   return true;
 }
@@ -522,7 +634,7 @@ document.getElementById('downloadBtn2').addEventListener('click', async ()=>{ if
 
 /* ---------------- الاتصال بـ GitHub ---------------- */
 function loadGithubConfig(){
-  const cfg = JSON.parse(localStorage.getItem('licenza_gh_config') || '{}');
+  const cfg = JSON.parse(localStorage.getItem('rjtech_gh_config') || '{}');
   document.getElementById('f-ghOwner').value = cfg.owner || '';
   document.getElementById('f-ghRepo').value = cfg.repo || '';
   document.getElementById('f-ghBranch').value = cfg.branch || 'main';
@@ -539,7 +651,7 @@ function readGithubConfig(){
     token: document.getElementById('f-ghToken').value.trim()
   };
 }
-function saveGithubConfig(cfg){ localStorage.setItem('licenza_gh_config', JSON.stringify(cfg)); }
+function saveGithubConfig(cfg){ localStorage.setItem('rjtech_gh_config', JSON.stringify(cfg)); }
 function updateConnStatus(connected){
   document.getElementById('connDot').classList.toggle('connected', connected);
   document.getElementById('connStatusText').textContent = connected
@@ -575,7 +687,7 @@ document.getElementById('testConnBtn').addEventListener('click', async ()=>{
 });
 
 document.getElementById('forgetTokenBtn').addEventListener('click', ()=>{
-  localStorage.removeItem('licenza_gh_config');
+  localStorage.removeItem('rjtech_gh_config');
   document.getElementById('f-ghToken').value = '';
   updateConnStatus(false);
   showSyncMsg('تم نسيان الرمز من هذا المتصفح.', true);
@@ -593,10 +705,7 @@ async function saveToGithub(){
     const sha = await githubGetSha(cfg);
     const content = btoa(unescape(encodeURIComponent(JSON.stringify(SITE, null, 2))));
     const url = `https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/${cfg.path}`;
-    const body = {
-      message: 'تحديث محتوى الموقع من لوحة التحكم',
-      content, branch: cfg.branch
-    };
+    const body = { message: 'تحديث محتوى الموقع من لوحة التحكم', content, branch: cfg.branch };
     if(sha) body.sha = sha;
     const res = await fetch(url, {
       method:'PUT',
