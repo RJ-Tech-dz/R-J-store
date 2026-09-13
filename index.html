@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title id="pageTitle">Licenza — اشتراكات برامج أصلية</title>
+<title>لوحة التحكم — RJ Tech</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
@@ -19,6 +19,7 @@
   --border: rgba(255,255,255,0.1);
   --success: #10b981;
   --warning: #f59e0b;
+  --danger: #ef4444;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -28,8 +29,6 @@ body {
   background: var(--bg-dark);
   color: var(--text);
   min-height: 100vh;
-  overflow-x: hidden;
-  position: relative;
 }
 
 body::before {
@@ -39,809 +38,144 @@ body::before {
   width: 100%; height: 100%;
   background: 
     radial-gradient(circle at 20% 30%, rgba(99,102,241,0.3) 0%, transparent 50%),
-    radial-gradient(circle at 80% 70%, rgba(236,72,153,0.2) 0%, transparent 50%),
-    radial-gradient(circle at 50% 50%, rgba(6,182,212,0.15) 0%, transparent 50%);
-  z-index: -2;
-  animation: bgShift 20s ease infinite;
-}
-
-body::after {
-  content: '';
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
-  background-size: 30px 30px;
+    radial-gradient(circle at 80% 70%, rgba(236,72,153,0.2) 0%, transparent 50%);
   z-index: -1;
-  opacity: 0.5;
 }
 
-@keyframes bgShift {
-  0%,100% { transform: translate(0,0) scale(1); }
-  50% { transform: translate(-5%,5%) scale(1.1); }
-}
-
-.navbar {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  backdrop-filter: blur(20px);
-  background: rgba(10,10,26,0.7);
-  border-bottom: 1px solid var(--border);
-  padding: 1rem 2rem;
-}
-
-.nav-container {
-  max-width: 1400px;
-  margin: 0 auto;
+.login-screen {
+  min-height: 100vh;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 2rem;
-}
-
-.logo {
-  font-size: 1.8rem;
-  font-weight: 900;
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  cursor: pointer;
-}
-
-.logo i { color: var(--primary); -webkit-text-fill-color: var(--primary); }
-
-.nav-links {
-  display: flex;
-  gap: 2rem;
-  list-style: none;
-}
-
-.nav-links a {
-  color: var(--text-muted);
-  text-decoration: none;
-  font-weight: 600;
-  transition: all 0.3s;
-  position: relative;
-}
-
-.nav-links a:hover { color: var(--text); }
-.nav-links a::after {
-  content: '';
-  position: absolute;
-  bottom: -5px;
-  right: 0;
-  width: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--primary), var(--secondary));
-  transition: width 0.3s;
-}
-.nav-links a:hover::after { width: 100%; }
-
-.admin-btn {
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  color: white;
-  border: none;
-  padding: 0.6rem 1.5rem;
-  border-radius: 50px;
-  cursor: pointer;
-  font-weight: 700;
-  font-family: inherit;
-  transition: all 0.3s;
-  box-shadow: 0 4px 20px rgba(99,102,241,0.4);
-}
-
-.admin-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(99,102,241,0.6); }
-
-.hero {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 5rem 2rem 3rem;
-  text-align: center;
-  position: relative;
-}
-
-.hero-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: rgba(99,102,241,0.15);
-  border: 1px solid rgba(99,102,241,0.3);
-  padding: 0.5rem 1.2rem;
-  border-radius: 50px;
-  font-size: 0.9rem;
-  margin-bottom: 1.5rem;
-  color: var(--primary);
-  font-weight: 600;
-}
-
-.hero h1 {
-  font-size: clamp(2rem, 5vw, 4rem);
-  font-weight: 900;
-  line-height: 1.2;
-  margin-bottom: 1.5rem;
-  background: linear-gradient(135deg, #fff 0%, #a1a1aa 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.hero h1 span {
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.hero p {
-  font-size: 1.2rem;
-  color: var(--text-muted);
-  max-width: 700px;
-  margin: 0 auto 2.5rem;
-  line-height: 1.8;
-}
-
-.hero-buttons {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-bottom: 3rem;
-}
-
-.btn-hero-primary, .btn-hero-secondary {
-  padding: 1rem 2rem;
-  border-radius: 50px;
-  font-weight: 700;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.3s;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-family: inherit;
-  border: none;
-}
-
-.btn-hero-primary {
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  color: white;
-  box-shadow: 0 4px 20px rgba(99,102,241,0.4);
-}
-
-.btn-hero-primary:hover { transform: translateY(-3px); box-shadow: 0 6px 25px rgba(99,102,241,0.6); }
-
-.btn-hero-secondary {
-  background: rgba(255,255,255,0.05);
-  color: var(--text);
-  border: 1px solid var(--border);
-  backdrop-filter: blur(10px);
-}
-
-.btn-hero-secondary:hover { background: rgba(255,255,255,0.1); transform: translateY(-3px); }
-
-.hero-features {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  flex-wrap: wrap;
-  margin-top: 3rem;
-}
-
-.hero-feature {
-  display: flex;
-  align-items: center;
-  gap: 0.7rem;
-  padding: 0.8rem 1.5rem;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 50px;
-  backdrop-filter: blur(10px);
-}
-
-.hero-feature i { color: var(--success); font-size: 1.2rem; }
-
-/* Banners Slider */
-.banners-section {
-  max-width: 1400px;
-  margin: 2rem auto;
-  padding: 0 2rem;
-}
-
-.banners-slider {
-  position: relative;
-  overflow: hidden;
-  border-radius: 20px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  backdrop-filter: blur(10px);
-}
-
-.banner-slide {
-  display: none;
-  padding: 3rem;
-  text-align: center;
-  animation: fadeIn 0.5s;
-}
-
-.banner-slide.active { display: block; }
-
-@keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-.banner-badge {
-  display: inline-block;
-  background: linear-gradient(135deg, var(--warning), #d97706);
-  color: white;
-  padding: 0.4rem 1rem;
-  border-radius: 50px;
-  font-size: 0.85rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-}
-
-.banner-slide h2 {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
-  background: linear-gradient(135deg, #fff, #a1a1aa);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.banner-slide p {
-  color: var(--text-muted);
-  font-size: 1.1rem;
-}
-
-.banner-controls {
-  position: absolute;
-  bottom: 1rem;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 0.5rem;
-}
-
-.banner-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.3);
-  cursor: pointer;
-  transition: all 0.3s;
-}
-
-.banner-dot.active {
-  background: var(--primary);
-  width: 30px;
-  border-radius: 5px;
-}
-
-.filters-section {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 3rem 2rem 2rem;
-}
-
-.section-title {
-  font-size: 2rem;
-  font-weight: 800;
-  margin-bottom: 0.5rem;
-}
-
-.section-subtitle {
-  color: var(--text-muted);
-  margin-bottom: 2rem;
-}
-
-.search-box {
-  position: relative;
-  max-width: 500px;
-  margin-bottom: 2rem;
-}
-
-.search-box input {
-  width: 100%;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  color: var(--text);
-  padding: 1rem 1rem 1rem 3rem;
-  border-radius: 50px;
-  font-family: inherit;
-  font-size: 1rem;
-  backdrop-filter: blur(10px);
-  transition: all 0.3s;
-}
-
-.search-box input:focus {
-  outline: none;
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(99,102,241,0.2);
-}
-
-.search-box i {
-  position: absolute;
-  left: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--text-muted);
-}
-
-.filters {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  margin-bottom: 2rem;
-}
-
-.filter-btn {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  color: var(--text-muted);
-  padding: 0.7rem 1.5rem;
-  border-radius: 50px;
-  cursor: pointer;
-  font-family: inherit;
-  font-weight: 600;
-  transition: all 0.3s;
-  backdrop-filter: blur(10px);
-}
-
-.filter-btn:hover { color: var(--text); border-color: var(--primary); }
-.filter-btn.active {
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  color: white;
-  border-color: transparent;
-}
-
-.products-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.5rem;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 2rem 3rem;
-}
-
-.product-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  overflow: hidden;
-  backdrop-filter: blur(10px);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  cursor: pointer;
-  position: relative;
-}
-
-.product-card:hover {
-  transform: translateY(-8px);
-  border-color: var(--primary);
-  box-shadow: 0 20px 40px rgba(99,102,241,0.3);
-}
-
-.product-image {
-  width: 100%;
-  height: 180px;
-  background: linear-gradient(135deg, #1a1a2e, #16213e);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  position: relative;
-}
-
-.product-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.product-image .placeholder-icon {
-  font-size: 4rem;
-  color: var(--primary);
-  opacity: 0.5;
-}
-
-.product-badge {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: rgba(16,185,129,0.9);
-  color: white;
-  padding: 0.3rem 0.8rem;
-  border-radius: 50px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  backdrop-filter: blur(10px);
-}
-
-.product-info { padding: 1.5rem; }
-
-.product-brand {
-  display: inline-block;
-  color: var(--primary);
-  font-size: 0.85rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-  text-transform: uppercase;
-}
-
-.product-title {
-  font-size: 1.2rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-}
-
-.product-desc {
-  color: var(--text-muted);
-  font-size: 0.9rem;
-  line-height: 1.6;
-  margin-bottom: 1rem;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.product-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 1rem;
-  border-top: 1px solid var(--border);
-}
-
-.product-price {
-  font-size: 1.4rem;
-  font-weight: 900;
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.product-price small {
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  -webkit-text-fill-color: var(--text-muted);
-  font-weight: 400;
-}
-
-.product-price .old-price {
-  text-decoration: line-through;
-  color: var(--text-muted);
-  font-size: 0.9rem;
-  margin-right: 0.5rem;
-  -webkit-text-fill-color: var(--text-muted);
-}
-
-.view-btn {
-  background: rgba(99,102,241,0.15);
-  color: var(--primary);
-  border: 1px solid rgba(99,102,241,0.3);
-  padding: 0.5rem 1rem;
-  border-radius: 50px;
-  cursor: pointer;
-  font-family: inherit;
-  font-weight: 600;
-  font-size: 0.85rem;
-  transition: all 0.3s;
-}
-
-.view-btn:hover {
-  background: var(--primary);
-  color: white;
-}
-
-.empty-state {
-  text-align: center;
-  padding: 4rem 2rem;
-  color: var(--text-muted);
-  grid-column: 1/-1;
-}
-
-.empty-state i {
-  font-size: 4rem;
-  margin-bottom: 1rem;
-  opacity: 0.3;
-}
-
-/* How it works */
-.how-section {
-  max-width: 1400px;
-  margin: 4rem auto;
-  padding: 3rem 2rem;
-  text-align: center;
-}
-
-.steps-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-  margin-top: 3rem;
-}
-
-.step-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 2rem;
-  backdrop-filter: blur(10px);
-  position: relative;
-}
-
-.step-number {
-  position: absolute;
-  top: -20px;
-  right: 50%;
-  transform: translateX(50%);
-  width: 50px;
-  height: 50px;
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  font-weight: 900;
-  color: white;
-  box-shadow: 0 4px 20px rgba(99,102,241,0.4);
-}
-
-.step-card h3 {
-  margin-top: 1.5rem;
-  margin-bottom: 1rem;
-  font-size: 1.3rem;
-}
-
-.step-card p {
-  color: var(--text-muted);
-  line-height: 1.8;
-}
-
-/* About Section */
-.about-section {
-  max-width: 1400px;
-  margin: 4rem auto;
-  padding: 3rem 2rem;
-  text-align: center;
-}
-
-.about-content {
-  max-width: 800px;
-  margin: 2rem auto;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 3rem;
-  backdrop-filter: blur(10px);
-}
-
-.about-content p {
-  color: var(--text-muted);
-  line-height: 2;
-  font-size: 1.1rem;
-}
-
-/* Contact Section */
-.contact-section {
-  max-width: 1400px;
-  margin: 4rem auto;
-  padding: 3rem 2rem;
-  text-align: center;
-}
-
-.contact-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-  margin-top: 3rem;
-}
-
-.contact-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 2rem;
-  backdrop-filter: blur(10px);
-  transition: all 0.3s;
-  cursor: pointer;
-}
-
-.contact-card:hover {
-  transform: translateY(-5px);
-  border-color: var(--primary);
-  box-shadow: 0 10px 30px rgba(99,102,241,0.3);
-}
-
-.contact-card i {
-  font-size: 3rem;
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: 1rem;
-}
-
-.contact-card h3 {
-  margin-bottom: 0.5rem;
-}
-
-.contact-card p {
-  color: var(--text-muted);
-}
-
-/* Modal */
-.modal-overlay {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.8);
-  backdrop-filter: blur(10px);
-  z-index: 1000;
-  display: none;
   align-items: center;
   justify-content: center;
   padding: 2rem;
-  animation: fadeIn 0.3s;
 }
 
-.modal-overlay.active { display: flex; }
-
-.modal {
-  background: linear-gradient(135deg, rgba(26,26,46,0.95), rgba(22,33,62,0.95));
+.login-box {
+  background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: 24px;
-  max-width: 700px;
+  padding: 3rem;
+  max-width: 450px;
   width: 100%;
-  max-height: 90vh;
-  overflow-y: auto;
-  position: relative;
-  animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(20px);
+  text-align: center;
 }
 
-@keyframes slideUp {
-  from { transform: translateY(50px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-}
-
-.modal-close {
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-  background: rgba(255,255,255,0.1);
-  border: none;
-  color: white;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: 1.2rem;
-  z-index: 10;
-  transition: all 0.3s;
-}
-
-.modal-close:hover { background: rgba(255,255,255,0.2); transform: rotate(90deg); }
-
-.modal-image {
-  width: 100%;
-  height: 300px;
-  background: linear-gradient(135deg, #1a1a2e, #16213e);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 24px 24px 0 0;
-  overflow: hidden;
-}
-
-.modal-image img { width: 100%; height: 100%; object-fit: cover; }
-.modal-image .placeholder-icon { font-size: 6rem; color: var(--primary); opacity: 0.5; }
-
-.modal-body { padding: 2rem; }
-
-.modal-brand {
-  display: inline-block;
-  background: rgba(99,102,241,0.15);
-  color: var(--primary);
-  padding: 0.3rem 1rem;
-  border-radius: 50px;
-  font-size: 0.85rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-}
-
-.modal-title {
+.login-box h1 {
   font-size: 2rem;
-  font-weight: 900;
-  margin-bottom: 1rem;
-}
-
-.modal-price {
-  font-size: 2.5rem;
-  font-weight: 900;
+  margin-bottom: 0.5rem;
   background: linear-gradient(135deg, var(--primary), var(--secondary));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+.login-box p {
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+  line-height: 1.8;
+}
+
+.login-box .form-group { margin-bottom: 1.5rem; text-align: right; }
+
+.login-box .form-label {
+  display: block;
   margin-bottom: 0.5rem;
+  font-weight: 600;
 }
 
-.modal-price .old-price {
-  font-size: 1.5rem;
-  text-decoration: line-through;
-  color: var(--text-muted);
-  -webkit-text-fill-color: var(--text-muted);
-  margin-right: 1rem;
-}
-
-.modal-duration {
-  color: var(--text-muted);
-  margin-bottom: 1.5rem;
+.login-box .form-input {
+  width: 100%;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 1rem;
+  border-radius: 12px;
+  font-family: inherit;
   font-size: 1rem;
 }
 
-.modal-desc {
-  color: var(--text-muted);
-  line-height: 1.8;
-  margin-bottom: 2rem;
-  white-space: pre-line;
+.login-box .form-input:focus {
+  outline: none;
+  border-color: var(--primary);
 }
 
-.modal-features {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-  margin-bottom: 2rem;
-}
-
-.modal-feature {
-  display: flex;
-  align-items: center;
-  gap: 0.7rem;
-  padding: 1rem;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-}
-
-.modal-feature i { color: var(--success); font-size: 1.2rem; }
-
-.modal-actions {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-.btn-primary, .btn-secondary {
-  flex: 1;
-  min-width: 150px;
-  padding: 1rem 1.5rem;
-  border-radius: 12px;
+.login-box button {
+  width: 100%;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
   border: none;
+  padding: 1rem;
+  border-radius: 12px;
   cursor: pointer;
   font-family: inherit;
   font-weight: 700;
   font-size: 1rem;
   transition: all 0.3s;
+}
+
+.login-box button:hover { transform: translateY(-2px); }
+
+.login-box .hint {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  background: rgba(99,102,241,0.1);
+  padding: 0.8rem;
+  border-radius: 8px;
+  border: 1px solid rgba(99,102,241,0.2);
+}
+
+.admin-container {
+  display: none;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.admin-header {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.admin-header h1 {
+  font-size: 2rem;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.admin-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 0.7rem 1.5rem;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s;
+  display: inline-flex;
+  align-items: center;
   gap: 0.5rem;
 }
 
 .btn-primary {
   background: linear-gradient(135deg, var(--primary), var(--secondary));
   color: white;
-  box-shadow: 0 4px 20px rgba(99,102,241,0.4);
 }
 
-.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(99,102,241,0.6); }
+.btn-primary:hover { transform: translateY(-2px); }
 
 .btn-secondary {
   background: rgba(255,255,255,0.05);
@@ -851,14 +185,63 @@ body::after {
 
 .btn-secondary:hover { background: rgba(255,255,255,0.1); }
 
-/* Order Form Modal */
-.order-form {
-  padding: 2rem;
+.btn-danger {
+  background: rgba(239,68,68,0.15);
+  color: var(--danger);
+  border: 1px solid rgba(239,68,68,0.3);
 }
 
-.order-form h2 {
+.btn-danger:hover { background: var(--danger); color: white; }
+
+.btn-warning {
+  background: rgba(245,158,11,0.15);
+  color: var(--warning);
+  border: 1px solid rgba(245,158,11,0.3);
+}
+
+.btn-warning:hover { background: var(--warning); color: white; }
+
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+}
+
+.tab {
+  padding: 1rem 1.5rem;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 600;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s;
+  white-space: nowrap;
+}
+
+.tab.active {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+}
+
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  backdrop-filter: blur(10px);
+}
+
+.card h2 {
   margin-bottom: 1.5rem;
-  text-align: center;
+  font-size: 1.5rem;
 }
 
 .form-group { margin-bottom: 1.5rem; }
@@ -869,7 +252,7 @@ body::after {
   font-weight: 600;
 }
 
-.form-input, .form-textarea {
+.form-input, .form-textarea, .form-select {
   width: 100%;
   background: rgba(255,255,255,0.05);
   border: 1px solid var(--border);
@@ -881,7 +264,7 @@ body::after {
   transition: all 0.3s;
 }
 
-.form-input:focus, .form-textarea:focus {
+.form-input:focus, .form-textarea:focus, .form-select:focus {
   outline: none;
   border-color: var(--primary);
   box-shadow: 0 0 0 3px rgba(99,102,241,0.2);
@@ -889,70 +272,58 @@ body::after {
 
 .form-textarea { min-height: 100px; resize: vertical; }
 
-/* Footer */
-.footer {
-  background: rgba(0,0,0,0.5);
-  border-top: 1px solid var(--border);
-  padding: 3rem 2rem 1.5rem;
-  margin-top: 4rem;
-}
-
-.footer-content {
-  max-width: 1400px;
-  margin: 0 auto;
+.form-row {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 2rem;
-  margin-bottom: 2rem;
+  gap: 1rem;
 }
 
-.footer-col h3 { margin-bottom: 1rem; font-size: 1.1rem; }
-.footer-col p, .footer-col a {
-  color: var(--text-muted);
-  text-decoration: none;
-  display: block;
-  margin-bottom: 0.5rem;
-  transition: color 0.3s;
-}
-.footer-col a:hover { color: var(--primary); }
-
-.social-links {
-  display: flex;
-  gap: 0.8rem;
-  margin-top: 1rem;
-}
-
-.social-links a {
-  width: 40px;
-  height: 40px;
-  background: rgba(255,255,255,0.05);
+.list-item {
+  background: rgba(255,255,255,0.03);
   border: 1px solid var(--border);
-  border-radius: 50%;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.list-item img {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.list-item .placeholder-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  background: rgba(99,102,241,0.1);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--text-muted);
-  transition: all 0.3s;
-  margin: 0;
+  color: var(--primary);
 }
 
-.social-links a:hover {
-  background: var(--primary);
-  color: white;
-  transform: translateY(-3px);
+.list-item-info { flex: 1; }
+.list-item-info h4 { font-size: 1rem; margin-bottom: 0.2rem; }
+.list-item-info p { font-size: 0.85rem; color: var(--text-muted); }
+
+.list-item-actions {
+  display: flex;
+  gap: 0.5rem;
 }
 
-.footer-bottom {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--border);
-  text-align: center;
-  color: var(--text-muted);
-  font-size: 0.9rem;
+.color-input {
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
 }
 
-/* Toast */
 .toast {
   position: fixed;
   bottom: 2rem;
@@ -976,19 +347,25 @@ body::after {
 
 .toast.error {
   background: linear-gradient(135deg, #ef4444, #dc2626);
-  box-shadow: 0 10px 30px rgba(239,68,68,0.4);
 }
 
-/* Mobile */
+.debug-info {
+  background: rgba(0,0,0,0.3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-top: 1rem;
+  font-family: monospace;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-align: left;
+  direction: ltr;
+}
+
 @media (max-width: 768px) {
-  .nav-links { display: none; }
-  .hero { padding: 3rem 1rem 2rem; }
-  .products-grid { padding: 0 1rem 3rem; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
-  .modal-body { padding: 1.5rem; }
-  .modal-title { font-size: 1.5rem; }
-  .modal-price { font-size: 2rem; }
-  .banner-slide { padding: 2rem 1rem; }
-  .banner-slide h2 { font-size: 1.5rem; }
+  .admin-header { flex-direction: column; align-items: stretch; }
+  .card { padding: 1.5rem; }
+  .form-row { grid-template-columns: 1fr; }
 }
 
 ::-webkit-scrollbar { width: 8px; }
@@ -1001,207 +378,162 @@ body::after {
 </head>
 <body>
 
-<nav class="navbar">
-  <div class="nav-container">
-    <div class="logo" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-      <i class="fas fa-crown"></i>
-      <span id="navBrandName">Licenza</span>
+<div class="login-screen" id="loginScreen">
+  <div class="login-box">
+    <h1><i class="fas fa-lock"></i> لوحة التحكم</h1>
+    <p>أدخل كلمة المرور للوصول إلى إعدادات الموقع</p>
+    <form onsubmit="login(event)">
+      <div class="form-group">
+        <label class="form-label">كلمة المرور</label>
+        <input type="password" class="form-input" id="loginPassword" required autocomplete="current-password">
+      </div>
+      <button type="submit"><i class="fas fa-sign-in-alt"></i> دخول</button>
+    </form>
+    <div class="hint">
+      <strong>كلمة المرور الافتراضية:</strong> admin123<br>
+      <small>غيّرها فور دخولك من تبويب "الإعدادات العامة"</small>
     </div>
-    <ul class="nav-links">
-      <li><a href="#products">البرامج</a></li>
-      <li><a href="#how">كيف تطلب</a></li>
-      <li><a href="#about">من نحن</a></li>
-      <li><a href="#contact">تواصل معنا</a></li>
-    </ul>
-    <button class="admin-btn" onclick="window.location.href='admin.html'">
-      <i class="fas fa-lock"></i> لوحة التحكم
+    <button class="btn btn-warning" style="margin-top:1rem;width:100%" onclick="forceReloadData()">
+      <i class="fas fa-sync"></i> إعادة تحميل البيانات من GitHub
     </button>
-  </div>
-</nav>
-
-<section class="hero">
-  <div class="hero-badge">
-    <i class="fas fa-bolt"></i>
-    <span id="heroBadgeText">تفعيل فوري خلال دقائق</span>
-  </div>
-  <h1 id="heroTitle">أدوات الإبداع والهندسة<br><span id="heroSubtitle">باشتراك أصلي وموثوق</span></h1>
-  <p id="heroDescription">فوتوشوب، إليستريتور، بريمير، أوتوكاد وكل برامج Adobe و Autodesk بأسعار محلية وتفعيل فوري على حسابك الخاص.</p>
-  <div class="hero-buttons">
-    <a href="#products" class="btn-hero-primary">
-      <i class="fas fa-shopping-cart"></i>
-      <span>اطلب اشتراكك الآن</span>
-    </a>
-    <a href="#contact" class="btn-hero-secondary">
-      <i class="fas fa-comments"></i>
-      <span>تواصل معنا</span>
-    </a>
-  </div>
-  <div class="hero-features">
-    <div class="hero-feature"><i class="fas fa-check-circle"></i><span>تفعيل خلال دقائق</span></div>
-    <div class="hero-feature"><i class="fas fa-check-circle"></i><span>دعم مباشر 24/7</span></div>
-    <div class="hero-feature"><i class="fas fa-check-circle"></i><span>حسابك الخاص</span></div>
-  </div>
-</section>
-
-<section class="banners-section" id="bannersSection" style="display:none">
-  <div class="banners-slider">
-    <div id="bannersContainer"></div>
-    <div class="banner-controls" id="bannerControls"></div>
-  </div>
-</section>
-
-<section class="filters-section" id="products">
-  <h2 class="section-title">اختر البرنامج المناسب لك</h2>
-  <p class="section-subtitle">جميع الاشتراكات أصلية وتُفعَّل يدويًا على حسابك الخاص</p>
-  
-  <div class="search-box">
-    <i class="fas fa-search"></i>
-    <input type="text" id="searchInput" placeholder="ابحث عن برنامج...">
-  </div>
-  
-  <div class="filters" id="brandFilters"></div>
-</section>
-
-<div class="products-grid" id="productsGrid"></div>
-
-<section class="how-section" id="how">
-  <h2 class="section-title">كيف تحصل على اشتراكك</h2>
-  <p class="section-subtitle">ثلاث خطوات بسيطة من الاختيار إلى التفعيل</p>
-  <div class="steps-grid">
-    <div class="step-card">
-      <div class="step-number">1</div>
-      <h3>اختر البرنامج والمدة</h3>
-      <p>تصفح الباقات المتوفرة واختر ما يناسب احتياجك ومدة اشتراكك.</p>
-    </div>
-    <div class="step-card">
-      <div class="step-number">2</div>
-      <h3>أرسل طلبك</h3>
-      <p>اضغط "اطلب الآن" وأرسل بياناتك عبر تيليجرام أو فيسبوك مباشرة.</p>
-    </div>
-    <div class="step-card">
-      <div class="step-number">3</div>
-      <h3>استلم التفعيل</h3>
-      <p>نؤكد الدفع ونفعّل اشتراكك على حسابك خلال دقائق مع إرسال إثبات التفعيل.</p>
-    </div>
-  </div>
-</section>
-
-<section class="about-section" id="about">
-  <h2 class="section-title">من نحن</h2>
-  <div class="about-content">
-    <p id="aboutText">نحن متجر متخصص في توفير اشتراكات برامج أصلية لعملائنا في المنطقة، بأسعار تناسب السوق المحلي وطرق دفع مبسطة. كل اشتراك يُفعَّل يدويًا من فريقنا خلال دقائق من تأكيد الطلب.</p>
-  </div>
-</section>
-
-<section class="contact-section" id="contact">
-  <h2 class="section-title">تواصل معنا</h2>
-  <p class="section-subtitle" id="supportHours">متوفرون يوميًا من 9 صباحًا حتى 11 مساءً</p>
-  <div class="contact-grid">
-    <div class="contact-card" onclick="contactVia('telegram')">
-      <i class="fab fa-telegram"></i>
-      <h3>تيليجرام</h3>
-      <p>راسلنا مباشرة لأي استفسار</p>
-    </div>
-    <div class="contact-card" onclick="contactVia('messenger')">
-      <i class="fab fa-facebook-messenger"></i>
-      <h3>ماسنجر فيسبوك</h3>
-      <p>تواصل معنا عبر صفحتنا</p>
-    </div>
-    <div class="contact-card" onclick="contactVia('facebook')">
-      <i class="fab fa-facebook"></i>
-      <h3>صفحة فيسبوك</h3>
-      <p>تابع آخر العروض والتحديثات</p>
-    </div>
-  </div>
-</section>
-
-<footer class="footer">
-  <div class="footer-content">
-    <div class="footer-col">
-      <div class="logo" style="margin-bottom:1rem">
-        <i class="fas fa-crown"></i>
-        <span id="footerBrandName">Licenza</span>
-      </div>
-      <p id="footerTagline">اشتراكات برامج أصلية بأفضل الأسعار وتفعيل فوري.</p>
-      <div class="social-links">
-        <a href="#" onclick="contactVia('telegram');return false"><i class="fab fa-telegram"></i></a>
-        <a href="#" onclick="contactVia('facebook');return false"><i class="fab fa-facebook"></i></a>
-        <a href="#" onclick="contactVia('messenger');return false"><i class="fab fa-facebook-messenger"></i></a>
-      </div>
-    </div>
-    <div class="footer-col">
-      <h3>روابط سريعة</h3>
-      <a href="#products">البرامج</a>
-      <a href="#how">كيف تطلب</a>
-      <a href="#about">من نحن</a>
-    </div>
-    <div class="footer-col">
-      <h3>تواصل معنا</h3>
-      <p><i class="fab fa-telegram"></i> تيليجرام</p>
-      <p><i class="fab fa-facebook"></i> ماسنجر فيسبوك</p>
-      <p><i class="fas fa-envelope"></i> البريد الإلكتروني</p>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p id="footerText">© 2026 Licenza. جميع الحقوق محفوظة.</p>
-  </div>
-</footer>
-
-<div class="modal-overlay" id="productModal">
-  <div class="modal">
-    <button class="modal-close" onclick="closeModal('productModal')"><i class="fas fa-times"></i></button>
-    <div class="modal-image" id="modalImage"></div>
-    <div class="modal-body">
-      <span class="modal-brand" id="modalBrand"></span>
-      <h2 class="modal-title" id="modalTitle"></h2>
-      <div class="modal-price" id="modalPrice"></div>
-      <div class="modal-duration" id="modalDuration"></div>
-      <p class="modal-desc" id="modalDesc"></p>
-      <div class="modal-features" id="modalFeatures"></div>
-      <div class="modal-actions">
-        <button class="btn-primary" onclick="openOrderForm()">
-          <i class="fas fa-shopping-cart"></i> اطلب الآن
-        </button>
-        <button class="btn-secondary" onclick="contactVia('telegram')">
-          <i class="fab fa-telegram"></i> استفسار
-        </button>
-      </div>
-    </div>
+    <div class="debug-info" id="debugInfo" style="display:none"></div>
   </div>
 </div>
 
-<div class="modal-overlay" id="orderModal">
-  <div class="modal">
-    <button class="modal-close" onclick="closeModal('orderModal')"><i class="fas fa-times"></i></button>
-    <div class="order-form">
-      <h2>إتمام الطلب</h2>
-      <div id="orderProductInfo" style="background:rgba(99,102,241,0.1);padding:1rem;border-radius:12px;margin-bottom:1.5rem"></div>
-      <form id="orderForm" onsubmit="submitOrder(event)">
+<div class="admin-container" id="adminContainer">
+  <div class="admin-header">
+    <h1><i class="fas fa-cog"></i> لوحة التحكم</h1>
+    <div class="admin-actions">
+      <button class="btn btn-secondary" onclick="window.location.href='index.html'">
+        <i class="fas fa-eye"></i> معاينة الموقع
+      </button>
+      <button class="btn btn-primary" onclick="saveData()">
+        <i class="fas fa-save"></i> حفظ التغييرات
+      </button>
+      <button class="btn btn-danger" onclick="logout()">
+        <i class="fas fa-sign-out-alt"></i> خروج
+      </button>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('general', this)">الإعدادات العامة</button>
+    <button class="tab" onclick="switchTab('brands', this)">الماركات</button>
+    <button class="tab" onclick="switchTab('products', this)">المنتجات</button>
+    <button class="tab" onclick="switchTab('banners', this)">الإعلانات</button>
+    <button class="tab" onclick="switchTab('contact', this)">التواصل</button>
+    <button class="tab" onclick="switchTab('security', this)">الأمان</button>
+  </div>
+
+  <div id="tab-general" class="tab-content active">
+    <div class="card">
+      <h2>الهوية والعنوان</h2>
+      <div class="form-row">
         <div class="form-group">
-          <label class="form-label">الاسم الكامل *</label>
-          <input type="text" class="form-input" id="orderName" required>
+          <label class="form-label">اسم المتجر</label>
+          <input type="text" class="form-input" id="brandName">
         </div>
         <div class="form-group">
-          <label class="form-label">رقم الهاتف *</label>
-          <input type="tel" class="form-input" id="orderPhone" required>
+          <label class="form-label">الشعار النصي</label>
+          <input type="text" class="form-input" id="brandTagline">
         </div>
-        <div class="form-group">
-          <label class="form-label">البريد الإلكتروني (للتفعيل)</label>
-          <input type="email" class="form-input" id="orderEmail">
-        </div>
-        <div class="form-group">
-          <label class="form-label">ملاحظات (اختياري)</label>
-          <textarea class="form-textarea" id="orderNotes"></textarea>
-        </div>
-        <div class="modal-actions">
-          <button type="submit" class="btn-primary">
-            <i class="fab fa-telegram"></i> إرسال عبر تيليجرام
-          </button>
-          <button type="button" class="btn-secondary" onclick="submitOrderVia('messenger')">
-            <i class="fab fa-facebook-messenger"></i> ماسنجر
-          </button>
-        </div>
-      </form>
+      </div>
+      <div class="form-group">
+        <label class="form-label">عنوان الصفحة الرئيسية (السطر الأول)</label>
+        <input type="text" class="form-input" id="heroTitle">
+      </div>
+      <div class="form-group">
+        <label class="form-label">عنوان الصفحة الرئيسية (السطر الثاني)</label>
+        <input type="text" class="form-input" id="heroSubtitle">
+      </div>
+      <div class="form-group">
+        <label class="form-label">الوصف تحت العنوان الرئيسي</label>
+        <textarea class="form-textarea" id="heroDescription"></textarea>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>نبذة عن المتجر</h2>
+      <div class="form-group">
+        <label class="form-label">نص "من نحن"</label>
+        <textarea class="form-textarea" id="aboutText"></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">ساعات الدعم</label>
+        <input type="text" class="form-input" id="supportHours">
+      </div>
+      <div class="form-group">
+        <label class="form-label">نص أسفل الصفحة (Footer)</label>
+        <input type="text" class="form-input" id="footerText">
+      </div>
+    </div>
+  </div>
+
+  <div id="tab-brands" class="tab-content">
+    <div class="card">
+      <h2>ماركات المتجر</h2>
+      <p style="color:var(--text-muted);margin-bottom:1.5rem">أضف أي عدد من الماركات. كل ماركة لها لون مميز.</p>
+      <div id="brandsList"></div>
+      <button class="btn btn-primary" onclick="addBrand()">
+        <i class="fas fa-plus"></i> إضافة ماركة جديدة
+      </button>
+    </div>
+  </div>
+
+  <div id="tab-products" class="tab-content">
+    <div class="card">
+      <h2>المنتجات</h2>
+      <p style="color:var(--text-muted);margin-bottom:1.5rem">لا يوجد أي حد لعدد البرامج التي يمكنك إضافتها.</p>
+      <div id="productsList"></div>
+      <button class="btn btn-primary" onclick="openProductForm()">
+        <i class="fas fa-plus"></i> إضافة منتج جديد
+      </button>
+    </div>
+  </div>
+
+  <div id="tab-banners" class="tab-content">
+    <div class="card">
+      <h2>الإعلانات والعروض</h2>
+      <p style="color:var(--text-muted);margin-bottom:1.5rem">أضف إعلانات متحركة تظهر في الصفحة الرئيسية.</p>
+      <div id="bannersList"></div>
+      <button class="btn btn-primary" onclick="addBanner()">
+        <i class="fas fa-plus"></i> إضافة إعلان جديد
+      </button>
+    </div>
+  </div>
+
+  <div id="tab-contact" class="tab-content">
+    <div class="card">
+      <h2>روابط التواصل</h2>
+      <div class="form-group">
+        <label class="form-label">معرّف تيليجرام (بدون @)</label>
+        <input type="text" class="form-input" id="telegramUsername">
+      </div>
+      <div class="form-group">
+        <label class="form-label">رابط ماسنجر (m.me/...)</label>
+        <input type="text" class="form-input" id="messengerLink">
+      </div>
+      <div class="form-group">
+        <label class="form-label">رابط صفحة فيسبوك</label>
+        <input type="text" class="form-input" id="facebookPageUrl">
+      </div>
+    </div>
+  </div>
+
+  <div id="tab-security" class="tab-content">
+    <div class="card">
+      <h2>تغيير كلمة المرور</h2>
+      <div class="form-group">
+        <label class="form-label">كلمة المرور الجديدة</label>
+        <input type="password" class="form-input" id="newPassword">
+      </div>
+      <div class="form-group">
+        <label class="form-label">تأكيد كلمة المرور الجديدة</label>
+        <input type="password" class="form-input" id="confirmPassword">
+      </div>
+      <button class="btn btn-primary" onclick="changePassword()">
+        <i class="fas fa-key"></i> تغيير كلمة المرور
+      </button>
     </div>
   </div>
 </div>
@@ -1209,41 +541,29 @@ body::after {
 <div class="toast" id="toast"></div>
 
 <script>
-let siteData = null;
-let currentProduct = null;
-let currentFilter = 'all';
-let searchQuery = '';
-let currentBanner = 0;
-let bannerInterval = null;
-
-async function loadData() {
-  try {
-    const response = await fetch('data.json');
-    siteData = await response.json();
-    localStorage.setItem('siteData', JSON.stringify(siteData));
-  } catch (e) {
-    const cached = localStorage.getItem('siteData');
-    if (cached) {
-      siteData = JSON.parse(cached);
-    } else {
-      siteData = getDefaultData();
-    }
-  }
-  renderSite();
+// ============ التشفير ============
+async function sha256(message) {
+  const msgBuffer = new TextEncoder().encode(message);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 }
 
+// ============ البيانات الافتراضية ============
 function getDefaultData() {
   return {
     site: {
-      brandName: "Licenza",
-      brandTagline: "اشتراكات برامج أصلية",
+      brandName: "RJ Tech",
+      brandTagline: "اشتراكات برمجيات أصلية",
+      logoUrl: "",
       heroTitle: "أدوات الإبداع والهندسة",
       heroSubtitle: "باشتراك أصلي وموثوق",
-      heroDescription: "فوتوشوب، إليستريتور، بريمير، أوتوكاد وكل برامج Adobe و Autodesk بأسعار محلية وتفعيل فوري على حسابك الخاص.",
-      aboutText: "نحن متجر متخصص في توفير اشتراكات برامج أصلية لعملائنا في المنطقة، بأسعار تناسب السوق المحلي وطرق دفع مبسطة.",
-      footerText: "© 2026 Licenza. جميع الحقوق محفوظة.",
+      heroDescription: "فوتوشوب، إليستريتور، أوتوكاد وعشرات البرامج الأخرى...",
+      aboutText: "نحن متجر متخصص في توفير اشتراكات برامج أصلية...",
+      footerText: "© 2026 RJ Tech. جميع الحقوق محفوظة.",
       supportHours: "متوفرون يوميًا من 9 صباحًا حتى 11 مساءً",
-      telegramUsername: "your_telegram",
+      adminPasswordHash: "80cbbe1d37177dccf5d3a3a840879a8a50426ff3959b03a0cb57874eac7491c0",
+      telegramUsername: "your_telegram_username",
       messengerLink: "https://m.me/yourpage",
       facebookPageUrl: "https://facebook.com/yourpage"
     },
@@ -1256,270 +576,403 @@ function getDefaultData() {
   };
 }
 
-function renderSite() {
-  if (!siteData) return;
-  
-  const site = siteData.site;
-  
-  document.getElementById('pageTitle').textContent = `${site.brandName} — ${site.brandTagline}`;
-  document.getElementById('navBrandName').textContent = site.brandName;
-  document.getElementById('footerBrandName').textContent = site.brandName;
-  document.getElementById('footerTagline').textContent = site.brandTagline;
-  document.getElementById('heroTitle').innerHTML = `${site.heroTitle}<br><span>${site.heroSubtitle}</span>`;
-  document.getElementById('heroDescription').textContent = site.heroDescription;
-  document.getElementById('aboutText').textContent = site.aboutText;
-  document.getElementById('footerText').textContent = site.footerText;
-  document.getElementById('supportHours').textContent = site.supportHours;
-  
-  renderBanners();
-  renderBrandFilters();
-  renderProducts();
+let siteData = null;
+
+// ============ تنظيف البيانات الشامل ============
+function cleanData(obj) {
+  if (Array.isArray(obj)) {
+    return obj.map(item => cleanData(item));
+  }
+  if (obj !== null && typeof obj === 'object') {
+    const cleaned = {};
+    for (const key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        const cleanKey = key.trim();
+        cleaned[cleanKey] = cleanData(obj[key]);
+      }
+    }
+    return cleaned;
+  }
+  if (typeof obj === 'string') {
+    return obj.trim();
+  }
+  return obj;
 }
 
-function renderBanners() {
-  const banners = siteData.banners || [];
-  if (banners.length === 0) {
-    document.getElementById('bannersSection').style.display = 'none';
-    return;
+// ============ تحميل البيانات مع معالجة أخطاء شاملة ============
+async function loadData(forceReload = false) {
+  try {
+    // إضافة cache busting قوي
+    const cacheBuster = forceReload ? Date.now() : Math.random();
+    const response = await fetch('data.json?t=' + cacheBuster, {
+      cache: 'no-store',
+      headers: {
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache'
+      }
+    });
+    
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
+    
+    const rawData = await response.json();
+    console.log('✅ تم تحميل data.json بنجاح');
+    
+    // تنظيف تلقائي للبيانات
+    siteData = cleanData(rawData);
+    
+    // حفظ في localStorage
+    localStorage.setItem('siteData', JSON.stringify(siteData));
+    
+    return true;
+  } catch (e) {
+    console.error('❌ فشل تحميل data.json:', e);
+    
+    // محاولة استخدام localStorage
+    const cached = localStorage.getItem('siteData');
+    if (cached) {
+      try {
+        siteData = cleanData(JSON.parse(cached));
+        console.log('✅ تم استخدام النسخة المحلية');
+        return true;
+      } catch (parseError) {
+        console.error('❌ فشل تحليل localStorage:', parseError);
+      }
+    }
+    
+    // استخدام البيانات الافتراضية
+    console.warn('⚠️ استخدام البيانات الافتراضية');
+    siteData = getDefaultData();
+    return true;
+  }
+}
+
+// ============ إعادة تحميل البيانات ============
+async function forceReloadData() {
+  const debugEl = document.getElementById('debugInfo');
+  debugEl.style.display = 'block';
+  debugEl.innerHTML = 'جاري إعادة تحميل البيانات...';
+  
+  // مسح localStorage
+  localStorage.removeItem('siteData');
+  
+  // إعادة تحميل
+  const success = await loadData(true);
+  
+  if (success) {
+    debugEl.innerHTML = '✅ تم إعادة تحميل البيانات بنجاح!<br>الآن أدخل كلمة المرور واضغط دخول.';
+    showToast('✓ تم إعادة تحميل البيانات');
+  } else {
+    debugEl.innerHTML = '❌ فشل إعادة التحميل. تحقق من اتصالك بالإنترنت.';
+    showToast('❌ فشل إعادة التحميل', 'error');
+  }
+}
+
+// ============ تسجيل الدخول المحسّن ============
+async function login(event) {
+  event.preventDefault();
+  const password = document.getElementById('loginPassword').value;
+  
+  if (!siteData) {
+    await loadData();
   }
   
-  document.getElementById('bannersSection').style.display = 'block';
-  const container = document.getElementById('bannersContainer');
-  const controls = document.getElementById('bannerControls');
+  const hash = await sha256(password);
+  const storedHash = siteData.site.adminPasswordHash || '';
   
-  container.innerHTML = banners.map((b, i) => `
-    <div class="banner-slide ${i === 0 ? 'active' : ''}">
-      ${b.badge ? `<span class="banner-badge">${b.badge}</span>` : ''}
-      <h2>${b.title}</h2>
-      <p>${b.subtitle}</p>
+  console.log('=== معلومات التشخيص ===');
+  console.log('كلمة المرور المدخلة:', password);
+  console.log('Hash المدخل:', hash);
+  console.log('Hash المحفوظ:', storedHash);
+  console.log('طول hash المدخل:', hash.length);
+  console.log('طول hash المحفوظ:', storedHash.length);
+  console.log('هل متطابقان؟', hash === storedHash);
+  
+  if (hash === storedHash) {
+    sessionStorage.setItem('adminLoggedIn', 'true');
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('adminContainer').style.display = 'block';
+    loadAllTabs();
+    showToast('✓ تم تسجيل الدخول بنجاح');
+  } else {
+    showToast('❌ كلمة المرور غير صحيحة', 'error');
+    
+    // عرض معلومات التشخيص
+    const debugEl = document.getElementById('debugInfo');
+    debugEl.style.display = 'block';
+    debugEl.innerHTML = `
+      <strong>معلومات التشخيص:</strong><br>
+      Hash المدخل: ${hash.substring(0, 20)}...<br>
+      Hash المحفوظ: ${storedHash.substring(0, 20)}...<br>
+      طول المدخل: ${hash.length}<br>
+      طول المحفوظ: ${storedHash.length}<br>
+      <br>
+      <strong>الحل:</strong> اضغط "إعادة تحميل البيانات من GitHub"
+    `;
+  }
+}
+
+function logout() {
+  sessionStorage.removeItem('adminLoggedIn');
+  document.getElementById('loginScreen').style.display = 'flex';
+  document.getElementById('adminContainer').style.display = 'none';
+  document.getElementById('loginPassword').value = '';
+}
+
+// ============ التبويبات ============
+function switchTab(tabName, btn) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('tab-' + tabName).classList.add('active');
+}
+
+// ============ تحميل جميع التبويبات ============
+function loadAllTabs() {
+  loadGeneralTab();
+  loadBrandsTab();
+  loadProductsTab();
+  loadBannersTab();
+  loadContactTab();
+}
+
+// ============ تبويب الإعدادات العامة ============
+function loadGeneralTab() {
+  const s = siteData.site;
+  document.getElementById('brandName').value = s.brandName || '';
+  document.getElementById('brandTagline').value = s.brandTagline || '';
+  document.getElementById('heroTitle').value = s.heroTitle || '';
+  document.getElementById('heroSubtitle').value = s.heroSubtitle || '';
+  document.getElementById('heroDescription').value = s.heroDescription || '';
+  document.getElementById('aboutText').value = s.aboutText || '';
+  document.getElementById('supportHours').value = s.supportHours || '';
+  document.getElementById('footerText').value = s.footerText || '';
+}
+
+// ============ تبويب الماركات ============
+function loadBrandsTab() {
+  const container = document.getElementById('brandsList');
+  if (siteData.brands.length === 0) {
+    container.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:2rem">لا توجد ماركات بعد</p>';
+    return;
+  }
+  container.innerHTML = siteData.brands.map((b, i) => `
+    <div class="list-item">
+      <input type="color" class="color-input" value="${b.color}" onchange="updateBrandColor(${i}, this.value)">
+      <div class="list-item-info">
+        <input type="text" class="form-input" value="${b.name}" onchange="updateBrandName(${i}, this.value)" style="margin-bottom:0.3rem">
+        <p>المعرف: ${b.id} • ${siteData.products.filter(p => p.brandId === b.id).length} منتج</p>
+      </div>
+      <div class="list-item-actions">
+        <button class="btn btn-danger" onclick="deleteBrand(${i})"><i class="fas fa-trash"></i></button>
+      </div>
     </div>
   `).join('');
-  
-  controls.innerHTML = banners.map((_, i) => `
-    <div class="banner-dot ${i === 0 ? 'active' : ''}" onclick="goToBanner(${i})"></div>
-  `).join('');
-  
-  if (bannerInterval) clearInterval(bannerInterval);
-  if (banners.length > 1) {
-    bannerInterval = setInterval(() => {
-      currentBanner = (currentBanner + 1) % banners.length;
-      updateBanner();
-    }, 5000);
+}
+
+function addBrand() {
+  const name = prompt('اسم الماركة الجديدة:');
+  if (!name) return;
+  const id = name.toLowerCase().replace(/\s+/g, '-') + '-' + Date.now();
+  siteData.brands.push({ id, name, color: '#6366f1' });
+  saveData();
+  loadBrandsTab();
+  showToast('✓ تمت إضافة الماركة');
+}
+
+function updateBrandName(index, newName) {
+  siteData.brands[index].name = newName;
+  saveData();
+}
+
+function updateBrandColor(index, newColor) {
+  siteData.brands[index].color = newColor;
+  saveData();
+}
+
+function deleteBrand(index) {
+  const brand = siteData.brands[index];
+  const count = siteData.products.filter(p => p.brandId === brand.id).length;
+  if (count > 0) {
+    if (!confirm(`هناك ${count} منتج من هذه الماركة. هل تريد المتابعة؟`)) return;
+    siteData.products = siteData.products.filter(p => p.brandId !== brand.id);
   }
+  siteData.brands.splice(index, 1);
+  saveData();
+  loadBrandsTab();
+  loadProductsTab();
+  showToast('✓ تم حذف الماركة');
 }
 
-function goToBanner(index) {
-  currentBanner = index;
-  updateBanner();
-}
-
-function updateBanner() {
-  const slides = document.querySelectorAll('.banner-slide');
-  const dots = document.querySelectorAll('.banner-dot');
-  slides.forEach((s, i) => s.classList.toggle('active', i === currentBanner));
-  dots.forEach((d, i) => d.classList.toggle('active', i === currentBanner));
-}
-
-function renderBrandFilters() {
-  const brands = siteData.brands || [];
-  const container = document.getElementById('brandFilters');
-  
-  container.innerHTML = `
-    <button class="filter-btn ${currentFilter === 'all' ? 'active' : ''}" data-brand="all">الكل</button>
-    ${brands.map(b => `
-      <button class="filter-btn ${currentFilter === b.id ? 'active' : ''}" data-brand="${b.id}">${b.name}</button>
-    `).join('')}
-  `;
-  
-  container.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      currentFilter = btn.dataset.brand;
-      renderBrandFilters();
-      renderProducts();
-    });
-  });
-}
-
-function renderProducts() {
-  const grid = document.getElementById('productsGrid');
-  let products = siteData.products || [];
-  
-  if (currentFilter !== 'all') {
-    products = products.filter(p => p.brandId === currentFilter);
-  }
-  
-  if (searchQuery) {
-    const q = searchQuery.toLowerCase();
-    products = products.filter(p => 
-      p.name.toLowerCase().includes(q) || 
-      p.description.toLowerCase().includes(q) ||
-      (siteData.brands.find(b => b.id === p.brandId)?.name || '').toLowerCase().includes(q)
-    );
-  }
-  
-  if (products.length === 0) {
-    grid.innerHTML = `
-      <div class="empty-state">
-        <i class="fas fa-box-open"></i>
-        <h3>لا توجد منتجات</h3>
-        <p>جرب تغيير الفلتر أو البحث بكلمات مختلفة</p>
-      </div>`;
+// ============ تبويب المنتجات ============
+function loadProductsTab() {
+  const container = document.getElementById('productsList');
+  if (siteData.products.length === 0) {
+    container.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:2rem">لا توجد منتجات بعد</p>';
     return;
   }
-  
-  grid.innerHTML = products.map(p => {
+  container.innerHTML = siteData.products.map((p, i) => {
     const brand = siteData.brands.find(b => b.id === p.brandId);
     return `
-      <div class="product-card" onclick="openProduct('${p.id}')">
-        <div class="product-image">
-          ${p.image 
-            ? `<img src="${p.image}" alt="${p.name}" loading="lazy">` 
-            : `<i class="fas fa-cube placeholder-icon"></i>`}
-          ${p.badge ? `<span class="product-badge">${p.badge}</span>` : ''}
+      <div class="list-item">
+        ${p.image 
+          ? `<img src="${p.image}" alt="${p.name}">`
+          : `<div class="placeholder-icon"><i class="fas fa-cube"></i></div>`}
+        <div class="list-item-info">
+          <h4>${p.name}</h4>
+          <p>${brand ? brand.name : 'بدون ماركة'} • ${p.price} ${p.currency} • ${p.duration}</p>
         </div>
-        <div class="product-info">
-          <span class="product-brand">${brand ? brand.name : ''}</span>
-          <h3 class="product-title">${p.name}</h3>
-          <p class="product-desc">${p.description}</p>
-          <div class="product-footer">
-            <div class="product-price">
-              ${p.oldPrice ? `<span class="old-price">${p.oldPrice} ${p.currency}</span>` : ''}
-              ${p.price} ${p.currency}
-            </div>
-            <button class="view-btn">عرض التفاصيل</button>
-          </div>
+        <div class="list-item-actions">
+          <button class="btn btn-danger" onclick="deleteProduct(${i})"><i class="fas fa-trash"></i></button>
         </div>
       </div>
     `;
   }).join('');
 }
 
-function openProduct(id) {
-  currentProduct = siteData.products.find(p => p.id === id);
-  if (!currentProduct) return;
+function openProductForm() {
+  const name = prompt('اسم المنتج:');
+  if (!name) return;
   
-  const brand = siteData.brands.find(b => b.id === currentProduct.brandId);
+  const brandOptions = siteData.brands.map((b, i) => `${i + 1}. ${b.name}`).join('\n');
+  const brandChoice = prompt(`اختر الماركة:\n${brandOptions}`);
+  const brandIndex = parseInt(brandChoice) - 1;
   
-  document.getElementById('modalImage').innerHTML = currentProduct.image 
-    ? `<img src="${currentProduct.image}" alt="${currentProduct.name}">`
-    : `<i class="fas fa-cube placeholder-icon"></i>`;
-  document.getElementById('modalBrand').textContent = brand ? brand.name : '';
-  document.getElementById('modalTitle').textContent = currentProduct.name;
-  document.getElementById('modalPrice').innerHTML = currentProduct.oldPrice 
-    ? `<span class="old-price">${currentProduct.oldPrice} ${currentProduct.currency}</span>${currentProduct.price} ${currentProduct.currency}`
-    : `${currentProduct.price} ${currentProduct.currency}`;
-  document.getElementById('modalDuration').textContent = `المدة: ${currentProduct.duration}`;
-  document.getElementById('modalDesc').textContent = currentProduct.longDescription || currentProduct.description;
-  
-  const features = currentProduct.features || [];
-  document.getElementById('modalFeatures').innerHTML = features.map(f => `
-    <div class="modal-feature"><i class="fas fa-check"></i><span>${f}</span></div>
-  `).join('');
-  
-  document.getElementById('productModal').classList.add('active');
-  document.body.style.overflow = 'hidden';
-}
-
-function openOrderForm() {
-  if (!currentProduct) return;
-  const brand = siteData.brands.find(b => b.id === currentProduct.brandId);
-  
-  document.getElementById('orderProductInfo').innerHTML = `
-    <strong>${currentProduct.name}</strong><br>
-    <span style="color:var(--text-muted)">${brand ? brand.name : ''} • ${currentProduct.duration}</span><br>
-    <span style="font-size:1.3rem;font-weight:700;color:var(--primary)">${currentProduct.price} ${currentProduct.currency}</span>
-  `;
-  
-  closeModal('productModal');
-  document.getElementById('orderModal').classList.add('active');
-  document.body.style.overflow = 'hidden';
-}
-
-function submitOrder(event) {
-  event.preventDefault();
-  submitOrderVia('telegram');
-}
-
-function submitOrderVia(platform) {
-  const name = document.getElementById('orderName').value;
-  const phone = document.getElementById('orderPhone').value;
-  const email = document.getElementById('orderEmail').value;
-  const notes = document.getElementById('orderNotes').value;
-  
-  if (!name || !phone) {
-    showToast('الرجاء ملء جميع الحقول المطلوبة', 'error');
+  if (isNaN(brandIndex) || brandIndex < 0 || brandIndex >= siteData.brands.length) {
+    showToast('❌ اختيار غير صحيح', 'error');
     return;
   }
   
-  const brand = siteData.brands.find(b => b.id === currentProduct.brandId);
-  const message = `طلب جديد:%0A%0Aالمنتج: ${currentProduct.name}%0Aالماركة: ${brand ? brand.name : ''}%0Aالمدة: ${currentProduct.duration}%0Aالسعر: ${currentProduct.price} ${currentProduct.currency}%0A%0Aالاسم: ${name}%0Aالهاتف: ${phone}%0Aالبريد: ${email || 'غير محدد'}%0Aملاحظات: ${notes || 'لا يوجد'}`;
+  const price = prompt('السعر:') || '0';
+  const currency = prompt('العملة:') || 'دج';
+  const duration = prompt('المدة:') || 'شهر واحد';
+  const description = prompt('الوصف المختصر:') || '';
   
-  if (platform === 'telegram') {
-    window.open(`https://t.me/${siteData.site.telegramUsername}?text=${message}`, '_blank');
-  } else {
-    window.open(`${siteData.site.messengerLink}?text=${message}`, '_blank');
-  }
-  
-  closeModal('orderModal');
-  document.getElementById('orderForm').reset();
-  showToast('✓ تم إرسال طلبك بنجاح');
-}
-
-function contactVia(platform) {
-  if (platform === 'telegram') {
-    window.open(`https://t.me/${siteData.site.telegramUsername}`, '_blank');
-  } else if (platform === 'messenger') {
-    window.open(siteData.site.messengerLink, '_blank');
-  } else if (platform === 'facebook') {
-    window.open(siteData.site.facebookPageUrl, '_blank');
-  }
-}
-
-function closeModal(id) {
-  document.getElementById(id).classList.remove('active');
-  document.body.style.overflow = '';
-}
-
-document.getElementById('searchInput').addEventListener('input', (e) => {
-  searchQuery = e.target.value;
-  renderProducts();
-});
-
-document.querySelectorAll('.modal-overlay').forEach(overlay => {
-  overlay.addEventListener('click', (e) => {
-    if (e.target === overlay) {
-      overlay.classList.remove('active');
-      document.body.style.overflow = '';
-    }
+  siteData.products.push({
+    id: 'prod-' + Date.now(),
+    brandId: siteData.brands[brandIndex].id,
+    name: name,
+    description: description,
+    longDescription: description,
+    features: [],
+    duration: duration,
+    price: price,
+    oldPrice: '',
+    currency: currency,
+    badge: '',
+    image: ''
   });
-});
+  
+  saveData();
+  loadProductsTab();
+  showToast('✓ تمت إضافة المنتج');
+}
 
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') {
-    document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('active'));
-    document.body.style.overflow = '';
+function deleteProduct(index) {
+  if (!confirm('هل أنت متأكد من حذف هذا المنتج؟')) return;
+  siteData.products.splice(index, 1);
+  saveData();
+  loadProductsTab();
+  showToast('✓ تم حذف المنتج');
+}
+
+// ============ تبويب الإعلانات ============
+function loadBannersTab() {
+  const container = document.getElementById('bannersList');
+  if (!siteData.banners || siteData.banners.length === 0) {
+    container.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:2rem">لا توجد إعلانات بعد</p>';
+    return;
   }
-});
+  container.innerHTML = siteData.banners.map((b, i) => `
+    <div class="list-item">
+      <div class="placeholder-icon" style="background:linear-gradient(135deg,var(--warning),#d97706);color:white">
+        <i class="fas fa-bullhorn"></i>
+      </div>
+      <div class="list-item-info">
+        <h4>${b.title}</h4>
+        <p>${b.subtitle}</p>
+      </div>
+      <div class="list-item-actions">
+        <button class="btn btn-danger" onclick="deleteBanner(${i})"><i class="fas fa-trash"></i></button>
+      </div>
+    </div>
+  `).join('');
+}
 
+function addBanner() {
+  const title = prompt('عنوان الإعلان:');
+  if (!title) return;
+  const subtitle = prompt('الوصف:') || '';
+  const badge = prompt('الشارة (اختياري):') || '';
+  
+  if (!siteData.banners) siteData.banners = [];
+  siteData.banners.push({ title, subtitle, badge });
+  saveData();
+  loadBannersTab();
+  showToast('✓ تمت إضافة الإعلان');
+}
+
+function deleteBanner(index) {
+  if (!confirm('حذف هذا الإعلان؟')) return;
+  siteData.banners.splice(index, 1);
+  saveData();
+  loadBannersTab();
+  showToast('✓ تم حذف الإعلان');
+}
+
+// ============ تبويب التواصل ============
+function loadContactTab() {
+  document.getElementById('telegramUsername').value = siteData.site.telegramUsername || '';
+  document.getElementById('messengerLink').value = siteData.site.messengerLink || '';
+  document.getElementById('facebookPageUrl').value = siteData.site.facebookPageUrl || '';
+}
+
+// ============ تغيير كلمة المرور ============
+async function changePassword() {
+  const newPass = document.getElementById('newPassword').value;
+  const confirmPass = document.getElementById('confirmPassword').value;
+  
+  if (newPass.length < 6) {
+    showToast('❌ كلمة المرور يجب أن تكون 6 أحرف على الأقل', 'error');
+    return;
+  }
+  if (newPass !== confirmPass) {
+    showToast('❌ كلمتا المرور غير متطابقتين', 'error');
+    return;
+  }
+  
+  siteData.site.adminPasswordHash = await sha256(newPass);
+  saveData();
+  document.getElementById('newPassword').value = '';
+  document.getElementById('confirmPassword').value = '';
+  showToast('✓ تم تغيير كلمة المرور بنجاح');
+}
+
+// ============ حفظ البيانات ============
+function saveData() {
+  localStorage.setItem('siteData', JSON.stringify(siteData));
+  showToast('✓ تم حفظ التغييرات محلياً');
+}
+
+// ============ Toast ============
 function showToast(message, type = 'success') {
   const toast = document.getElementById('toast');
   toast.textContent = message;
-  toast.className = `toast ${type}`;
-  toast.classList.add('show');
+  toast.className = `toast show ${type}`;
   setTimeout(() => toast.classList.remove('show'), 3000);
 }
 
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
-    e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  });
+// ============ التحقق من الجلسة عند التحميل ============
+window.addEventListener('DOMContentLoaded', async () => {
+  await loadData();
+  
+  if (sessionStorage.getItem('adminLoggedIn') === 'true') {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('adminContainer').style.display = 'block';
+    loadAllTabs();
+  }
 });
-
-loadData();
 </script>
 
 </body>
