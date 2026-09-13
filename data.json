@@ -3,16 +3,15 @@
     "brandName": "RJ Tech",
     "brandTagline": "اشتراكات برمجيات أصلية",
     "logoUrl": "",
-    "heroTitle": "أدوات الإبداع والهندسة",
-    "heroSubtitle": "باشتراك أصلي وموثوق",
-    "heroDescription": "فوتوشوب، إليستريتور، بريمير، أوتوكاد وكل برامج Adobe و Autodesk بأسعار محلية وتفعيل فوري على حسابك الخاص.",
-    "aboutText": "نحن متجر متخصص في توفير اشتراكات برامج أصلية لعملائنا في المنطقة، بأسعار تناسب السوق المحلي وطرق دفع مبسطة. كل اشتراك يُفعَّل يدويًا من فريقنا خلال دقائق من تأكيد الطلب.",
-    "footerText": "© 2026 RJ Tech. جميع الحقوق محفوظة.",
-    "supportHours": "متوفرون يوميًا من 9 صباحًا حتى 11 مساءً",
+    "heroTitle": "أدوات الإبداع والهندسة، باشتراك أصلي وموثوق",
+    "heroSubtitle": "فوتوشوب، إليستريتور، أوتوكاد وعشرات البرامج الأخرى من أفضل الماركات العالمية، بأسعار محلية وتفعيل فوري ودعم مباشر بعد كل عملية شراء.",
     "adminPasswordHash": "80cbbe1d37177dccf5d3a3a840879a8a50426ff3959b03a0cb57874eac7491c0",
     "telegramUsername": "your_telegram_username",
+    "facebookPageUrl": "https://www.facebook.com/profile.php?id=61594083745646",
     "messengerLink": "https://m.me/yourpage",
-    "facebookPageUrl": "https://facebook.com/yourpage"
+    "aboutText": "نحن متجر متخصص في توفير اشتراكات برامج أصلية لعملائنا في المنطقة، بأسعار تناسب السوق المحلي وطرق دفع مبسطة. كل اشتراك يُفعَّل يدويًا من فريقنا خلال دقائق من تأكيد الطلب.",
+    "footerText": "جميع الأسماء والعلامات التجارية المذكورة ملك لأصحابها. هذا المتجر معيد بيع اشتراكات وليس تابعًا رسميًا لأي من الشركات المذكورة.",
+    "supportHours": "متوفرون يوميًا من 9 صباحًا حتى 11 مساءً"
   },
   "brands": [
     {
@@ -24,36 +23,18 @@
       "id": "autodesk",
       "name": "Autodesk",
       "color": "#3B82F6"
-    },
-    {
-      "id": "microsoft",
-      "name": "Microsoft",
-      "color": "#00A4EF"
-    },
-    {
-      "id": "corel",
-      "name": "Corel",
-      "color": "#00B050"
     }
   ],
   "banners": [
     {
-      "id": "banner-1",
       "title": "عروض بداية الموسم",
       "subtitle": "خصم يصل إلى 20% على باقات Adobe السنوية",
       "badge": "لفترة محدودة"
     },
     {
-      "id": "banner-2",
       "title": "باقة الطلاب والمهندسين",
       "subtitle": "أسعار خاصة لحاملي البطاقة الجامعية على AutoCAD و Revit",
       "badge": "جديد"
-    },
-    {
-      "id": "banner-3",
-      "title": "تفعيل فوري خلال دقائق",
-      "subtitle": "فريقنا جاهز لتفعيل اشتراكك على حسابك الخاص فور تأكيد الطلب",
-      "badge": "خدمة مميزة"
     }
   ],
   "products": [
@@ -134,25 +115,6 @@
       "image": ""
     },
     {
-      "id": "ae-1m",
-      "brandId": "adobe",
-      "name": "After Effects",
-      "description": "المؤثرات البصرية والرسوم المتحركة الاحترافية.",
-      "longDescription": "أفتر إفكتس هو البرنامج الرائد في صناعة المؤثرات البصرية والرسوم المتحركة، يُستخدم في السينما والتلفزيون وصناعة المحتوى الرقمي.",
-      "features": [
-        "مكتبة ضخمة من التأثيرات الجاهزة",
-        "تكامل مع Premiere Pro",
-        "دعم الصيغ الاحترافية",
-        "تفعيل على حسابك الخاص"
-      ],
-      "duration": "شهر واحد",
-      "price": "2200",
-      "oldPrice": "",
-      "currency": "دج",
-      "badge": "",
-      "image": ""
-    },
-    {
       "id": "acad-12m",
       "brandId": "autodesk",
       "name": "AutoCAD",
@@ -204,63 +166,6 @@
       ],
       "duration": "12 شهرًا",
       "price": "19500",
-      "oldPrice": "",
-      "currency": "دج",
-      "badge": "",
-      "image": ""
-    },
-    {
-      "id": "maya-12m",
-      "brandId": "autodesk",
-      "name": "Maya",
-      "description": "الأنيميشن والمؤثرات البصرية ثلاثية الأبعاد.",
-      "longDescription": "Maya هو البرنامج القياسي في صناعة الأنيميشن والمؤثرات البصرية للأفلام والألعاب، يستخدمه كبار الاستوديوهات حول العالم.",
-      "features": [
-        "ترخيص أصلي سنوي كامل",
-        "أدوات أنيميشن متقدمة",
-        "محرك رندر احترافي",
-        "تحديثات Autodesk الرسمية"
-      ],
-      "duration": "12 شهرًا",
-      "price": "19500",
-      "oldPrice": "",
-      "currency": "دج",
-      "badge": "",
-      "image": ""
-    },
-    {
-      "id": "office-12m",
-      "brandId": "microsoft",
-      "name": "Microsoft 365",
-      "description": "حزمة Office الكاملة: Word، Excel، PowerPoint والمزيد.",
-      "longDescription": "اشترك في Microsoft 365 واحصل على جميع تطبيقات Office الأساسية بالإضافة إلى 1 تيرابايت من التخزين السحابي على OneDrive.",
-      "features": [
-        "Word، Excel، PowerPoint، Outlook",
-        "1 تيرابايت تخزين على OneDrive",
-        "يعمل على 5 أجهزة في نفس الوقت",
-        "تحديثات مستمرة"
-      ],
-      "duration": "12 شهرًا",
-      "price": "3500",
-      "oldPrice": "5000",
-      "currency": "دج",
-      "badge": "عرض خاص",
-      "image": ""
-    },
-    {
-      "id": "cdr-1y",
-      "brandId": "corel",
-      "name": "CorelDRAW Graphics Suite",
-      "description": "تصميم فيكتور وتحرير صور احترافي.",
-      "longDescription": "CorelDRAW هو بديل قوي لـ Illustrator، يوفر أدوات تصميم فيكتور وتحرير صور متكاملة بسعر مناسب.",
-      "features": [
-        "أدوات تصميم فيكتور احترافية",
-        "محرر صور مدمج",
-        "متوافق مع صيغ Adobe",
-        "ترخيص سنوي كامل"
-      ],
-      "duration": "سنة واحدة",
-      "price": "4500",
       "oldPrice": "",
       "currency": "دج",
       "badge": "",
