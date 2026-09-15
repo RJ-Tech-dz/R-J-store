@@ -58,6 +58,7 @@ body::after{
   0%,100%{transform:translate(0,0) scale(1)}
   50%{transform:translate(-5%,5%) scale(1.1)}
 }
+@media (prefers-reduced-motion: reduce){ body::before{animation:none} }
 
 /* ===== Navbar ===== */
 .navbar{
@@ -69,817 +70,197 @@ body::after{
   border-bottom:1px solid var(--border);
   padding:1rem 2rem;
 }
-.nav-container{
-  max-width:1400px;
-  margin:0 auto;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:2rem;
-}
+.nav-container{max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:2rem}
 .logo{
-  font-size:1.8rem;
-  font-weight:900;
+  font-size:1.8rem;font-weight:900;
   background:linear-gradient(135deg,var(--primary),var(--secondary));
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-clip:text;
-  display:flex;
-  align-items:center;
-  gap:0.5rem;
-  cursor:pointer;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  display:flex;align-items:center;gap:0.5rem;cursor:pointer;
 }
 .logo i{color:var(--primary);-webkit-text-fill-color:var(--primary)}
 .nav-links{display:flex;gap:2rem;list-style:none}
-.nav-links a{
-  color:var(--muted);
-  text-decoration:none;
-  font-weight:600;
-  transition:all 0.3s;
-  position:relative;
-}
+.nav-links a{color:var(--muted);text-decoration:none;font-weight:600;transition:all 0.3s;position:relative}
 .nav-links a:hover{color:var(--text)}
-.nav-links a::after{
-  content:'';
-  position:absolute;
-  bottom:-5px;
-  right:0;
-  width:0;
-  height:2px;
-  background:linear-gradient(90deg,var(--primary),var(--secondary));
-  transition:width 0.3s;
-}
+.nav-links a::after{content:'';position:absolute;bottom:-5px;right:0;width:0;height:2px;background:linear-gradient(90deg,var(--primary),var(--secondary));transition:width 0.3s}
 .nav-links a:hover::after{width:100%}
 .admin-btn{
-  background:rgba(255,255,255,0.05);
-  color:var(--muted);
-  border:1px solid var(--border);
-  padding:0.6rem 1.3rem;
-  border-radius:50px;
-  cursor:pointer;
-  font-weight:600;
-  font-family:inherit;
-  transition:all 0.3s;
-  text-decoration:none;
-  display:inline-flex;
-  align-items:center;
-  gap:0.5rem;
-  font-size:0.9rem;
+  background:rgba(255,255,255,0.05);color:var(--muted);border:1px solid var(--border);
+  padding:0.6rem 1.3rem;border-radius:50px;cursor:pointer;font-weight:600;font-family:inherit;
+  transition:all 0.3s;text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem;font-size:0.9rem;
 }
-.admin-btn:hover{
-  color:var(--text);
-  border-color:var(--primary);
-  background:rgba(99,102,241,0.1);
-}
-.menu-toggle{
-  display:none;
-  background:none;
-  border:none;
-  color:var(--text);
-  font-size:1.5rem;
-  cursor:pointer;
-}
+.admin-btn:hover{color:var(--text);border-color:var(--primary);background:rgba(99,102,241,0.1)}
+.menu-toggle{display:none;background:none;border:none;color:var(--text);font-size:1.5rem;cursor:pointer}
 
 /* ===== Hero ===== */
-.hero{
-  max-width:1400px;
-  margin:0 auto;
-  padding:5rem 2rem 3rem;
-  text-align:center;
-  position:relative;
-}
+.hero{max-width:1400px;margin:0 auto;padding:5rem 2rem 3rem;text-align:center;position:relative}
 .hero-badge{
-  display:inline-flex;
-  align-items:center;
-  gap:0.5rem;
-  background:rgba(99,102,241,0.15);
-  border:1px solid rgba(99,102,241,0.3);
-  padding:0.5rem 1.2rem;
-  border-radius:50px;
-  font-size:0.9rem;
-  margin-bottom:1.5rem;
-  color:var(--primary);
-  font-weight:600;
-  animation:fadeUp 0.6s ease;
+  display:inline-flex;align-items:center;gap:0.5rem;background:rgba(99,102,241,0.15);
+  border:1px solid rgba(99,102,241,0.3);padding:0.5rem 1.2rem;border-radius:50px;font-size:0.9rem;
+  margin-bottom:1.5rem;color:var(--primary);font-weight:600;animation:fadeUp 0.6s ease;
 }
 .hero h1{
-  font-size:clamp(2rem,5vw,4rem);
-  font-weight:900;
-  line-height:1.2;
-  margin-bottom:1.5rem;
+  font-size:clamp(2rem,5vw,4rem);font-weight:900;line-height:1.2;margin-bottom:1.5rem;
   background:linear-gradient(135deg,#fff 0%,#a1a1aa 100%);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-clip:text;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
   animation:fadeUp 0.8s ease;
 }
-.hero p{
-  font-size:1.15rem;
-  color:var(--muted);
-  max-width:700px;
-  margin:0 auto 2.5rem;
-  line-height:1.8;
-  animation:fadeUp 1s ease;
-}
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(20px)}
-  to{opacity:1;transform:translateY(0)}
-}
-.hero-buttons{
-  display:flex;
-  gap:1rem;
-  justify-content:center;
-  flex-wrap:wrap;
-  margin-bottom:3rem;
-  animation:fadeUp 1.2s ease;
-}
+.hero p{font-size:1.15rem;color:var(--muted);max-width:700px;margin:0 auto 2.5rem;line-height:1.8;animation:fadeUp 1s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.hero-buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:3rem;animation:fadeUp 1.2s ease}
 .btn-hero-primary,.btn-hero-secondary{
-  padding:1rem 2rem;
-  border-radius:50px;
-  font-weight:700;
-  font-size:1rem;
-  cursor:pointer;
-  transition:all 0.3s;
-  text-decoration:none;
-  display:inline-flex;
-  align-items:center;
-  gap:0.5rem;
-  font-family:inherit;
-  border:none;
+  padding:1rem 2rem;border-radius:50px;font-weight:700;font-size:1rem;cursor:pointer;transition:all 0.3s;
+  text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem;font-family:inherit;border:none;
 }
-.btn-hero-primary{
-  background:linear-gradient(135deg,var(--primary),var(--secondary));
-  color:white;
-  box-shadow:0 4px 20px rgba(99,102,241,0.4);
-}
+.btn-hero-primary{background:linear-gradient(135deg,var(--primary),var(--secondary));color:white;box-shadow:0 4px 20px rgba(99,102,241,0.4)}
 .btn-hero-primary:hover{transform:translateY(-3px);box-shadow:0 6px 25px rgba(99,102,241,0.6)}
-.btn-hero-secondary{
-  background:rgba(255,255,255,0.05);
-  color:var(--text);
-  border:1px solid var(--border);
-  backdrop-filter:blur(10px);
-}
+.btn-hero-secondary{background:rgba(255,255,255,0.05);color:var(--text);border:1px solid var(--border);backdrop-filter:blur(10px)}
 .btn-hero-secondary:hover{background:rgba(255,255,255,0.1);transform:translateY(-3px)}
-.hero-features{
-  display:flex;
-  justify-content:center;
-  gap:1.5rem;
-  flex-wrap:wrap;
-  margin-top:3rem;
-  animation:fadeUp 1.4s ease;
-}
-.hero-feature{
-  display:flex;
-  align-items:center;
-  gap:0.7rem;
-  padding:0.8rem 1.5rem;
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:50px;
-  backdrop-filter:blur(10px);
-}
+.hero-features{display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;margin-top:3rem;animation:fadeUp 1.4s ease}
+.hero-feature{display:flex;align-items:center;gap:0.7rem;padding:0.8rem 1.5rem;background:var(--card);border:1px solid var(--border);border-radius:50px;backdrop-filter:blur(10px)}
 .hero-feature i{color:var(--success);font-size:1.2rem}
 
 /* ===== Banners ===== */
-.banners-section{
-  max-width:1400px;
-  margin:2rem auto;
-  padding:0 2rem;
-}
-.banners-slider{
-  position:relative;
-  overflow:hidden;
-  border-radius:20px;
-  background:var(--card);
-  border:1px solid var(--border);
-  backdrop-filter:blur(10px);
-  min-height:150px;
-}
-.banner-slide{
-  display:none;
-  padding:3rem;
-  text-align:center;
-  animation:fadeIn 0.5s;
-}
+.banners-section{max-width:1400px;margin:2rem auto;padding:0 2rem}
+.banners-slider{position:relative;overflow:hidden;border-radius:20px;background:var(--card);border:1px solid var(--border);backdrop-filter:blur(10px);min-height:150px}
+.banner-slide{display:none;padding:3rem;text-align:center;animation:fadeIn 0.5s}
 .banner-slide.active{display:block}
 @keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-.banner-badge{
-  display:inline-block;
-  background:linear-gradient(135deg,var(--warning),#d97706);
-  color:white;
-  padding:0.4rem 1rem;
-  border-radius:50px;
-  font-size:0.85rem;
-  font-weight:700;
-  margin-bottom:1rem;
-}
-.banner-slide h2{
-  font-size:2rem;
-  margin-bottom:0.5rem;
-  background:linear-gradient(135deg,#fff,#a1a1aa);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-clip:text;
-}
+.banner-badge{display:inline-block;background:linear-gradient(135deg,var(--warning),#d97706);color:white;padding:0.4rem 1rem;border-radius:50px;font-size:0.85rem;font-weight:700;margin-bottom:1rem}
+.banner-slide h2{font-size:2rem;margin-bottom:0.5rem;background:linear-gradient(135deg,#fff,#a1a1aa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .banner-slide p{color:var(--muted);font-size:1.1rem}
-.banner-controls{
-  position:absolute;
-  bottom:1rem;
-  left:50%;
-  transform:translateX(-50%);
-  display:flex;
-  gap:0.5rem;
-}
-.banner-dot{
-  width:10px;
-  height:10px;
-  border-radius:50%;
-  background:rgba(255,255,255,0.3);
-  cursor:pointer;
-  transition:all 0.3s;
-  border:none;
-}
-.banner-dot.active{
-  background:var(--primary);
-  width:30px;
-  border-radius:5px;
-}
+.banner-controls{position:absolute;bottom:1rem;left:50%;transform:translateX(-50%);display:flex;gap:0.5rem}
+.banner-dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.3);cursor:pointer;transition:all 0.3s;border:none}
+.banner-dot.active{background:var(--primary);width:30px;border-radius:5px}
 
 /* ===== Filters ===== */
-.filters-section{
-  max-width:1400px;
-  margin:0 auto;
-  padding:3rem 2rem 2rem;
-}
-.section-title{
-  font-size:2rem;
-  font-weight:800;
-  margin-bottom:0.5rem;
-  background:linear-gradient(135deg,#fff,#a1a1aa);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-clip:text;
-}
-.section-subtitle{
-  color:var(--muted);
-  margin-bottom:2rem;
-  line-height:1.8;
-}
-.search-box{
-  position:relative;
-  max-width:500px;
-  margin-bottom:2rem;
-}
+.filters-section{max-width:1400px;margin:0 auto;padding:3rem 2rem 2rem}
+.section-title{font-size:2rem;font-weight:800;margin-bottom:0.5rem;background:linear-gradient(135deg,#fff,#a1a1aa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.section-subtitle{color:var(--muted);margin-bottom:2rem;line-height:1.8}
+.search-box{position:relative;max-width:500px;margin-bottom:2rem}
 .search-box input{
-  width:100%;
-  background:var(--card);
-  border:1px solid var(--border);
-  color:var(--text);
-  padding:1rem 1rem 1rem 3rem;
-  border-radius:50px;
-  font-family:inherit;
-  font-size:1rem;
-  backdrop-filter:blur(10px);
-  transition:all 0.3s;
+  width:100%;background:var(--card);border:1px solid var(--border);color:var(--text);
+  padding:1rem 1rem 1rem 3rem;border-radius:50px;font-family:inherit;font-size:1rem;backdrop-filter:blur(10px);transition:all 0.3s;
 }
-.search-box input:focus{
-  outline:none;
-  border-color:var(--primary);
-  box-shadow:0 0 0 3px rgba(99,102,241,0.2);
-}
-.search-box i{
-  position:absolute;
-  left:1rem;
-  top:50%;
-  transform:translateY(-50%);
-  color:var(--muted);
-}
-.filters{
-  display:flex;
-  gap:0.8rem;
-  flex-wrap:wrap;
-  margin-bottom:2rem;
-}
-.filter-btn{
-  background:var(--card);
-  border:1px solid var(--border);
-  color:var(--muted);
-  padding:0.7rem 1.5rem;
-  border-radius:50px;
-  cursor:pointer;
-  font-family:inherit;
-  font-weight:600;
-  transition:all 0.3s;
-  backdrop-filter:blur(10px);
-}
+.search-box input:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(99,102,241,0.2)}
+.search-box i{position:absolute;left:1rem;top:50%;transform:translateY(-50%);color:var(--muted)}
+.filters{display:flex;gap:0.8rem;flex-wrap:wrap;margin-bottom:2rem}
+.filter-btn{background:var(--card);border:1px solid var(--border);color:var(--muted);padding:0.7rem 1.5rem;border-radius:50px;cursor:pointer;font-family:inherit;font-weight:600;transition:all 0.3s;backdrop-filter:blur(10px);display:inline-flex;align-items:center;gap:0.5rem}
+.filter-btn i{width:8px;height:8px;border-radius:50%;display:inline-block}
 .filter-btn:hover{color:var(--text);border-color:var(--primary)}
-.filter-btn.active{
-  background:linear-gradient(135deg,var(--primary),var(--secondary));
-  color:white;
-  border-color:transparent;
-}
+.filter-btn.active{background:linear-gradient(135deg,var(--primary),var(--secondary));color:white;border-color:transparent}
+.filter-btn.active i{background:#fff !important}
 
 /* ===== Products Grid ===== */
-.products-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
-  gap:1.5rem;
-  max-width:1400px;
-  margin:0 auto;
-  padding:0 2rem 3rem;
-}
-.product-card{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:20px;
-  overflow:hidden;
-  backdrop-filter:blur(10px);
-  transition:all 0.4s cubic-bezier(0.4,0,0.2,1);
-  cursor:pointer;
-  position:relative;
-}
-.product-card:hover{
-  transform:translateY(-8px);
-  border-color:var(--primary);
-  box-shadow:0 20px 40px rgba(99,102,241,0.3);
-}
-.product-image{
-  width:100%;
-  height:180px;
-  background:linear-gradient(135deg,#1a1a2e,#16213e);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  overflow:hidden;
-  position:relative;
-}
-.product-image img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  transition:transform 0.4s;
-}
+.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;max-width:1400px;margin:0 auto;padding:0 2rem 3rem}
+.product-card{background:var(--card);border:1px solid var(--border);border-radius:20px;overflow:hidden;backdrop-filter:blur(10px);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);cursor:pointer;position:relative}
+.product-card:hover{transform:translateY(-8px);border-color:var(--primary);box-shadow:0 20px 40px rgba(99,102,241,0.3)}
+.product-image{width:100%;height:180px;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.product-image img{width:100%;height:100%;object-fit:cover;transition:transform 0.4s}
 .product-card:hover .product-image img{transform:scale(1.05)}
-.product-image .placeholder-icon{
-  font-size:4rem;
-  color:var(--primary);
-  opacity:0.5;
-}
-.product-badge{
-  position:absolute;
-  top:1rem;
-  right:1rem;
-  background:rgba(16,185,129,0.9);
-  color:white;
-  padding:0.3rem 0.8rem;
-  border-radius:50px;
-  font-size:0.75rem;
-  font-weight:700;
-  backdrop-filter:blur(10px);
-  z-index:2;
-}
+.product-image .placeholder-icon{font-size:4rem;color:#fff;opacity:0.85}
+.product-badge{position:absolute;top:1rem;right:1rem;background:rgba(16,185,129,0.9);color:white;padding:0.3rem 0.8rem;border-radius:50px;font-size:0.75rem;font-weight:700;backdrop-filter:blur(10px);z-index:2}
 .product-info{padding:1.5rem}
-.product-brand{
-  display:inline-block;
-  color:var(--primary);
-  font-size:0.85rem;
-  font-weight:700;
-  margin-bottom:0.5rem;
-  text-transform:uppercase;
-  letter-spacing:0.5px;
-}
-.product-title{
-  font-size:1.2rem;
-  font-weight:700;
-  margin-bottom:0.5rem;
-}
-.product-desc{
-  color:var(--muted);
-  font-size:0.9rem;
-  line-height:1.6;
-  margin-bottom:1rem;
-  display:-webkit-box;
-  -webkit-line-clamp:2;
-  -webkit-box-orient:vertical;
-  overflow:hidden;
-}
-.product-footer{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding-top:1rem;
-  border-top:1px solid var(--border);
-}
-.product-price{
-  font-size:1.4rem;
-  font-weight:900;
-  background:linear-gradient(135deg,var(--primary),var(--secondary));
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-clip:text;
-}
-.product-price .old-price{
-  text-decoration:line-through;
-  color:var(--muted);
-  font-size:0.85rem;
-  margin-left:0.5rem;
-  -webkit-text-fill-color:var(--muted);
-  font-weight:400;
-}
-.view-btn{
-  background:rgba(99,102,241,0.15);
-  color:var(--primary);
-  border:1px solid rgba(99,102,241,0.3);
-  padding:0.5rem 1rem;
-  border-radius:50px;
-  cursor:pointer;
-  font-family:inherit;
-  font-weight:600;
-  font-size:0.85rem;
-  transition:all 0.3s;
-}
+.product-brand{display:inline-flex;align-items:center;gap:6px;color:var(--primary);font-size:0.85rem;font-weight:700;margin-bottom:0.5rem}
+.product-brand i{width:7px;height:7px;border-radius:50%;display:inline-block}
+.product-title{font-size:1.2rem;font-weight:700;margin-bottom:0.5rem}
+.product-desc{color:var(--muted);font-size:0.9rem;line-height:1.6;margin-bottom:1rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.product-footer{display:flex;justify-content:space-between;align-items:center;padding-top:1rem;border-top:1px solid var(--border)}
+.product-price{font-size:1.4rem;font-weight:900;background:linear-gradient(135deg,var(--primary),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.product-price .old-price{text-decoration:line-through;color:var(--muted);font-size:0.85rem;margin-left:0.5rem;-webkit-text-fill-color:var(--muted);font-weight:400}
+.view-btn{background:rgba(99,102,241,0.15);color:var(--primary);border:1px solid rgba(99,102,241,0.3);padding:0.5rem 1rem;border-radius:50px;cursor:pointer;font-family:inherit;font-weight:600;font-size:0.85rem;transition:all 0.3s}
 .view-btn:hover{background:var(--primary);color:white}
-
-.empty-state{
-  text-align:center;
-  padding:4rem 2rem;
-  color:var(--muted);
-  grid-column:1/-1;
-}
+.empty-state{text-align:center;padding:4rem 2rem;color:var(--muted);grid-column:1/-1}
 .empty-state i{font-size:4rem;margin-bottom:1rem;opacity:0.3;display:block}
 
 /* ===== How Section ===== */
-.how-section{
-  max-width:1400px;
-  margin:4rem auto;
-  padding:3rem 2rem;
-  text-align:center;
-}
-.steps-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:2rem;
-  margin-top:3rem;
-}
-.step-card{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:20px;
-  padding:2.5rem 2rem 2rem;
-  backdrop-filter:blur(10px);
-  position:relative;
-  transition:all 0.3s;
-}
+.how-section{max-width:1400px;margin:4rem auto;padding:3rem 2rem;text-align:center}
+.steps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem;margin-top:3rem}
+.step-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:2.5rem 2rem 2rem;backdrop-filter:blur(10px);position:relative;transition:all 0.3s}
 .step-card:hover{transform:translateY(-5px);border-color:var(--primary)}
-.step-number{
-  position:absolute;
-  top:-20px;
-  right:50%;
-  transform:translateX(50%);
-  width:50px;
-  height:50px;
-  background:linear-gradient(135deg,var(--primary),var(--secondary));
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:1.3rem;
-  font-weight:900;
-  color:white;
-  box-shadow:0 4px 20px rgba(99,102,241,0.4);
-}
+.step-number{position:absolute;top:-20px;right:50%;transform:translateX(50%);width:50px;height:50px;background:linear-gradient(135deg,var(--primary),var(--secondary));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;font-weight:900;color:white;box-shadow:0 4px 20px rgba(99,102,241,0.4)}
 .step-card h3{margin-top:1rem;margin-bottom:1rem;font-size:1.2rem}
 .step-card p{color:var(--muted);line-height:1.8}
 
 /* ===== About ===== */
-.about-section{
-  max-width:1400px;
-  margin:4rem auto;
-  padding:3rem 2rem;
-  text-align:center;
-}
-.about-content{
-  max-width:800px;
-  margin:2rem auto;
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:20px;
-  padding:3rem;
-  backdrop-filter:blur(10px);
-}
+.about-section{max-width:1400px;margin:4rem auto;padding:3rem 2rem;text-align:center}
+.about-content{max-width:800px;margin:2rem auto;background:var(--card);border:1px solid var(--border);border-radius:20px;padding:3rem;backdrop-filter:blur(10px)}
 .about-content p{color:var(--muted);line-height:2;font-size:1.1rem}
+.about-content .support-hours{margin-top:1rem;font-size:0.95rem;color:var(--muted);opacity:0.8}
 
 /* ===== Contact ===== */
-.contact-section{
-  max-width:1400px;
-  margin:4rem auto;
-  padding:3rem 2rem;
-  text-align:center;
-}
-.contact-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:2rem;
-  margin-top:3rem;
-}
-.contact-card{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:20px;
-  padding:2rem;
-  backdrop-filter:blur(10px);
-  transition:all 0.3s;
-  cursor:pointer;
-  text-decoration:none;
-  color:inherit;
-  display:block;
-}
-.contact-card:hover{
-  transform:translateY(-5px);
-  border-color:var(--primary);
-  box-shadow:0 10px 30px rgba(99,102,241,0.3);
-}
-.contact-card i{
-  font-size:3rem;
-  background:linear-gradient(135deg,var(--primary),var(--secondary));
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-clip:text;
-  margin-bottom:1rem;
-  display:block;
-}
+.contact-section{max-width:1400px;margin:4rem auto;padding:3rem 2rem;text-align:center}
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem;margin-top:3rem}
+.contact-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:2rem;backdrop-filter:blur(10px);transition:all 0.3s;cursor:pointer;text-decoration:none;color:inherit;display:block}
+.contact-card:hover{transform:translateY(-5px);border-color:var(--primary);box-shadow:0 10px 30px rgba(99,102,241,0.3)}
+.contact-card i{font-size:3rem;background:linear-gradient(135deg,var(--primary),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:1rem;display:block}
 .contact-card h3{margin-bottom:0.5rem}
 .contact-card p{color:var(--muted)}
 
 /* ===== Footer ===== */
-.footer{
-  background:rgba(0,0,0,0.5);
-  border-top:1px solid var(--border);
-  padding:3rem 2rem 1.5rem;
-  margin-top:4rem;
-}
-.footer-content{
-  max-width:1400px;
-  margin:0 auto;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:2rem;
-  margin-bottom:2rem;
-}
+.footer{background:rgba(0,0,0,0.5);border-top:1px solid var(--border);padding:3rem 2rem 1.5rem;margin-top:4rem}
+.footer-content{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;margin-bottom:2rem}
 .footer-col h3{margin-bottom:1rem;font-size:1.1rem}
-.footer-col p,.footer-col a{
-  color:var(--muted);
-  text-decoration:none;
-  display:block;
-  margin-bottom:0.5rem;
-  transition:color 0.3s;
-}
+.footer-col p,.footer-col a{color:var(--muted);text-decoration:none;display:block;margin-bottom:0.5rem;transition:color 0.3s}
 .footer-col a:hover{color:var(--primary)}
+.footer-col p i{margin-left:6px}
 .social-links{display:flex;gap:0.8rem;margin-top:1rem}
-.social-links a{
-  width:40px;
-  height:40px;
-  background:rgba(255,255,255,0.05);
-  border:1px solid var(--border);
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:var(--muted);
-  transition:all 0.3s;
-  margin:0;
-}
-.social-links a:hover{
-  background:var(--primary);
-  color:white;
-  transform:translateY(-3px);
-}
-.footer-bottom{
-  max-width:1400px;
-  margin:0 auto;
-  padding-top:1.5rem;
-  border-top:1px solid var(--border);
-  text-align:center;
-  color:var(--muted);
-  font-size:0.9rem;
-}
+.social-links a{width:40px;height:40px;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--muted);transition:all 0.3s;margin:0}
+.social-links a:hover{background:var(--primary);color:white;transform:translateY(-3px)}
+.footer-bottom{max-width:1400px;margin:0 auto;padding-top:1.5rem;border-top:1px solid var(--border);text-align:center;color:var(--muted);font-size:0.9rem}
 
 /* ===== Modal ===== */
-.modal-overlay{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.8);
-  backdrop-filter:blur(10px);
-  z-index:1000;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:1rem;
-  animation:fadeIn 0.3s;
-}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.8);backdrop-filter:blur(10px);z-index:1000;display:none;align-items:center;justify-content:center;padding:1rem;animation:fadeIn 0.3s}
 .modal-overlay.active{display:flex}
-.modal{
-  background:linear-gradient(135deg,rgba(26,26,46,0.98),rgba(22,33,62,0.98));
-  border:1px solid var(--border);
-  border-radius:24px;
-  max-width:700px;
-  width:100%;
-  max-height:90vh;
-  overflow-y:auto;
-  position:relative;
-  animation:slideUp 0.4s cubic-bezier(0.4,0,0.2,1);
-}
-@keyframes slideUp{
-  from{transform:translateY(50px);opacity:0}
-  to{transform:translateY(0);opacity:1}
-}
-.modal-close{
-  position:absolute;
-  top:1rem;
-  left:1rem;
-  background:rgba(255,255,255,0.1);
-  border:none;
-  color:white;
-  width:40px;
-  height:40px;
-  border-radius:50%;
-  cursor:pointer;
-  font-size:1.2rem;
-  z-index:10;
-  transition:all 0.3s;
-}
+.modal{background:linear-gradient(135deg,rgba(26,26,46,0.98),rgba(22,33,62,0.98));border:1px solid var(--border);border-radius:24px;max-width:700px;width:100%;max-height:90vh;overflow-y:auto;position:relative;animation:slideUp 0.4s cubic-bezier(0.4,0,0.2,1)}
+@keyframes slideUp{from{transform:translateY(50px);opacity:0}to{transform:translateY(0);opacity:1}}
+.modal-close{position:absolute;top:1rem;left:1rem;background:rgba(255,255,255,0.1);border:none;color:white;width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:1.2rem;z-index:10;transition:all 0.3s}
 .modal-close:hover{background:rgba(255,255,255,0.2);transform:rotate(90deg)}
-.modal-image{
-  width:100%;
-  height:300px;
-  background:linear-gradient(135deg,#1a1a2e,#16213e);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:24px 24px 0 0;
-  overflow:hidden;
-}
+.modal-image{width:100%;height:300px;display:flex;align-items:center;justify-content:center;border-radius:24px 24px 0 0;overflow:hidden}
 .modal-image img{width:100%;height:100%;object-fit:cover}
-.modal-image .placeholder-icon{font-size:6rem;color:var(--primary);opacity:0.5}
+.modal-image .placeholder-icon{font-size:6rem;color:#fff;opacity:0.85}
 .modal-body{padding:2rem}
-.modal-brand{
-  display:inline-block;
-  background:rgba(99,102,241,0.15);
-  color:var(--primary);
-  padding:0.3rem 1rem;
-  border-radius:50px;
-  font-size:0.85rem;
-  font-weight:700;
-  margin-bottom:1rem;
-}
+.modal-brand{display:inline-flex;align-items:center;gap:7px;background:rgba(99,102,241,0.15);color:var(--primary);padding:0.3rem 1rem;border-radius:50px;font-size:0.85rem;font-weight:700;margin-bottom:1rem}
+.modal-brand i{width:8px;height:8px;border-radius:50%;display:inline-block}
 .modal-title{font-size:2rem;font-weight:900;margin-bottom:1rem}
-.modal-price{
-  font-size:2.5rem;
-  font-weight:900;
-  background:linear-gradient(135deg,var(--primary),var(--secondary));
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-clip:text;
-  margin-bottom:0.5rem;
-}
-.modal-price .old-price{
-  font-size:1.5rem;
-  text-decoration:line-through;
-  color:var(--muted);
-  -webkit-text-fill-color:var(--muted);
-  margin-left:1rem;
-}
+.modal-price{font-size:2.5rem;font-weight:900;background:linear-gradient(135deg,var(--primary),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:0.5rem}
+.modal-price .old-price{font-size:1.5rem;text-decoration:line-through;color:var(--muted);-webkit-text-fill-color:var(--muted);margin-left:1rem}
 .modal-duration{color:var(--muted);margin-bottom:1.5rem;font-size:1rem}
 .modal-desc{color:var(--muted);line-height:1.8;margin-bottom:2rem;white-space:pre-line}
-.modal-features{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:1rem;
-  margin-bottom:2rem;
-}
-.modal-feature{
-  display:flex;
-  align-items:center;
-  gap:0.7rem;
-  padding:1rem;
-  background:rgba(255,255,255,0.03);
-  border:1px solid var(--border);
-  border-radius:12px;
-}
+.modal-features{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:2rem}
+.modal-feature{display:flex;align-items:center;gap:0.7rem;padding:1rem;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:12px}
 .modal-feature i{color:var(--success);font-size:1.2rem}
 .modal-actions{display:flex;gap:1rem;flex-wrap:wrap}
-.btn-primary,.btn-secondary{
-  flex:1;
-  min-width:150px;
-  padding:1rem 1.5rem;
-  border-radius:12px;
-  border:none;
-  cursor:pointer;
-  font-family:inherit;
-  font-weight:700;
-  font-size:1rem;
-  transition:all 0.3s;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:0.5rem;
-}
-.btn-primary{
-  background:linear-gradient(135deg,var(--primary),var(--secondary));
-  color:white;
-  box-shadow:0 4px 20px rgba(99,102,241,0.4);
-}
+.btn-primary,.btn-secondary{flex:1;min-width:150px;padding:1rem 1.5rem;border-radius:12px;border:none;cursor:pointer;font-family:inherit;font-weight:700;font-size:1rem;transition:all 0.3s;display:flex;align-items:center;justify-content:center;gap:0.5rem}
+.btn-primary{background:linear-gradient(135deg,var(--primary),var(--secondary));color:white;box-shadow:0 4px 20px rgba(99,102,241,0.4)}
 .btn-primary:hover{transform:translateY(-2px);box-shadow:0 6px 25px rgba(99,102,241,0.6)}
-.btn-secondary{
-  background:rgba(255,255,255,0.05);
-  color:var(--text);
-  border:1px solid var(--border);
-}
+.btn-secondary{background:rgba(255,255,255,0.05);color:var(--text);border:1px solid var(--border)}
 .btn-secondary:hover{background:rgba(255,255,255,0.1)}
 
 /* ===== Order Form ===== */
 .order-form{padding:2rem}
 .order-form h2{margin-bottom:1.5rem;text-align:center}
-.order-product-info{
-  background:rgba(99,102,241,0.1);
-  border:1px solid rgba(99,102,241,0.3);
-  padding:1rem;
-  border-radius:12px;
-  margin-bottom:1.5rem;
-}
+.order-product-info{background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.3);padding:1rem;border-radius:12px;margin-bottom:1.5rem}
 .form-group{margin-bottom:1.5rem}
 .form-label{display:block;margin-bottom:0.5rem;font-weight:600}
-.form-input,.form-textarea{
-  width:100%;
-  background:rgba(255,255,255,0.05);
-  border:1px solid var(--border);
-  color:var(--text);
-  padding:0.8rem 1rem;
-  border-radius:12px;
-  font-family:inherit;
-  font-size:1rem;
-  transition:all 0.3s;
-}
-.form-input:focus,.form-textarea:focus{
-  outline:none;
-  border-color:var(--primary);
-  box-shadow:0 0 0 3px rgba(99,102,241,0.2);
-}
+.form-input,.form-textarea{width:100%;background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--text);padding:0.8rem 1rem;border-radius:12px;font-family:inherit;font-size:1rem;transition:all 0.3s}
+.form-input:focus,.form-textarea:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(99,102,241,0.2)}
 .form-textarea{min-height:100px;resize:vertical}
 
 /* ===== Toast ===== */
-.toast{
-  position:fixed;
-  bottom:2rem;
-  left:50%;
-  transform:translateX(-50%) translateY(100px);
-  background:linear-gradient(135deg,var(--success),#059669);
-  color:white;
-  padding:1rem 2rem;
-  border-radius:50px;
-  box-shadow:0 10px 30px rgba(16,185,129,0.4);
-  z-index:3000;
-  opacity:0;
-  transition:all 0.4s;
-  font-weight:600;
-}
+.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(100px);background:linear-gradient(135deg,var(--success),#059669);color:white;padding:1rem 2rem;border-radius:50px;box-shadow:0 10px 30px rgba(16,185,129,0.4);z-index:3000;opacity:0;transition:all 0.4s;font-weight:600;max-width:90vw;text-align:center}
 .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
 .toast.error{background:linear-gradient(135deg,#ef4444,#dc2626);box-shadow:0 10px 30px rgba(239,68,68,0.4)}
 
 /* ===== Loading ===== */
-.loading{
-  text-align:center;
-  padding:4rem 2rem;
-  grid-column:1/-1;
-}
-.loading-spinner{
-  width:50px;
-  height:50px;
-  border:3px solid var(--border);
-  border-top-color:var(--primary);
-  border-radius:50%;
-  animation:spin 1s linear infinite;
-  margin:0 auto 1rem;
-}
+.loading{text-align:center;padding:4rem 2rem;grid-column:1/-1}
+.loading-spinner{width:50px;height:50px;border:3px solid var(--border);border-top-color:var(--primary);border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 1rem}
 @keyframes spin{to{transform:rotate(360deg)}}
 
 /* ===== Mobile ===== */
 @media(max-width:768px){
   .nav-links{display:none}
   .menu-toggle{display:block}
-  .nav-links.mobile-open{
-    display:flex;
-    flex-direction:column;
-    position:absolute;
-    top:100%;
-    right:0;
-    left:0;
-    background:rgba(10,10,26,0.95);
-    backdrop-filter:blur(20px);
-    padding:1rem 2rem;
-    border-bottom:1px solid var(--border);
-    gap:1rem;
-  }
+  .nav-links.mobile-open{display:flex;flex-direction:column;position:absolute;top:100%;right:0;left:0;background:rgba(10,10,26,0.95);backdrop-filter:blur(20px);padding:1rem 2rem;border-bottom:1px solid var(--border);gap:1rem}
   .hero{padding:3rem 1rem 2rem}
   .products-grid{padding:0 1rem 3rem;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
   .modal-body{padding:1.5rem}
@@ -915,36 +296,21 @@ body::after{
         <i class="fas fa-lock"></i>
         <span>لوحة التحكم</span>
       </a>
-      <button class="menu-toggle" onclick="toggleMenu()">
-        <i class="fas fa-bars"></i>
-      </button>
+      <button class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
     </div>
   </div>
 </nav>
 
 <!-- ===== Hero ===== -->
 <section class="hero">
-  <div class="hero-badge">
-    <i class="fas fa-bolt"></i>
-    <span id="heroBadgeText">تفعيل فوري خلال دقائق</span>
-  </div>
-  <h1 id="heroTitle">أدوات الإبداع والهندسة<br><span id="heroSubtitle">باشتراك أصلي وموثوق</span></h1>
-  <p id="heroDescription">فوتوشوب، إليستريتور، بريمير، أوتوكاد وكل برامج Adobe و Autodesk بأسعار محلية وتفعيل فوري.</p>
+  <div class="hero-badge"><i class="fas fa-bolt"></i><span>تفعيل فوري خلال دقائق</span></div>
+  <h1 id="heroTitle">أدوات الإبداع والهندسة، باشتراك أصلي وموثوق</h1>
+  <p id="heroSubtitle">فوتوشوب، إليستريتور، أوتوكاد وعشرات البرامج الأصلية بأسعار محلية وتفعيل فوري.</p>
   <div class="hero-buttons">
-    <a href="#products" class="btn-hero-primary">
-      <i class="fas fa-shopping-cart"></i>
-      <span>اطلب اشتراكك الآن</span>
-    </a>
-    <a href="#contact" class="btn-hero-secondary">
-      <i class="fas fa-comments"></i>
-      <span>تواصل معنا</span>
-    </a>
+    <a href="#products" class="btn-hero-primary"><i class="fas fa-shopping-cart"></i><span>اطلب اشتراكك الآن</span></a>
+    <a href="#contact" class="btn-hero-secondary"><i class="fas fa-comments"></i><span>تواصل معنا</span></a>
   </div>
-  <div class="hero-features">
-    <div class="hero-feature"><i class="fas fa-check-circle"></i><span>تفعيل خلال دقائق</span></div>
-    <div class="hero-feature"><i class="fas fa-check-circle"></i><span>دعم مباشر 24/7</span></div>
-    <div class="hero-feature"><i class="fas fa-check-circle"></i><span>حسابك الخاص</span></div>
-  </div>
+  <div class="hero-features" id="heroStats"></div>
 </section>
 
 <!-- ===== Banners ===== -->
@@ -959,20 +325,15 @@ body::after{
 <section class="filters-section" id="products">
   <h2 class="section-title">اختر البرنامج المناسب لك</h2>
   <p class="section-subtitle">جميع الاشتراكات أصلية وتُفعَّل يدويًا على حسابك الخاص خلال دقائق من تأكيد الطلب.</p>
-  
   <div class="search-box">
     <i class="fas fa-search"></i>
     <input type="text" id="searchInput" placeholder="ابحث عن برنامج...">
   </div>
-  
   <div class="filters" id="brandFilters"></div>
 </section>
 
 <div class="products-grid" id="productsGrid">
-  <div class="loading">
-    <div class="loading-spinner"></div>
-    <p>جاري تحميل المنتجات...</p>
-  </div>
+  <div class="loading"><div class="loading-spinner"></div><p>جاري تحميل المنتجات...</p></div>
 </div>
 
 <!-- ===== How Section ===== -->
@@ -980,21 +341,9 @@ body::after{
   <h2 class="section-title">كيف تحصل على اشتراكك</h2>
   <p class="section-subtitle">ثلاث خطوات بسيطة من الاختيار إلى التفعيل</p>
   <div class="steps-grid">
-    <div class="step-card">
-      <div class="step-number">1</div>
-      <h3>اختر البرنامج والمدة</h3>
-      <p>تصفح الباقات المتوفرة واختر ما يناسب احتياجك ومدة اشتراكك.</p>
-    </div>
-    <div class="step-card">
-      <div class="step-number">2</div>
-      <h3>أرسل طلبك</h3>
-      <p>اضغط "اطلب الآن" وأرسل بياناتك عبر تيليجرام أو فيسبوك مباشرة.</p>
-    </div>
-    <div class="step-card">
-      <div class="step-number">3</div>
-      <h3>استلم التفعيل</h3>
-      <p>نؤكد الدفع ونفعّل اشتراكك على حسابك خلال دقائق مع إرسال إثبات التفعيل.</p>
-    </div>
+    <div class="step-card"><div class="step-number">1</div><h3>اختر البرنامج والمدة</h3><p>تصفح الباقات المتوفرة واختر ما يناسب احتياجك ومدة اشتراكك.</p></div>
+    <div class="step-card"><div class="step-number">2</div><h3>أرسل طلبك</h3><p>اضغط "اطلب الآن" وأرسل بياناتك عبر تيليجرام أو فيسبوك مباشرة.</p></div>
+    <div class="step-card"><div class="step-number">3</div><h3>استلم التفعيل</h3><p>نؤكد الدفع ونفعّل اشتراكك على حسابك خلال دقائق مع إرسال إثبات التفعيل.</p></div>
   </div>
 </section>
 
@@ -1002,29 +351,23 @@ body::after{
 <section class="about-section" id="about">
   <h2 class="section-title">من نحن</h2>
   <div class="about-content">
-    <p id="aboutText">نحن متجر متخصص في توفير اشتراكات برامج أصلية لعملائنا في المنطقة، بأسعار تناسب السوق المحلي وطرق دفع مبسطة. كل اشتراك يُفعَّل يدويًا من فريقنا خلال دقائق من تأكيد الطلب.</p>
+    <p id="aboutText"></p>
+    <p class="support-hours" id="supportHours"></p>
   </div>
 </section>
 
 <!-- ===== Contact ===== -->
 <section class="contact-section" id="contact">
   <h2 class="section-title">تواصل معنا</h2>
-  <p class="section-subtitle" id="supportHours">متوفرون يوميًا من 9 صباحًا حتى 11 مساءً</p>
   <div class="contact-grid">
     <a href="#" class="contact-card" id="telegramCard" onclick="contactVia('telegram');return false">
-      <i class="fab fa-telegram"></i>
-      <h3>تيليجرام</h3>
-      <p>راسلنا مباشرة لأي استفسار</p>
+      <i class="fab fa-telegram"></i><h3>تيليجرام</h3><p>راسلنا مباشرة لأي استفسار</p>
     </a>
     <a href="#" class="contact-card" id="messengerCard" onclick="contactVia('messenger');return false">
-      <i class="fab fa-facebook-messenger"></i>
-      <h3>ماسنجر فيسبوك</h3>
-      <p>تواصل معنا عبر صفحتنا</p>
+      <i class="fab fa-facebook-messenger"></i><h3>ماسنجر فيسبوك</h3><p>تواصل معنا عبر صفحتنا</p>
     </a>
     <a href="#" class="contact-card" id="facebookCard" onclick="contactVia('facebook');return false">
-      <i class="fab fa-facebook"></i>
-      <h3>صفحة فيسبوك</h3>
-      <p>تابع آخر العروض والتحديثات</p>
+      <i class="fab fa-facebook"></i><h3>صفحة فيسبوك</h3><p>تابع آخر العروض والتحديثات</p>
     </a>
   </div>
 </section>
@@ -1033,11 +376,8 @@ body::after{
 <footer class="footer">
   <div class="footer-content">
     <div class="footer-col">
-      <div class="logo" style="margin-bottom:1rem">
-        <i class="fas fa-crown"></i>
-        <span id="footerBrandName">RJ Tech</span>
-      </div>
-      <p id="footerTagline">اشتراكات برامج أصلية بأفضل الأسعار وتفعيل فوري.</p>
+      <div class="logo" style="margin-bottom:1rem"><i class="fas fa-crown"></i><span id="footerBrandName">RJ Tech</span></div>
+      <p id="footerTagline">اشتراكات برامج أصلية</p>
       <div class="social-links">
         <a href="#" onclick="contactVia('telegram');return false"><i class="fab fa-telegram"></i></a>
         <a href="#" onclick="contactVia('facebook');return false"><i class="fab fa-facebook"></i></a>
@@ -1053,14 +393,12 @@ body::after{
     </div>
     <div class="footer-col">
       <h3>تواصل معنا</h3>
-      <p><i class="fab fa-telegram"></i> تيليجرام</p>
-      <p><i class="fab fa-facebook-messenger"></i> ماسنجر فيسبوك</p>
-      <p><i class="fab fa-facebook"></i> صفحة فيسبوك</p>
+      <p><i class="fab fa-telegram"></i>تيليجرام</p>
+      <p><i class="fab fa-facebook-messenger"></i>ماسنجر فيسبوك</p>
+      <p><i class="fab fa-facebook"></i>صفحة فيسبوك</p>
     </div>
   </div>
-  <div class="footer-bottom">
-    <p id="footerText">© 2026 RJ Tech. جميع الحقوق محفوظة.</p>
-  </div>
+  <div class="footer-bottom"><p id="footerText"></p></div>
 </footer>
 
 <!-- ===== Product Modal ===== -->
@@ -1076,12 +414,8 @@ body::after{
       <p class="modal-desc" id="modalDesc"></p>
       <div class="modal-features" id="modalFeatures"></div>
       <div class="modal-actions">
-        <button class="btn-primary" onclick="openOrderForm()">
-          <i class="fas fa-shopping-cart"></i> اطلب الآن
-        </button>
-        <button class="btn-secondary" onclick="contactVia('telegram')">
-          <i class="fab fa-telegram"></i> استفسار
-        </button>
+        <button class="btn-primary" onclick="openOrderForm()"><i class="fas fa-shopping-cart"></i> اطلب الآن</button>
+        <button class="btn-secondary" onclick="contactVia('telegram')"><i class="fab fa-telegram"></i> استفسار</button>
       </div>
     </div>
   </div>
@@ -1095,29 +429,12 @@ body::after{
       <h2>إتمام الطلب</h2>
       <div class="order-product-info" id="orderProductInfo"></div>
       <form id="orderForm" onsubmit="submitOrder(event)">
-        <div class="form-group">
-          <label class="form-label">الاسم الكامل *</label>
-          <input type="text" class="form-input" id="orderName" required>
-        </div>
-        <div class="form-group">
-          <label class="form-label">رقم الهاتف *</label>
-          <input type="tel" class="form-input" id="orderPhone" required>
-        </div>
-        <div class="form-group">
-          <label class="form-label">البريد الإلكتروني (للتفعيل)</label>
-          <input type="email" class="form-input" id="orderEmail">
-        </div>
-        <div class="form-group">
-          <label class="form-label">ملاحظات (اختياري)</label>
-          <textarea class="form-textarea" id="orderNotes"></textarea>
-        </div>
+        <div class="form-group"><label class="form-label">الاسم الكامل *</label><input type="text" class="form-input" id="orderName" required></div>
+        <div class="form-group"><label class="form-label">رقم الهاتف *</label><input type="tel" class="form-input" id="orderPhone" required></div>
+        <div class="form-group"><label class="form-label">ملاحظات (اختياري)</label><textarea class="form-textarea" id="orderNotes"></textarea></div>
         <div class="modal-actions">
-          <button type="submit" class="btn-primary">
-            <i class="fab fa-telegram"></i> إرسال عبر تيليجرام
-          </button>
-          <button type="button" class="btn-secondary" onclick="submitOrderVia('messenger')">
-            <i class="fab fa-facebook-messenger"></i> ماسنجر
-          </button>
+          <button type="submit" class="btn-primary"><i class="fab fa-telegram"></i> إرسال عبر تيليجرام</button>
+          <button type="button" class="btn-secondary" onclick="submitOrderVia('messenger')"><i class="fab fa-facebook-messenger"></i> ماسنجر</button>
         </div>
       </form>
     </div>
@@ -1127,194 +444,250 @@ body::after{
 <div class="toast" id="toast"></div>
 
 <script>
-// ========== المتغيرات ==========
-let siteData = null;
+const DEFAULT_DATA = {
+  "site": {
+    "brandName": "RJ Tech",
+    "brandTagline": "اشتراكات برمجيات أصلية",
+    "logoUrl": "",
+    "heroTitle": "أدوات الإبداع والهندسة، باشتراك أصلي وموثوق",
+    "heroSubtitle": "فوتوشوب، إليستريتور، أوتوكاد وعشرات البرامج الأصلية من أفضل الماركات العالمية، بأسعار محلية وتفعيل فوري ودعم مباشر بعد كل عملية شراء.",
+    "adminPasswordHash": "240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9",
+    "telegramUsername": "your_telegram_username",
+    "facebookPageUrl": "https://facebook.com/yourpage",
+    "messengerLink": "https://m.me/yourpage",
+    "aboutText": "نحن متجر متخصص في توفير اشتراكات برامج أصلية لعملائنا في المنطقة، بأسعار تناسب السوق المحلي وطرق دفع مبسطة. كل اشتراك يُفعَّل يدويًا من فريقنا خلال دقائق من تأكيد الطلب.",
+    "footerText": "جميع الأسماء والعلامات التجارية المذكورة ملك لأصحابها. هذا المتجر معيد بيع اشتراكات وليس تابعًا رسميًا لأي من الشركات المذكورة.",
+    "supportHours": "متوفرون يوميًا من 9 صباحًا حتى 11 مساءً"
+  },
+  "brands": [
+    { "id": "adobe", "name": "Adobe", "color": "#FF3B3B" },
+    { "id": "autodesk", "name": "Autodesk", "color": "#3B82F6" }
+  ],
+  "banners": [
+    {
+      "title": "عروض بداية الموسم",
+      "subtitle": "خصم يصل إلى 20% على باقات Adobe السنوية",
+      "badge": "لفترة محدودة"
+    },
+    {
+      "title": "باقة الطلاب والمهندسين",
+      "subtitle": "أسعار خاصة لحاملي البطاقة الجامعية على AutoCAD و Revit",
+      "badge": "جديد"
+    }
+  ],
+  "products": [
+    {
+      "id": "ps-1m",
+      "brandId": "adobe",
+      "name": "Photoshop",
+      "description": "تحرير الصور الاحترافي، اشتراك فردي مفعّل على حسابك الخاص.",
+      "longDescription": "فوتوشوب هو المعيار العالمي في تحرير الصور والتصميم الجرافيكي، يستخدمه المصممون والمصورون المحترفون حول العالم. مع هذا الاشتراك تحصل على أحدث إصدار مع كل التحديثات والميزات المدعومة بالذكاء الاصطناعي، مفعّلًا بالكامل على حسابك الخاص.",
+      "features": ["تفعيل رسمي على بريدك الإلكتروني الخاص", "جميع التحديثات مشمولة طوال مدة الاشتراك", "يعمل على ويندوز وماك", "دعم فني عند أي مشكلة في التفعيل"],
+      "duration": "شهر واحد",
+      "price": "2200",
+      "oldPrice": "2800",
+      "currency": "دج",
+      "badge": "الأكثر طلبًا",
+      "image": ""
+    },
+    {
+      "id": "cc-all-12m",
+      "brandId": "adobe",
+      "name": "Creative Cloud - جميع التطبيقات",
+      "description": "أكثر من 20 برنامج من Adobe بما فيها فوتوشوب وإليستريتور وبريمير.",
+      "longDescription": "باقة Creative Cloud الكاملة تمنحك وصولًا لأكثر من 20 تطبيقًا من Adobe في مكان واحد: فوتوشوب، إليستريتور، بريمير برو، أفتر إفكتس، إنديزاين وغيرها. الخيار الأمثل للمصممين والمبدعين الذين يحتاجون أكثر من أداة واحدة.",
+      "features": ["أكثر من 20 تطبيق Adobe في اشتراك واحد", "100 جيجابايت تخزين سحابي", "تفعيل على حسابك الشخصي", "أفضل قيمة مقابل السعر مقارنة بالاشتراك الفردي"],
+      "duration": "12 شهرًا",
+      "price": "13500",
+      "oldPrice": "16900",
+      "currency": "دج",
+      "badge": "أفضل قيمة",
+      "image": ""
+    },
+    {
+      "id": "ai-1m",
+      "brandId": "adobe",
+      "name": "Illustrator",
+      "description": "تصميم فيكتور احترافي للشعارات والهوية البصرية.",
+      "longDescription": "إليستريتور هو برنامج الرسم الاتجاهي (Vector) الأول عالميًا، مثالي لتصميم الشعارات والأيقونات والهوية البصرية بجودة تكبير غير محدودة.",
+      "features": ["تفعيل رسمي على بريدك الإلكتروني", "متوافق مع جميع ملفات Adobe الأخرى", "تحديثات مستمرة", "دعم فني كامل"],
+      "duration": "شهر واحد",
+      "price": "2200",
+      "oldPrice": "",
+      "currency": "دج",
+      "badge": "",
+      "image": ""
+    },
+    {
+      "id": "pr-1m",
+      "brandId": "adobe",
+      "name": "Premiere Pro",
+      "description": "مونتاج فيديو احترافي بجودة سينمائية.",
+      "longDescription": "بريمير برو هو برنامج المونتاج الاحترافي المعتمد في صناعة الأفلام والمحتوى الرقمي، يدعم جميع صيغ الفيديو الحديثة ويعمل بسلاسة حتى مع مشاريع 4K.",
+      "features": ["دعم كامل لمقاطع 4K و8K", "أدوات تصحيح ألوان احترافية", "تكامل مباشر مع باقي برامج Adobe", "تفعيل على حسابك الخاص"],
+      "duration": "شهر واحد",
+      "price": "2200",
+      "oldPrice": "",
+      "currency": "دج",
+      "badge": "",
+      "image": ""
+    },
+    {
+      "id": "acad-12m",
+      "brandId": "autodesk",
+      "name": "AutoCAD",
+      "description": "الرسم الهندسي ثنائي وثلاثي الأبعاد لجميع التخصصات.",
+      "longDescription": "أوتوكاد هو المرجع الأول في الرسم الهندسي بمختلف تخصصاته: معماري، ميكانيكي، كهربائي ومدني. يدعم الرسم ثنائي وثلاثي الأبعاد بدقة احترافية.",
+      "features": ["ترخيص أصلي سنوي كامل", "يشمل جميع أدوات الرسم 2D و3D", "تحديثات Autodesk الرسمية", "مناسب للطلاب والمهندسين الممارسين"],
+      "duration": "12 شهرًا",
+      "price": "18500",
+      "oldPrice": "22000",
+      "currency": "دج",
+      "badge": "طلاب وموظفون",
+      "image": ""
+    },
+    {
+      "id": "revit-12m",
+      "brandId": "autodesk",
+      "name": "Revit",
+      "description": "نمذجة معلومات البناء BIM للمهندسين المعماريين.",
+      "longDescription": "Revit هو برنامج نمذجة معلومات البناء (BIM) الأكثر استخدامًا عالميًا من طرف المهندسين المعماريين والإنشائيين، يتيح تصميم وتوثيق المشاريع بنموذج ثلاثي الأبعاد متكامل.",
+      "features": ["ترخيص أصلي سنوي كامل", "تصميم معماري وإنشائي متكامل", "تحديثات Autodesk الرسمية", "دعم فني عند التفعيل"],
+      "duration": "12 شهرًا",
+      "price": "19500",
+      "oldPrice": "",
+      "currency": "دج",
+      "badge": "",
+      "image": ""
+    },
+    {
+      "id": "3dsmax-12m",
+      "brandId": "autodesk",
+      "name": "3ds Max",
+      "description": "نمذجة ثلاثية الأبعاد ورندر احترافي.",
+      "longDescription": "3ds Max هو أحد أقوى برامج النمذجة ثلاثية الأبعاد والرندر، يستخدم في التصميم المعماري، الألعاب، والمؤثرات البصرية.",
+      "features": ["ترخيص أصلي سنوي كامل", "أدوات نمذجة ورندر احترافية", "تحديثات Autodesk الرسمية", "تفعيل على حسابك الخاص"],
+      "duration": "12 شهرًا",
+      "price": "19500",
+      "oldPrice": "",
+      "currency": "دج",
+      "badge": "",
+      "image": ""
+    }
+  ]
+};
+
+let SITE = DEFAULT_DATA;
 let currentProduct = null;
 let currentFilter = 'all';
 let searchQuery = '';
 let currentBanner = 0;
 let bannerInterval = null;
 
-// ========== تنظيف البيانات ==========
-function clean(obj) {
-  if (Array.isArray(obj)) return obj.map(clean);
-  if (obj && typeof obj === 'object') {
-    const c = {};
-    for (const k in obj) if (obj.hasOwnProperty(k)) c[k.trim()] = clean(obj[k]);
-    return c;
+async function loadData(){
+  try{
+    const res = await fetch('data.json?t=' + Date.now(), {cache:'no-store'});
+    if(res.ok){ SITE = await res.json(); localStorage.setItem('rjtech_site_cache', JSON.stringify(SITE)); }
+  }catch(e){
+    const cached = localStorage.getItem('rjtech_site_cache');
+    if(cached){ try{ SITE = JSON.parse(cached); }catch(_){} }
   }
-  return typeof obj === 'string' ? obj.trim() : obj;
+  render();
 }
 
-// ========== البيانات الافتراضية ==========
-function getDefaultData() {
-  return {
-    site: {
-      brandName: "RJ Tech",
-      brandTagline: "اشتراكات برمجيات أصلية",
-      heroTitle: "أدوات الإبداع والهندسة",
-      heroSubtitle: "باشتراك أصلي وموثوق",
-      heroDescription: "فوتوشوب، إليستريتور، أوتوكاد وعشرات البرامج الأخرى من أفضل الماركات العالمية، بأسعار محلية وتفعيل فوري ودعم مباشر بعد كل عملية شراء.",
-      aboutText: "نحن متجر متخصص في توفير اشتراكات برامج أصلية لعملائنا في المنطقة، بأسعار تناسب السوق المحلي وطرق دفع مبسطة.",
-      footerText: "© 2026 RJ Tech. جميع الحقوق محفوظة.",
-      supportHours: "متوفرون يوميًا من 9 صباحًا حتى 11 مساءً",
-      telegramUsername: "your_telegram_username",
-      messengerLink: "https://m.me/yourpage",
-      facebookPageUrl: "https://facebook.com/yourpage"
-    },
-    brands: [
-      { id: "adobe", name: "Adobe", color: "#FF3B3B" },
-      { id: "autodesk", name: "Autodesk", color: "#3B82F6" }
-    ],
-    banners: [],
-    products: []
-  };
-}
+function brandOf(id){ return (SITE.brands||[]).find(b=>b.id===id) || {name:id||'—', color:'#6366f1'}; }
+function esc(v){ return (v===undefined||v===null) ? '' : String(v); }
 
-// ========== تحميل البيانات ==========
-async function loadData() {
-  try {
-    const r = await fetch('data.json?t=' + Date.now(), { cache: 'no-store' });
-    if (!r.ok) throw new Error('HTTP ' + r.status);
-    siteData = clean(await r.json());
-    localStorage.setItem('siteData', JSON.stringify(siteData));
-  } catch (e) {
-    console.warn('فشل تحميل data.json:', e);
-    const cached = localStorage.getItem('siteData');
-    siteData = cached ? clean(JSON.parse(cached)) : getDefaultData();
-  }
-  renderSite();
-}
-
-// ========== عرض الموقع ==========
-function renderSite() {
-  if (!siteData) return;
-  const s = siteData.site;
-  
+function render(){
+  const s = SITE.site;
   document.getElementById('pageTitle').textContent = `${s.brandName} — ${s.brandTagline}`;
   document.getElementById('navBrandName').textContent = s.brandName;
   document.getElementById('footerBrandName').textContent = s.brandName;
   document.getElementById('footerTagline').textContent = s.brandTagline;
-  document.getElementById('heroTitle').innerHTML = `${s.heroTitle}<br><span>${s.heroSubtitle}</span>`;
-  document.getElementById('heroDescription').textContent = s.heroDescription;
+  document.getElementById('heroTitle').textContent = s.heroTitle;
+  document.getElementById('heroSubtitle').textContent = s.heroSubtitle;
   document.getElementById('aboutText').textContent = s.aboutText;
   document.getElementById('footerText').textContent = s.footerText;
-  document.getElementById('supportHours').textContent = s.supportHours;
-  
+  document.getElementById('supportHours').textContent = s.supportHours || '';
+
+  document.getElementById('heroStats').innerHTML = `
+    <div class="hero-feature"><i class="fas fa-check-circle"></i><span>${SITE.products.length}+ برنامج متوفر</span></div>
+    <div class="hero-feature"><i class="fas fa-check-circle"></i><span>${(SITE.brands||[]).length} ماركات موثوقة</span></div>
+    <div class="hero-feature"><i class="fas fa-check-circle"></i><span>دعم مباشر 24/7</span></div>
+  `;
+
   renderBanners();
   renderBrandFilters();
   renderProducts();
 }
 
-// ========== الإعلانات ==========
-function renderBanners() {
-  const banners = siteData.banners || [];
+/* ---------------- الإعلانات ---------------- */
+function renderBanners(){
+  const banners = SITE.banners || [];
   const section = document.getElementById('bannersSection');
-  
-  if (banners.length === 0) {
-    section.style.display = 'none';
-    return;
-  }
-  
+  if(banners.length === 0){ section.style.display = 'none'; return; }
   section.style.display = 'block';
-  const container = document.getElementById('bannersContainer');
-  const controls = document.getElementById('bannerControls');
-  
-  container.innerHTML = banners.map((b, i) => `
-    <div class="banner-slide ${i === 0 ? 'active' : ''}">
+  document.getElementById('bannersContainer').innerHTML = banners.map((b,i)=>`
+    <div class="banner-slide ${i===0?'active':''}">
       ${b.badge ? `<span class="banner-badge">${b.badge}</span>` : ''}
       <h2>${b.title}</h2>
       <p>${b.subtitle}</p>
     </div>
   `).join('');
-  
-  controls.innerHTML = banners.map((_, i) => `
-    <button class="banner-dot ${i === 0 ? 'active' : ''}" onclick="goToBanner(${i})"></button>
-  `).join('');
-  
-  if (bannerInterval) clearInterval(bannerInterval);
-  if (banners.length > 1) {
-    bannerInterval = setInterval(() => {
-      currentBanner = (currentBanner + 1) % banners.length;
-      updateBanner();
-    }, 5000);
-  }
+  document.getElementById('bannerControls').innerHTML = banners.map((_,i)=>`<button class="banner-dot ${i===0?'active':''}" onclick="goToBanner(${i})"></button>`).join('');
+  currentBanner = 0;
+  if(bannerInterval) clearInterval(bannerInterval);
+  if(banners.length > 1){ bannerInterval = setInterval(()=>{ currentBanner = (currentBanner+1) % banners.length; updateBanner(); }, 5000); }
+}
+function goToBanner(i){ currentBanner = i; updateBanner(); }
+function updateBanner(){
+  document.querySelectorAll('.banner-slide').forEach((el,i)=>el.classList.toggle('active', i===currentBanner));
+  document.querySelectorAll('.banner-dot').forEach((el,i)=>el.classList.toggle('active', i===currentBanner));
 }
 
-function goToBanner(i) { currentBanner = i; updateBanner(); }
-function updateBanner() {
-  document.querySelectorAll('.banner-slide').forEach((s, i) => s.classList.toggle('active', i === currentBanner));
-  document.querySelectorAll('.banner-dot').forEach((d, i) => d.classList.toggle('active', i === currentBanner));
-}
-
-// ========== فلاتر الماركات ==========
-function renderBrandFilters() {
-  const brands = siteData.brands || [];
+/* ---------------- الفلاتر ---------------- */
+function renderBrandFilters(){
+  const usedIds = [...new Set(SITE.products.map(p=>p.brandId))];
+  const brands = (SITE.brands||[]).filter(b=>usedIds.includes(b.id));
   const container = document.getElementById('brandFilters');
-  
-  container.innerHTML = `
-    <button class="filter-btn ${currentFilter === 'all' ? 'active' : ''}" data-brand="all">الكل</button>
-    ${brands.map(b => `
-      <button class="filter-btn ${currentFilter === b.id ? 'active' : ''}" data-brand="${b.id}">${b.name}</button>
-    `).join('')}
-  `;
-  
-  container.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      currentFilter = btn.dataset.brand;
-      renderBrandFilters();
-      renderProducts();
-    });
+  container.innerHTML = `<button class="filter-btn ${currentFilter==='all'?'active':''}" data-brand="all">الكل</button>` +
+    brands.map(b=>`<button class="filter-btn ${currentFilter===b.id?'active':''}" data-brand="${b.id}"><i style="background:${b.color}"></i>${b.name}</button>`).join('');
+  container.querySelectorAll('.filter-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{ currentFilter = btn.dataset.brand; renderBrandFilters(); renderProducts(); });
   });
 }
 
-// ========== عرض المنتجات ==========
-function renderProducts() {
+/* ---------------- المنتجات ---------------- */
+function renderProducts(){
   const grid = document.getElementById('productsGrid');
-  let products = siteData.products || [];
-  
-  if (currentFilter !== 'all') {
-    products = products.filter(p => p.brandId === currentFilter);
-  }
-  
-  if (searchQuery) {
+  let products = SITE.products || [];
+  if(currentFilter !== 'all') products = products.filter(p=>p.brandId===currentFilter);
+  if(searchQuery){
     const q = searchQuery.toLowerCase();
-    products = products.filter(p => 
-      p.name.toLowerCase().includes(q) || 
-      (p.description || '').toLowerCase().includes(q) ||
-      (siteData.brands.find(b => b.id === p.brandId)?.name || '').toLowerCase().includes(q)
+    products = products.filter(p =>
+      p.name.toLowerCase().includes(q) ||
+      (p.description||'').toLowerCase().includes(q) ||
+      (brandOf(p.brandId).name||'').toLowerCase().includes(q)
     );
   }
-  
-  if (products.length === 0) {
-    grid.innerHTML = `
-      <div class="empty-state">
-        <i class="fas fa-box-open"></i>
-        <h3>لا توجد منتجات</h3>
-        <p>جرب تغيير الفلتر أو البحث بكلمات مختلفة</p>
-      </div>`;
+  if(products.length === 0){
+    grid.innerHTML = `<div class="empty-state"><i class="fas fa-box-open"></i><h3>لا توجد نتائج</h3><p>جرّب تغيير الفلتر أو البحث بكلمات مختلفة</p></div>`;
     return;
   }
-  
-  grid.innerHTML = products.map(p => {
-    const brand = siteData.brands.find(b => b.id === p.brandId);
+  grid.innerHTML = products.map(p=>{
+    const brand = brandOf(p.brandId);
     return `
       <div class="product-card" onclick="openProduct('${p.id}')">
-        <div class="product-image">
-          ${p.image 
-            ? `<img src="${p.image}" alt="${p.name}" loading="lazy">` 
-            : `<i class="fas fa-cube placeholder-icon"></i>`}
+        <div class="product-image" style="background:linear-gradient(135deg, ${brand.color}55, #16213e)">
+          ${p.image ? `<img src="${p.image}" alt="${p.name}" loading="lazy">` : `<i class="fas fa-cube placeholder-icon"></i>`}
           ${p.badge ? `<span class="product-badge">${p.badge}</span>` : ''}
         </div>
         <div class="product-info">
-          <span class="product-brand">${brand ? brand.name : ''}</span>
+          <span class="product-brand"><i style="background:${brand.color}"></i>${brand.name}</span>
           <h3 class="product-title">${p.name}</h3>
-          <p class="product-desc">${p.description || ''}</p>
+          <p class="product-desc">${p.description||''}</p>
           <div class="product-footer">
-            <div class="product-price">
-              ${p.oldPrice ? `<span class="old-price">${p.oldPrice}</span>` : ''}
-              ${p.price} ${p.currency || 'دج'}
-            </div>
+            <div class="product-price">${p.oldPrice ? `<span class="old-price">${p.oldPrice}</span>` : ''}${p.price} ${p.currency||'دج'}</div>
             <button class="view-btn">عرض التفاصيل</button>
           </div>
         </div>
@@ -1323,145 +696,110 @@ function renderProducts() {
   }).join('');
 }
 
-// ========== Modal المنتج ==========
-function openProduct(id) {
-  currentProduct = siteData.products.find(p => p.id === id);
-  if (!currentProduct) return;
-  
-  const brand = siteData.brands.find(b => b.id === currentProduct.brandId);
-  
-  document.getElementById('modalImage').innerHTML = currentProduct.image 
+/* ---------------- مودال المنتج ---------------- */
+function openProduct(id){
+  currentProduct = SITE.products.find(p=>p.id===id);
+  if(!currentProduct) return;
+  const brand = brandOf(currentProduct.brandId);
+
+  document.getElementById('modalImage').innerHTML = currentProduct.image
     ? `<img src="${currentProduct.image}" alt="${currentProduct.name}">`
-    : `<i class="fas fa-cube placeholder-icon"></i>`;
-  document.getElementById('modalBrand').textContent = brand ? brand.name : '';
+    : `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg, ${brand.color}77, #16213e)"><i class="fas fa-cube placeholder-icon"></i></div>`;
+  document.getElementById('modalBrand').innerHTML = `<i style="background:${brand.color}"></i>${brand.name}`;
   document.getElementById('modalTitle').textContent = currentProduct.name;
-  document.getElementById('modalPrice').innerHTML = currentProduct.oldPrice 
-    ? `<span class="old-price">${currentProduct.oldPrice} ${currentProduct.currency || 'دج'}</span>${currentProduct.price} ${currentProduct.currency || 'دج'}`
-    : `${currentProduct.price} ${currentProduct.currency || 'دج'}`;
+  document.getElementById('modalPrice').innerHTML = currentProduct.oldPrice
+    ? `<span class="old-price">${currentProduct.oldPrice} ${currentProduct.currency||'دج'}</span>${currentProduct.price} ${currentProduct.currency||'دج'}`
+    : `${currentProduct.price} ${currentProduct.currency||'دج'}`;
   document.getElementById('modalDuration').textContent = `المدة: ${currentProduct.duration}`;
   document.getElementById('modalDesc').textContent = currentProduct.longDescription || currentProduct.description || '';
-  
-  const features = currentProduct.features || [];
-  document.getElementById('modalFeatures').innerHTML = features.length > 0
-    ? features.map(f => `<div class="modal-feature"><i class="fas fa-check"></i><span>${f}</span></div>`).join('')
-    : `
-      <div class="modal-feature"><i class="fas fa-check"></i><span>اشتراك أصلي 100%</span></div>
-      <div class="modal-feature"><i class="fas fa-check"></i><span>تفعيل فوري</span></div>
-      <div class="modal-feature"><i class="fas fa-check"></i><span>دعم فني مباشر</span></div>
-      <div class="modal-feature"><i class="fas fa-check"></i><span>حسابك الخاص</span></div>
-    `;
-  
+
+  const feats = (currentProduct.features||[]).filter(Boolean);
+  document.getElementById('modalFeatures').innerHTML = (feats.length ? feats : ['اشتراك أصلي 100%','تفعيل فوري','دعم فني مباشر','حسابك الخاص'])
+    .map(f=>`<div class="modal-feature"><i class="fas fa-check-circle"></i><span>${f}</span></div>`).join('');
+
   document.getElementById('productModal').classList.add('active');
   document.body.style.overflow = 'hidden';
 }
 
-function openOrderForm() {
-  if (!currentProduct) return;
-  const brand = siteData.brands.find(b => b.id === currentProduct.brandId);
-  
+function openOrderForm(){
+  if(!currentProduct) return;
+  const brand = brandOf(currentProduct.brandId);
   document.getElementById('orderProductInfo').innerHTML = `
     <strong>${currentProduct.name}</strong><br>
-    <span style="color:var(--muted)">${brand ? brand.name : ''} • ${currentProduct.duration}</span><br>
-    <span style="font-size:1.3rem;font-weight:700;color:var(--primary)">${currentProduct.price} ${currentProduct.currency || 'دج'}</span>
+    <span style="color:var(--muted)">${brand.name} · ${currentProduct.duration}</span><br>
+    <span style="font-size:1.3rem;font-weight:700;color:var(--primary)">${currentProduct.price} ${currentProduct.currency||'دج'}</span>
   `;
-  
   closeModal('productModal');
   document.getElementById('orderModal').classList.add('active');
   document.body.style.overflow = 'hidden';
 }
 
-function submitOrder(event) {
-  event.preventDefault();
-  submitOrderVia('telegram');
-}
+function submitOrder(event){ event.preventDefault(); submitOrderVia('telegram'); }
+function submitOrderVia(target){
+  const name = document.getElementById('orderName').value.trim();
+  const phone = document.getElementById('orderPhone').value.trim();
+  const notes = document.getElementById('orderNotes').value.trim();
+  if(!name || !phone){ showToast('الرجاء ملء الاسم ورقم الهاتف', 'error'); return; }
 
-function submitOrderVia(platform) {
-  const name = document.getElementById('orderName').value;
-  const phone = document.getElementById('orderPhone').value;
-  const email = document.getElementById('orderEmail').value;
-  const notes = document.getElementById('orderNotes').value;
-  
-  if (!name || !phone) {
-    showToast('الرجاء ملء جميع الحقول المطلوبة', 'error');
-    return;
-  }
-  
-  const brand = siteData.brands.find(b => b.id === currentProduct.brandId);
-  const message = `🛒 *طلب جديد*%0A%0A📦 *المنتج:* ${currentProduct.name}%0A🏷️ *الماركة:* ${brand ? brand.name : ''}%0A⏱️ *المدة:* ${currentProduct.duration}%0A💰 *السعر:* ${currentProduct.price} ${currentProduct.currency || 'دج'}%0A%0A👤 *الاسم:* ${name}%0A📱 *الهاتف:* ${phone}%0A📧 *البريد:* ${email || 'غير محدد'}%0A📝 *ملاحظات:* ${notes || 'لا يوجد'}`;
-  
-  if (platform === 'telegram') {
-    window.open(`https://t.me/${siteData.site.telegramUsername}?text=${message}`, '_blank');
+  const brand = brandOf(currentProduct.brandId);
+  const lines = [
+    'طلب اشتراك جديد',
+    `البرنامج: ${currentProduct.name} (${brand.name})`,
+    `المدة: ${currentProduct.duration}`,
+    `السعر: ${currentProduct.price} ${currentProduct.currency||'دج'}`,
+    `الاسم: ${name}`,
+    `الهاتف: ${phone}`,
+  ];
+  if(notes) lines.push(`ملاحظات: ${notes}`);
+  const text = encodeURIComponent(lines.join('\n'));
+
+  if(target === 'telegram'){
+    const uname = (SITE.site.telegramUsername||'').replace('@','');
+    window.open(`https://t.me/${uname}?text=${text}`, '_blank');
   } else {
-    window.open(`${siteData.site.messengerLink}?text=${message}`, '_blank');
+    if(navigator.clipboard){
+      navigator.clipboard.writeText(decodeURIComponent(text)).then(()=>{
+        showToast('تم نسخ تفاصيل الطلب — الصقها في محادثة ماسنجر بعد فتحها');
+      }).catch(()=>{});
+    }
+    window.open(SITE.site.messengerLink || '#', '_blank');
   }
-  
   closeModal('orderModal');
   document.getElementById('orderForm').reset();
   showToast('✓ تم إرسال طلبك بنجاح');
 }
 
-function contactVia(platform) {
-  const s = siteData.site;
-  if (platform === 'telegram') {
-    window.open(`https://t.me/${s.telegramUsername}`, '_blank');
-  } else if (platform === 'messenger') {
-    window.open(s.messengerLink, '_blank');
-  } else if (platform === 'facebook') {
-    window.open(s.facebookPageUrl, '_blank');
-  }
+function contactVia(platform){
+  const s = SITE.site;
+  if(platform === 'telegram') window.open(`https://t.me/${(s.telegramUsername||'').replace('@','')}`, '_blank');
+  else if(platform === 'messenger') window.open(s.messengerLink || '#', '_blank');
+  else if(platform === 'facebook') window.open(s.facebookPageUrl || '#', '_blank');
 }
 
-function closeModal(id) {
-  document.getElementById(id).classList.remove('active');
-  document.body.style.overflow = '';
-}
+function closeModal(id){ document.getElementById(id).classList.remove('active'); document.body.style.overflow = ''; }
 
-// ========== البحث ==========
-document.getElementById('searchInput').addEventListener('input', (e) => {
-  searchQuery = e.target.value;
-  renderProducts();
+document.getElementById('searchInput').addEventListener('input', e=>{ searchQuery = e.target.value; renderProducts(); });
+
+document.querySelectorAll('.modal-overlay').forEach(overlay=>{
+  overlay.addEventListener('click', e=>{ if(e.target === overlay){ overlay.classList.remove('active'); document.body.style.overflow=''; } });
+});
+document.addEventListener('keydown', e=>{
+  if(e.key === 'Escape'){ document.querySelectorAll('.modal-overlay').forEach(m=>m.classList.remove('active')); document.body.style.overflow=''; }
 });
 
-// ========== إغلاق Modal ==========
-document.querySelectorAll('.modal-overlay').forEach(overlay => {
-  overlay.addEventListener('click', (e) => {
-    if (e.target === overlay) {
-      overlay.classList.remove('active');
-      document.body.style.overflow = '';
-    }
-  });
-});
-
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') {
-    document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('active'));
-    document.body.style.overflow = '';
-  }
-});
-
-// ========== Toast ==========
-function showToast(message, type = 'success') {
+function showToast(message, type='success'){
   const toast = document.getElementById('toast');
   toast.textContent = message;
   toast.className = `toast show ${type}`;
-  setTimeout(() => toast.classList.remove('show'), 3000);
+  setTimeout(()=>toast.classList.remove('show'), 3000);
 }
 
-// ========== القائمة المتنقلة ==========
-function toggleMenu() {
-  document.getElementById('navLinks').classList.toggle('mobile-open');
-}
-
-// إغلاق القائمة عند النقر على رابط
-document.querySelectorAll('.nav-links a').forEach(link => {
-  link.addEventListener('click', () => {
-    document.getElementById('navLinks').classList.remove('mobile-open');
-  });
+function toggleMenu(){ document.getElementById('navLinks').classList.toggle('mobile-open'); }
+document.querySelectorAll('.nav-links a').forEach(link=>{
+  link.addEventListener('click', ()=> document.getElementById('navLinks').classList.remove('mobile-open'));
 });
 
-// ========== التهيئة ==========
-window.addEventListener('DOMContentLoaded', loadData);
+loadData();
 </script>
-
 </body>
 </html>

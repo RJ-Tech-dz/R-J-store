@@ -7,704 +7,656 @@
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
-:root{--primary:#6366f1;--secondary:#ec4899;--bg:#0a0a1a;--card:rgba(255,255,255,0.05);--text:#fff;--muted:#a1a1aa;--border:rgba(255,255,255,0.1);--success:#10b981;--warning:#f59e0b;--danger:#ef4444}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
-body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background:radial-gradient(circle at 20% 30%,rgba(99,102,241,0.3) 0%,transparent 50%),radial-gradient(circle at 80% 70%,rgba(236,72,153,0.2) 0%,transparent 50%);z-index:-1}
-
-.login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:2rem}
-.login-box{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:3rem;max-width:450px;width:100%;backdrop-filter:blur(20px);text-align:center}
-.login-box h1{font-size:2rem;margin-bottom:.5rem;background:linear-gradient(135deg,var(--primary),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.login-box p{color:var(--muted);margin-bottom:2rem;line-height:1.8}
-.login-box .form-group{margin-bottom:1.5rem;text-align:right}
-.login-box .form-label{display:block;margin-bottom:.5rem;font-weight:600}
-.login-box .form-input{width:100%;background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--text);padding:1rem;border-radius:12px;font-family:inherit;font-size:1rem}
-.login-box .form-input:focus{outline:none;border-color:var(--primary)}
-.login-box button[type=submit]{width:100%;background:linear-gradient(135deg,var(--primary),var(--secondary));color:white;border:none;padding:1rem;border-radius:12px;cursor:pointer;font-family:inherit;font-weight:700;font-size:1rem;transition:all .3s}
-.login-box button[type=submit]:hover{transform:translateY(-2px)}
-.hint{margin-top:1rem;font-size:.85rem;color:var(--muted);background:rgba(99,102,241,0.1);padding:.8rem;border-radius:8px;border:1px solid rgba(99,102,241,0.2)}
-
-.admin-container{display:none;max-width:1200px;margin:0 auto;padding:2rem}
-.admin-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;flex-wrap:wrap;gap:1rem}
-.admin-header h1{font-size:1.8rem;background:linear-gradient(135deg,var(--primary),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.admin-actions{display:flex;gap:.8rem;flex-wrap:wrap}
-.btn{padding:.7rem 1.2rem;border-radius:12px;border:none;cursor:pointer;font-family:inherit;font-weight:600;font-size:.85rem;transition:all .3s;display:inline-flex;align-items:center;gap:.5rem}
-.btn-primary{background:linear-gradient(135deg,var(--primary),var(--secondary));color:white}
-.btn-primary:hover{transform:translateY(-2px)}
-.btn-secondary{background:rgba(255,255,255,0.05);color:var(--text);border:1px solid var(--border)}
-.btn-secondary:hover{background:rgba(255,255,255,0.1)}
-.btn-danger{background:rgba(239,68,68,0.15);color:var(--danger);border:1px solid rgba(239,68,68,0.3)}
-.btn-danger:hover{background:var(--danger);color:white}
-.btn-success{background:rgba(16,185,129,0.15);color:var(--success);border:1px solid rgba(16,185,129,0.3)}
-.btn-success:hover{background:var(--success);color:white}
-
-.tabs{display:flex;gap:.5rem;margin-bottom:2rem;border-bottom:1px solid var(--border);overflow-x:auto}
-.tab{padding:1rem 1.2rem;background:none;border:none;color:var(--muted);cursor:pointer;font-family:inherit;font-weight:600;border-bottom:2px solid transparent;transition:all .3s;white-space:nowrap;font-size:.9rem}
-.tab.active{color:var(--primary);border-bottom-color:var(--primary)}
-.tab-content{display:none}
-.tab-content.active{display:block}
-
-.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2rem;margin-bottom:2rem;backdrop-filter:blur(10px)}
-.card h2{margin-bottom:1.5rem;font-size:1.3rem}
-.form-group{margin-bottom:1.5rem}
-.form-label{display:block;margin-bottom:.5rem;font-weight:600;font-size:.95rem}
-.form-input,.form-textarea,.form-select{width:100%;background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--text);padding:.8rem 1rem;border-radius:12px;font-family:inherit;font-size:1rem;transition:all .3s}
-.form-input:focus,.form-textarea:focus,.form-select:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(99,102,241,0.2)}
-.form-textarea{min-height:100px;resize:vertical}
-.form-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem}
-
-.image-upload{border:2px dashed var(--border);border-radius:12px;padding:2rem;text-align:center;cursor:pointer;transition:all .3s;background:rgba(255,255,255,0.02)}
-.image-upload:hover{border-color:var(--primary);background:rgba(99,102,241,0.05)}
-.image-upload i{font-size:2.5rem;color:var(--primary);margin-bottom:.5rem;display:block}
-.image-upload p{color:var(--muted);margin-bottom:.3rem}
-.image-upload small{color:var(--muted);font-size:.8rem}
-.image-preview{margin-top:1rem;position:relative;display:none}
-.image-preview img{width:100%;max-height:200px;object-fit:cover;border-radius:12px}
-.image-preview .remove-img{position:absolute;top:.5rem;left:.5rem;background:rgba(239,68,68,0.9);color:white;border:none;width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:.9rem}
-.image-info{margin-top:.5rem;font-size:.8rem;color:var(--success)}
-
-.list-item{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
-.list-item img{width:60px;height:60px;border-radius:8px;object-fit:cover}
-.list-item .placeholder-icon{width:60px;height:60px;border-radius:8px;background:rgba(99,102,241,0.1);display:flex;align-items:center;justify-content:center;color:var(--primary);font-size:1.5rem}
-.list-item-info{flex:1;min-width:150px}
-.list-item-info h4{font-size:1rem;margin-bottom:.2rem}
-.list-item-info p{font-size:.85rem;color:var(--muted)}
-.list-item-actions{display:flex;gap:.5rem}
-.color-input{width:50px;height:40px;border:none;border-radius:8px;cursor:pointer;background:none}
-
-.modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);backdrop-filter:blur(10px);z-index:2000;display:none;align-items:center;justify-content:center;padding:1rem}
-.modal-overlay.active{display:flex}
-.modal-box{background:linear-gradient(135deg,rgba(26,26,46,0.98),rgba(22,33,62,0.98));border:1px solid var(--border);border-radius:24px;max-width:650px;width:100%;max-height:90vh;overflow-y:auto;padding:2rem;position:relative;animation:slideUp .3s ease}
-@keyframes slideUp{from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1}}
-.modal-close{position:absolute;top:1rem;left:1rem;background:rgba(255,255,255,0.1);border:none;color:white;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:1.1rem;transition:all .3s}
-.modal-close:hover{background:rgba(255,255,255,0.2);transform:rotate(90deg)}
-.modal-box h2{margin-bottom:1.5rem;font-size:1.4rem}
-
-.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(100px);background:linear-gradient(135deg,var(--success),#059669);color:white;padding:1rem 2rem;border-radius:50px;box-shadow:0 10px 30px rgba(16,185,129,0.4);z-index:3000;opacity:0;transition:all .4s;font-weight:600}
-.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
-.toast.error{background:linear-gradient(135deg,#ef4444,#dc2626)}
-
-.github-status{padding:1rem;border-radius:12px;margin-bottom:1.5rem;display:flex;align-items:center;gap:.8rem;font-weight:600}
-.github-status.connected{background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);color:var(--success)}
-.github-status.disconnected{background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.3);color:var(--warning)}
-
-@media(max-width:768px){
-  .admin-header{flex-direction:column;align-items:stretch}
-  .card{padding:1.2rem}
-  .form-row{grid-template-columns:1fr}
-  .modal-box{padding:1.5rem}
+:root{
+  --primary:#6366f1; --primary-dark:#4f46e5; --secondary:#ec4899; --accent:#06b6d4;
+  --bg:#0a0a1a; --card:rgba(255,255,255,0.05); --card-solid:#14142b;
+  --text:#fff; --muted:#a1a1aa; --border:rgba(255,255,255,0.1);
+  --success:#10b981; --danger:#ef4444;
 }
-::-webkit-scrollbar{width:8px}
-::-webkit-scrollbar-track{background:var(--bg)}
-::-webkit-scrollbar-thumb{background:linear-gradient(var(--primary),var(--secondary));border-radius:10px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;position:relative;line-height:1.6}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(circle at 20% 20%,rgba(99,102,241,0.25) 0%,transparent 50%),radial-gradient(circle at 80% 80%,rgba(236,72,153,0.18) 0%,transparent 50%);z-index:-1}
+a{color:inherit}
+button{font-family:inherit;cursor:pointer}
+input,textarea,select{font-family:inherit}
+
+#loginScreen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+.login-box{background:var(--card-solid);border:1px solid var(--border);border-radius:20px;padding:36px;max-width:380px;width:100%;backdrop-filter:blur(10px)}
+.login-box .logo{font-size:1.8rem;font-weight:900;background:linear-gradient(135deg,var(--primary),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:flex;align-items:center;gap:0.5rem;margin-bottom:18px}
+.login-box .logo i{color:var(--primary);-webkit-text-fill-color:var(--primary)}
+.login-box h1{font-size:20px;margin-bottom:6px}
+.login-box p{font-size:13.5px;color:var(--muted);margin-bottom:24px}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:13px;font-weight:700;margin-bottom:6px}
+.field input,.field textarea{width:100%;padding:11px 14px;border-radius:10px;border:1px solid var(--border);font-size:14.5px;background:rgba(255,255,255,0.04);color:var(--text)}
+.field input::placeholder,.field textarea::placeholder{color:#6b7280}
+.field textarea{resize:vertical;min-height:80px}
+.field small{display:block;color:var(--muted);font-size:12px;margin-top:5px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 22px;border-radius:12px;font-size:14.5px;font-weight:700;border:none;transition:all .2s}
+.btn-primary{background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;width:100%;box-shadow:0 4px 20px rgba(99,102,241,0.4)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 6px 25px rgba(99,102,241,0.6)}
+.btn-ghost{background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--text)}
+.btn-ghost:hover{border-color:var(--primary)}
+.btn-danger{background:rgba(239,68,68,0.12);color:var(--danger)}
+.msg{font-size:13.5px;margin-top:12px;padding:10px 14px;border-radius:10px;display:none}
+.msg.show{display:block}
+.msg.err{background:rgba(239,68,68,0.12);color:var(--danger)}
+.msg.ok{background:rgba(16,185,129,0.12);color:var(--success)}
+
+#app{display:none}
+header{position:sticky;top:0;z-index:20;background:rgba(10,10,26,0.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.topbar{max-width:1100px;margin:0 auto;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.topbar h1{font-size:17px;font-weight:800}
+.topbar h1 span{color:var(--muted);font-weight:500;font-size:13px;display:block;margin-top:2px}
+.topbar-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.status-dot{width:8px;height:8px;border-radius:50%;background:var(--muted);display:inline-block}
+.status-dot.connected{background:var(--success)}
+
+main{max-width:1100px;margin:0 auto;padding:28px 24px 90px}
+.tabs{display:flex;gap:8px;margin-bottom:26px;flex-wrap:wrap;border-bottom:1px solid var(--border)}
+.tab-btn{padding:12px 6px;margin-left:20px;font-size:14.5px;font-weight:700;color:var(--muted);border:none;background:none;border-bottom:2px solid transparent;margin-bottom:-1px}
+.tab-btn.active{color:var(--text);border-bottom-color:var(--primary)}
+.panel{display:none}
+.panel.active{display:block}
+
+.card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:24px;margin-bottom:20px;backdrop-filter:blur(10px)}
+.card h3{font-size:15.5px;margin-bottom:16px}
+.card > p.hint{font-size:13px;color:var(--muted);margin-bottom:18px;margin-top:-8px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+@media(max-width:720px){.grid2,.grid3{grid-template-columns:1fr}}
+
+.product-item,.banner-item,.brand-item{border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:14px;background:rgba(255,255,255,0.03)}
+.item-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.item-head strong{font-size:14px}
+.remove-btn{font-size:12.5px;font-weight:700;color:var(--danger);background:none;border:none}
+.add-btn{width:100%;padding:14px;border:1.5px dashed var(--border);border-radius:14px;background:none;color:var(--muted);font-weight:700;font-size:14px}
+.add-btn:hover{border-color:var(--primary);color:var(--text)}
+
+.save-bar{position:fixed;bottom:0;right:0;left:0;background:rgba(10,10,26,0.92);backdrop-filter:blur(14px);border-top:1px solid var(--border);padding:14px 24px;display:flex;justify-content:center;gap:12px;z-index:30}
+.save-bar-inner{max-width:1100px;width:100%;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.save-note{font-size:13px;color:var(--muted)}
+.swatch-input{display:flex;align-items:center;gap:10px}
+.swatch-preview{width:38px;height:38px;border-radius:10px;border:1px solid var(--border);flex-shrink:0}
+
+select{color:var(--text);background:rgba(255,255,255,0.04)}
+select option{background:#14142b;color:var(--text)}
+
+/* image uploader — بارز وواضح */
+.image-uploader{display:flex;gap:16px;align-items:center;margin-bottom:18px;padding:14px;border:1px solid var(--border);border-radius:14px;background:rgba(255,255,255,0.02)}
+.image-preview{width:96px;height:96px;border-radius:12px;border:1px dashed var(--border);background:rgba(255,255,255,0.03);overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--muted);text-align:center;padding:6px}
+.image-preview img{width:100%;height:100%;object-fit:cover}
+.image-actions{display:flex;flex-direction:column;gap:8px;flex:1}
+.image-actions input[type=file]{display:none}
+.upload-label{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:10px;background:linear-gradient(135deg,var(--primary),var(--secondary));font-size:13.5px;font-weight:700;cursor:pointer;color:#fff;width:fit-content;box-shadow:0 4px 16px rgba(99,102,241,0.35)}
+.upload-label:hover{transform:translateY(-1px)}
+.image-size-note{font-size:11.5px;color:var(--muted)}
 </style>
 </head>
 <body>
 
-<div class="login-screen" id="loginScreen">
+<div id="loginScreen">
   <div class="login-box">
-    <h1><i class="fas fa-lock"></i> لوحة التحكم</h1>
-    <p>أدخل كلمة المرور للوصول إلى إعدادات الموقع</p>
-    <form onsubmit="login(event)">
-      <div class="form-group">
-        <label class="form-label">كلمة المرور</label>
-        <input type="password" class="form-input" id="loginPassword" required>
-      </div>
-      <button type="submit"><i class="fas fa-sign-in-alt"></i> دخول</button>
-    </form>
-    <div class="hint">
-      <strong>كلمة المرور الافتراضية:</strong> admin123
+    <div class="logo"><i class="fas fa-crown"></i><span>RJ Tech</span></div>
+    <h1>لوحة تحكم المالك</h1>
+    <p>أدخل كلمة المرور للوصول إلى إعدادات الموقع.<br>كلمة المرور الافتراضية: <strong>admin123</strong> (غيّرها من التبويب "الإعدادات العامة" فور دخولك).</p>
+    <div class="field">
+      <label for="pwInput">كلمة المرور</label>
+      <input type="password" id="pwInput" placeholder="••••••••">
     </div>
+    <button class="btn btn-primary" id="loginBtn">دخول</button>
+    <div class="msg err" id="loginMsg"></div>
   </div>
 </div>
 
-<div class="admin-container" id="adminContainer">
-  <div class="admin-header">
-    <h1><i class="fas fa-cog"></i> لوحة التحكم</h1>
-    <div class="admin-actions">
-      <button class="btn btn-secondary" onclick="window.location.href='index.html'"><i class="fas fa-eye"></i> معاينة الموقع</button>
-      <button class="btn btn-success" onclick="saveAndPublish()"><i class="fas fa-cloud-upload-alt"></i> حفظ ونشر</button>
-      <button class="btn btn-danger" onclick="logout()"><i class="fas fa-sign-out-alt"></i> خروج</button>
-    </div>
-  </div>
-
-  <div class="github-status disconnected" id="githubStatus">
-    <i class="fab fa-github" style="font-size:1.5rem"></i>
-    <span id="githubStatusText">غير متصل بـ GitHub — التعديلات ستُحفظ محليًا فقط</span>
-  </div>
-
-  <div class="tabs">
-    <button class="tab active" onclick="switchTab('general',this)">الإعدادات</button>
-    <button class="tab" onclick="switchTab('brands',this)">الماركات</button>
-    <button class="tab" onclick="switchTab('products',this)">المنتجات</button>
-    <button class="tab" onclick="switchTab('banners',this)">الإعلانات</button>
-    <button class="tab" onclick="switchTab('contact',this)">التواصل</button>
-    <button class="tab" onclick="switchTab('github',this)">GitHub</button>
-    <button class="tab" onclick="switchTab('security',this)">الأمان</button>
-  </div>
-
-  <div id="tab-general" class="tab-content active">
-    <div class="card">
-      <h2>الهوية والعنوان</h2>
-      <div class="form-row">
-        <div class="form-group"><label class="form-label">اسم المتجر</label><input type="text" class="form-input" id="brandName"></div>
-        <div class="form-group"><label class="form-label">الشعار النصي</label><input type="text" class="form-input" id="brandTagline"></div>
+<div id="app">
+  <header>
+    <div class="topbar">
+      <h1>لوحة تحكم المالك <span id="connStatusText">غير متصل بـ GitHub — التعديلات ستُحفظ محليًا فقط حتى تُهيّئ الاتصال</span></h1>
+      <div class="topbar-actions">
+        <span class="status-dot" id="connDot"></span>
+        <button class="btn btn-ghost" id="downloadBtn">تنزيل data.json</button>
+        <button class="btn btn-primary" id="saveGithubBtn">حفظ ونشر على الموقع</button>
       </div>
-      <div class="form-group"><label class="form-label">عنوان الصفحة الرئيسية</label><input type="text" class="form-input" id="heroTitle"></div>
-      <div class="form-group"><label class="form-label">الوصف تحت العنوان</label><textarea class="form-textarea" id="heroDescription"></textarea></div>
     </div>
-    <div class="card">
-      <h2>نبذة عن المتجر</h2>
-      <div class="form-group"><label class="form-label">نص "من نحن"</label><textarea class="form-textarea" id="aboutText"></textarea></div>
-      <div class="form-group"><label class="form-label">ساعات الدعم</label><input type="text" class="form-input" id="supportHours"></div>
-      <div class="form-group"><label class="form-label">نص أسفل الصفحة</label><input type="text" class="form-input" id="footerText"></div>
-    </div>
-  </div>
+  </header>
 
-  <div id="tab-brands" class="tab-content">
-    <div class="card">
-      <h2>ماركات المتجر</h2>
+  <main>
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="general">الإعدادات العامة</button>
+      <button class="tab-btn" data-tab="brands">الماركات</button>
+      <button class="tab-btn" data-tab="products">البرامج والأسعار</button>
+      <button class="tab-btn" data-tab="banners">الإعلانات</button>
+      <button class="tab-btn" data-tab="sync">الاتصال بـ GitHub</button>
+    </div>
+
+    <div class="panel active" id="panel-general">
+      <div class="card">
+        <h3>الهوية والعنوان</h3>
+        <div class="grid2">
+          <div class="field"><label>اسم المتجر</label><input id="f-brandName"></div>
+          <div class="field"><label>الشعار النصي (Tagline)</label><input id="f-brandTagline"></div>
+        </div>
+        <div class="field"><label>رابط صورة الشعار (Logo URL) — اختياري</label><input id="f-logoUrl" placeholder="https://..."></div>
+        <div class="field"><label>عنوان الصفحة الرئيسية (Hero)</label><input id="f-heroTitle"></div>
+        <div class="field"><label>الوصف تحت العنوان الرئيسي</label><textarea id="f-heroSubtitle"></textarea></div>
+      </div>
+      <div class="card">
+        <h3>نبذة عن المتجر والدعم</h3>
+        <div class="field"><label>نص "من نحن"</label><textarea id="f-aboutText"></textarea></div>
+        <div class="field"><label>ساعات الدعم</label><input id="f-supportHours"></div>
+        <div class="field"><label>نص أسفل الصفحة (Footer)</label><textarea id="f-footerText"></textarea></div>
+      </div>
+      <div class="card">
+        <h3>روابط التواصل</h3>
+        <div class="grid2">
+          <div class="field"><label>معرّف تيليجرام (بدون @)</label><input id="f-telegramUsername"></div>
+          <div class="field"><label>رابط ماسنجر (m.me/...)</label><input id="f-messengerLink"></div>
+        </div>
+        <div class="field"><label>رابط صفحة فيسبوك</label><input id="f-facebookPageUrl"></div>
+      </div>
+      <div class="card">
+        <h3>تغيير كلمة مرور لوحة التحكم</h3>
+        <div class="grid2">
+          <div class="field"><label>كلمة المرور الجديدة</label><input type="password" id="f-newPassword" placeholder="اتركها فارغة إذا لا تريد التغيير"></div>
+          <div class="field"><label>تأكيد كلمة المرور</label><input type="password" id="f-newPassword2"></div>
+        </div>
+        <small>ملاحظة أمان: هذه الحماية أساسية مناسبة لثني الزوار العاديين، وليست بديلاً عن حماية خادم حقيقية.</small>
+      </div>
+    </div>
+
+    <div class="panel" id="panel-brands">
+      <div class="card"><h3>ماركات المتجر</h3><p class="hint">أضف أي عدد من الماركات (Adobe، Autodesk، Microsoft، Canva...). كل ماركة لها لون مميز يظهر في البطاقات والفلاتر.</p></div>
       <div id="brandsList"></div>
-      <button class="btn btn-primary" onclick="addBrand()"><i class="fas fa-plus"></i> إضافة ماركة</button>
+      <button class="add-btn" id="addBrandBtn">+ إضافة ماركة جديدة</button>
     </div>
-  </div>
 
-  <div id="tab-products" class="tab-content">
-    <div class="card">
-      <h2>المنتجات</h2>
+    <div class="panel" id="panel-products">
+      <div class="card"><p class="hint" style="margin-top:0;">لا يوجد أي حد لعدد البرامج التي يمكنك إضافتها.</p></div>
       <div id="productsList"></div>
-      <button class="btn btn-primary" onclick="openProductModal()"><i class="fas fa-plus"></i> إضافة منتج جديد</button>
+      <button class="add-btn" id="addProductBtn">+ إضافة برنامج جديد</button>
     </div>
-  </div>
 
-  <div id="tab-banners" class="tab-content">
-    <div class="card">
-      <h2>الإعلانات</h2>
+    <div class="panel" id="panel-banners">
       <div id="bannersList"></div>
-      <button class="btn btn-primary" onclick="addBanner()"><i class="fas fa-plus"></i> إضافة إعلان</button>
+      <button class="add-btn" id="addBannerBtn">+ إضافة إعلان جديد</button>
     </div>
-  </div>
 
-  <div id="tab-contact" class="tab-content">
-    <div class="card">
-      <h2>روابط التواصل</h2>
-      <div class="form-group"><label class="form-label">معرّف تيليجرام (بدون @)</label><input type="text" class="form-input" id="telegramUsername"></div>
-      <div class="form-group"><label class="form-label">رابط ماسنجر</label><input type="text" class="form-input" id="messengerLink"></div>
-      <div class="form-group"><label class="form-label">رابط صفحة فيسبوك</label><input type="text" class="form-input" id="facebookPageUrl"></div>
-    </div>
-  </div>
-
-  <div id="tab-github" class="tab-content">
-    <div class="card">
-      <h2><i class="fab fa-github"></i> ربط GitHub</h2>
-      <p style="color:var(--muted);margin-bottom:1.5rem">لنشر التغييرات على الموقع الحي، أدخل بيانات مستودعك ورمز الوصول.</p>
-      <div class="form-row">
-        <div class="form-group"><label class="form-label">اسم المستخدم</label><input type="text" class="form-input" id="ghOwner" placeholder="مثال: rjtech"></div>
-        <div class="form-group"><label class="form-label">اسم المستودع</label><input type="text" class="form-input" id="ghRepo" placeholder="مثال: rjtech-site"></div>
+    <div class="panel" id="panel-sync">
+      <div class="card">
+        <h3>ربط لوحة التحكم بمستودع GitHub</h3>
+        <p class="hint">لكي يحفظ زر "حفظ ونشر" تعديلاتك مباشرة على الموقع الحي، تحتاج لإنشاء <strong>Personal Access Token</strong> من نوع Fine-grained من حسابك في GitHub، بصلاحية Contents: Read and write على مستودع الموقع فقط. الرمز يُحفظ في متصفحك فقط ولا يُرسل لأي جهة غير GitHub.</p>
+        <div class="grid3">
+          <div class="field"><label>اسم المستخدم / المؤسسة</label><input id="f-ghOwner" placeholder="username"></div>
+          <div class="field"><label>اسم المستودع</label><input id="f-ghRepo" placeholder="my-site"></div>
+          <div class="field"><label>الفرع (Branch)</label><input id="f-ghBranch" placeholder="main" value="main"></div>
+        </div>
+        <div class="field"><label>مسار ملف البيانات</label><input id="f-ghPath" value="data.json"></div>
+        <div class="field"><label>GitHub Token</label><input type="password" id="f-ghToken" placeholder="github_pat_..."></div>
+        <button class="btn btn-ghost" id="testConnBtn">اختبار الاتصال</button>
+        <button class="btn btn-danger" id="forgetTokenBtn" style="margin-inline-start:8px;">نسيان الرمز من هذا المتصفح</button>
+        <div class="msg" id="syncMsg"></div>
       </div>
-      <div class="form-row">
-        <div class="form-group"><label class="form-label">الفرع</label><input type="text" class="form-input" id="ghBranch" value="main"></div>
-        <div class="form-group"><label class="form-label">مسار الملف</label><input type="text" class="form-input" id="ghPath" value="data.json"></div>
-      </div>
-      <div class="form-group"><label class="form-label">GitHub Token</label><input type="password" class="form-input" id="ghToken" placeholder="ghp_xxxxxxxxxxxx"></div>
-      <div style="display:flex;gap:1rem;flex-wrap:wrap">
-        <button class="btn btn-primary" onclick="testGitHub()"><i class="fas fa-plug"></i> اختبار الاتصال</button>
-        <button class="btn btn-danger" onclick="clearGitHub()"><i class="fas fa-trash"></i> مسح البيانات</button>
+      <div class="card">
+        <h3>ملاحظة حول حجم الصور</h3>
+        <p class="hint" style="margin-bottom:0;">كل صورة تُرفع تُضغط وتُصغَّر تلقائيًا داخل متصفحك قبل الحفظ للحفاظ على سرعة الموقع. مع ذلك، كل صورة تضيف تقريبًا 60-150 كيلوبايت لملف data.json.</p>
       </div>
     </div>
-  </div>
+  </main>
 
-  <div id="tab-security" class="tab-content">
-    <div class="card">
-      <h2>تغيير كلمة المرور</h2>
-      <div class="form-group"><label class="form-label">كلمة المرور الجديدة</label><input type="password" class="form-input" id="newPassword"></div>
-      <div class="form-group"><label class="form-label">تأكيد كلمة المرور</label><input type="password" class="form-input" id="confirmPassword"></div>
-      <button class="btn btn-primary" onclick="changePassword()"><i class="fas fa-key"></i> تغيير</button>
+  <div class="save-bar">
+    <div class="save-bar-inner">
+      <span class="save-note" id="saveNote">آخر حفظ محلي: —</span>
+      <div style="display:flex;gap:10px;">
+        <button class="btn btn-ghost" id="downloadBtn2">تنزيل data.json</button>
+        <button class="btn btn-primary" id="saveGithubBtn2">حفظ ونشر على الموقع</button>
+      </div>
     </div>
   </div>
 </div>
-
-<div class="modal-overlay" id="productModal">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeProductModal()"><i class="fas fa-times"></i></button>
-    <h2 id="productModalTitle">إضافة منتج جديد</h2>
-    <form onsubmit="saveProduct(event)">
-      
-      <div class="form-group">
-        <label class="form-label">صورة المنتج</label>
-        <div class="image-upload" onclick="document.getElementById('imgInput').click()">
-          <i class="fas fa-cloud-upload-alt"></i>
-          <p>اضغط لاختيار صورة من حاسوبك</p>
-          <small>سيتم ضغطها تلقائياً مع الحفاظ على الجودة</small>
-        </div>
-        <input type="file" id="imgInput" accept="image/*" style="display:none" onchange="handleImage(event)">
-        <div class="image-preview" id="imgPreview">
-          <img id="imgPreviewSrc">
-          <button type="button" class="remove-img" onclick="removeImage(event)"><i class="fas fa-times"></i></button>
-          <div class="image-info" id="imgInfo"></div>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label class="form-label">اسم المنتج *</label>
-        <input type="text" class="form-input" id="pName" required>
-      </div>
-
-      <div class="form-row">
-        <div class="form-group">
-          <label class="form-label">الماركة *</label>
-          <select class="form-select" id="pBrand" required></select>
-        </div>
-        <div class="form-group">
-          <label class="form-label">المدة *</label>
-          <input type="text" class="form-input" id="pDuration" placeholder="شهر واحد / 12 شهرًا" required>
-        </div>
-      </div>
-
-      <div class="form-row">
-        <div class="form-group">
-          <label class="form-label">السعر *</label>
-          <input type="text" class="form-input" id="pPrice" placeholder="2200" required>
-        </div>
-        <div class="form-group">
-          <label class="form-label">السعر القديم (اختياري)</label>
-          <input type="text" class="form-input" id="pOldPrice" placeholder="2800">
-        </div>
-        <div class="form-group">
-          <label class="form-label">العملة</label>
-          <input type="text" class="form-input" id="pCurrency" value="دج">
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label class="form-label">الوصف المختصر (يظهر في البطاقة)</label>
-        <input type="text" class="form-input" id="pDesc">
-      </div>
-
-      <div class="form-group">
-        <label class="form-label">الوصف التفصيلي (يظهر في صفحة التفاصيل)</label>
-        <textarea class="form-textarea" id="pLongDesc" style="min-height:120px"></textarea>
-      </div>
-
-      <div class="form-group">
-        <label class="form-label">المميزات (ميزة واحدة في كل سطر)</label>
-        <textarea class="form-textarea" id="pFeatures" placeholder="تفعيل رسمي على بريدك&#10;جميع التحديثات مشمولة&#10;دعم فني كامل"></textarea>
-      </div>
-
-      <div class="form-group">
-        <label class="form-label">شارة (اختياري)</label>
-        <input type="text" class="form-input" id="pBadge" placeholder="الأكثر طلبًا / جديد / عرض خاص">
-      </div>
-
-      <button type="submit" class="btn btn-primary" style="width:100%;padding:1rem;font-size:1rem;justify-content:center">
-        <i class="fas fa-save"></i> حفظ المنتج
-      </button>
-    </form>
-  </div>
-</div>
-
-<div class="toast" id="toast"></div>
 
 <script>
-let siteData = null;
-let currentImage = null;
-let editingIndex = null;
-
-async function sha256(msg) {
-  const buf = new TextEncoder().encode(msg);
-  const hash = await crypto.subtle.digest('SHA-256', buf);
-  return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2,'0')).join('');
-}
-
-function clean(obj) {
-  if (Array.isArray(obj)) return obj.map(clean);
-  if (obj && typeof obj === 'object') {
-    const c = {};
-    for (const k in obj) if (obj.hasOwnProperty(k)) c[k.trim()] = clean(obj[k]);
-    return c;
-  }
-  return typeof obj === 'string' ? obj.trim() : obj;
-}
-
-async function loadData() {
-  try {
-    const r = await fetch('data.json?t=' + Date.now(), { cache: 'no-store' });
-    if (!r.ok) throw new Error('HTTP ' + r.status);
-    siteData = clean(await r.json());
-    localStorage.setItem('siteData', JSON.stringify(siteData));
-  } catch (e) {
-    console.warn('فشل تحميل data.json:', e);
-    const cached = localStorage.getItem('siteData');
-    siteData = cached ? clean(JSON.parse(cached)) : getDefaultData();
-  }
-}
-
-function getDefaultData() {
-  return {
-    site: { brandName:"RJ Tech", brandTagline:"اشتراكات برمجيات أصلية", heroTitle:"أدوات الإبداع والهندسة", heroSubtitle:"باشتراك أصلي وموثوق", heroDescription:"...", aboutText:"...", footerText:"© 2026 RJ Tech", supportHours:"متوفرون يوميًا", adminPasswordHash:"80cbbe1d37177dccf5d3a3a840879a8a50426ff3959b03a0cb57874eac7491c0", telegramUsername:"", messengerLink:"", facebookPageUrl:"" },
-    brands: [{ id:"adobe", name:"Adobe", color:"#FF3B3B" }, { id:"autodesk", name:"Autodesk", color:"#3B82F6" }],
-    banners: [],
-    products: []
-  };
-}
-
-async function login(e) {
-  e.preventDefault();
-  if (!siteData) await loadData();
-  const hash = await sha256(document.getElementById('loginPassword').value);
-  const stored = (siteData.site.adminPasswordHash || '').trim();
-  if (hash === stored) {
-    sessionStorage.setItem('adminLoggedIn', 'true');
-    document.getElementById('loginScreen').style.display = 'none';
-    document.getElementById('adminContainer').style.display = 'block';
-    loadAllTabs();
-    showToast('✓ تم تسجيل الدخول');
-  } else {
-    showToast('❌ كلمة المرور غير صحيحة', 'error');
-  }
-}
-
-function logout() {
-  sessionStorage.removeItem('adminLoggedIn');
-  location.reload();
-}
-
-function switchTab(name, btn) {
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById('tab-' + name).classList.add('active');
-}
-
-function loadAllTabs() {
-  loadGeneral(); loadBrands(); loadProducts(); loadBanners(); loadContact(); loadGitHub();
-  updateGitHubStatus();
-}
-
-function loadGeneral() {
-  const s = siteData.site;
-  document.getElementById('brandName').value = s.brandName || '';
-  document.getElementById('brandTagline').value = s.brandTagline || '';
-  document.getElementById('heroTitle').value = s.heroTitle || '';
-  document.getElementById('heroDescription').value = s.heroDescription || '';
-  document.getElementById('aboutText').value = s.aboutText || '';
-  document.getElementById('supportHours').value = s.supportHours || '';
-  document.getElementById('footerText').value = s.footerText || '';
-}
-
-function saveGeneral() {
-  siteData.site.brandName = document.getElementById('brandName').value;
-  siteData.site.brandTagline = document.getElementById('brandTagline').value;
-  siteData.site.heroTitle = document.getElementById('heroTitle').value;
-  siteData.site.heroDescription = document.getElementById('heroDescription').value;
-  siteData.site.aboutText = document.getElementById('aboutText').value;
-  siteData.site.supportHours = document.getElementById('supportHours').value;
-  siteData.site.footerText = document.getElementById('footerText').value;
-}
-
-function loadBrands() {
-  const c = document.getElementById('brandsList');
-  if (!siteData.brands.length) { c.innerHTML = '<p style="color:var(--muted);text-align:center;padding:2rem">لا توجد ماركات</p>'; return; }
-  c.innerHTML = siteData.brands.map((b, i) => `
-    <div class="list-item">
-      <input type="color" class="color-input" value="${b.color}" onchange="siteData.brands[${i}].color=this.value">
-      <div class="list-item-info">
-        <input type="text" class="form-input" value="${b.name}" onchange="siteData.brands[${i}].name=this.value" style="margin-bottom:.3rem">
-        <p>ID: ${b.id} • ${siteData.products.filter(p=>p.brandId===b.id).length} منتج</p>
-      </div>
-      <button class="btn btn-danger" onclick="deleteBrand(${i})"><i class="fas fa-trash"></i></button>
-    </div>`).join('');
-}
-
-function addBrand() {
-  const name = prompt('اسم الماركة:');
-  if (!name) return;
-  siteData.brands.push({ id: name.toLowerCase().replace(/\s+/g,'-') + '-' + Date.now(), name, color:'#6366f1' });
-  loadBrands(); showToast('✓ تمت الإضافة');
-}
-
-function deleteBrand(i) {
-  if (!confirm('حذف هذه الماركة؟')) return;
-  siteData.brands.splice(i, 1);
-  loadBrands(); showToast('✓ تم الحذف');
-}
-
-function loadProducts() {
-  const c = document.getElementById('productsList');
-  if (!siteData.products.length) { c.innerHTML = '<p style="color:var(--muted);text-align:center;padding:2rem">لا توجد منتجات</p>'; return; }
-  c.innerHTML = siteData.products.map((p, i) => {
-    const brand = siteData.brands.find(b => b.id === p.brandId);
-    return `
-    <div class="list-item">
-      ${p.image ? `<img src="${p.image}" alt="${p.name}">` : `<div class="placeholder-icon"><i class="fas fa-cube"></i></div>`}
-      <div class="list-item-info">
-        <h4>${p.name}</h4>
-        <p>${brand ? brand.name : '?'} • ${p.price} ${p.currency} • ${p.duration}</p>
-      </div>
-      <div class="list-item-actions">
-        <button class="btn btn-secondary" onclick="openProductModal(${i})"><i class="fas fa-edit"></i></button>
-        <button class="btn btn-danger" onclick="deleteProduct(${i})"><i class="fas fa-trash"></i></button>
-      </div>
-    </div>`;
-  }).join('');
-}
-
-function openProductModal(index = null) {
-  editingIndex = index;
-  document.getElementById('productModalTitle').textContent = index !== null ? 'تعديل المنتج' : 'إضافة منتج جديد';
-  
-  const sel = document.getElementById('pBrand');
-  sel.innerHTML = siteData.brands.map(b => `<option value="${b.id}">${b.name}</option>`).join('');
-  
-  if (index !== null) {
-    const p = siteData.products[index];
-    document.getElementById('pName').value = p.name;
-    sel.value = p.brandId;
-    document.getElementById('pDuration').value = p.duration;
-    document.getElementById('pPrice').value = p.price;
-    document.getElementById('pOldPrice').value = p.oldPrice || '';
-    document.getElementById('pCurrency').value = p.currency || 'دج';
-    document.getElementById('pDesc').value = p.description || '';
-    document.getElementById('pLongDesc').value = p.longDescription || '';
-    document.getElementById('pFeatures').value = (p.features || []).join('\n');
-    document.getElementById('pBadge').value = p.badge || '';
-    if (p.image) {
-      currentImage = p.image;
-      document.getElementById('imgPreviewSrc').src = p.image;
-      document.getElementById('imgPreview').style.display = 'block';
-      document.getElementById('imgInfo').textContent = '✓ صورة موجودة';
-    } else {
-      currentImage = null;
-      document.getElementById('imgPreview').style.display = 'none';
+const DEFAULT_DATA = {
+  "site": {
+    "brandName": "RJ Tech",
+    "brandTagline": "اشتراكات برمجيات أصلية",
+    "logoUrl": "",
+    "heroTitle": "أدوات الإبداع والهندسة، باشتراك أصلي وموثوق",
+    "heroSubtitle": "فوتوشوب، إليستريتور، أوتوكاد وعشرات البرامج الأصلية من أفضل الماركات العالمية، بأسعار محلية وتفعيل فوري ودعم مباشر بعد كل عملية شراء.",
+    "adminPasswordHash": "240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9",
+    "telegramUsername": "your_telegram_username",
+    "facebookPageUrl": "https://facebook.com/yourpage",
+    "messengerLink": "https://m.me/yourpage",
+    "aboutText": "نحن متجر متخصص في توفير اشتراكات برامج أصلية لعملائنا في المنطقة، بأسعار تناسب السوق المحلي وطرق دفع مبسطة. كل اشتراك يُفعَّل يدويًا من فريقنا خلال دقائق من تأكيد الطلب.",
+    "footerText": "جميع الأسماء والعلامات التجارية المذكورة ملك لأصحابها. هذا المتجر معيد بيع اشتراكات وليس تابعًا رسميًا لأي من الشركات المذكورة.",
+    "supportHours": "متوفرون يوميًا من 9 صباحًا حتى 11 مساءً"
+  },
+  "brands": [
+    { "id": "adobe", "name": "Adobe", "color": "#FF3B3B" },
+    { "id": "autodesk", "name": "Autodesk", "color": "#3B82F6" }
+  ],
+  "banners": [
+    {
+      "title": "عروض بداية الموسم",
+      "subtitle": "خصم يصل إلى 20% على باقات Adobe السنوية",
+      "badge": "لفترة محدودة"
+    },
+    {
+      "title": "باقة الطلاب والمهندسين",
+      "subtitle": "أسعار خاصة لحاملي البطاقة الجامعية على AutoCAD و Revit",
+      "badge": "جديد"
     }
-  } else {
-    document.getElementById('pName').value = '';
-    document.getElementById('pDuration').value = '';
-    document.getElementById('pPrice').value = '';
-    document.getElementById('pOldPrice').value = '';
-    document.getElementById('pCurrency').value = 'دج';
-    document.getElementById('pDesc').value = '';
-    document.getElementById('pLongDesc').value = '';
-    document.getElementById('pFeatures').value = '';
-    document.getElementById('pBadge').value = '';
-    currentImage = null;
-    document.getElementById('imgPreview').style.display = 'none';
-    document.getElementById('imgInput').value = '';
-  }
-  
-  document.getElementById('productModal').classList.add('active');
+  ],
+  "products": [
+    {
+      "id": "ps-1m",
+      "brandId": "adobe",
+      "name": "Photoshop",
+      "description": "تحرير الصور الاحترافي، اشتراك فردي مفعّل على حسابك الخاص.",
+      "longDescription": "فوتوشوب هو المعيار العالمي في تحرير الصور والتصميم الجرافيكي، يستخدمه المصممون والمصورون المحترفون حول العالم. مع هذا الاشتراك تحصل على أحدث إصدار مع كل التحديثات والميزات المدعومة بالذكاء الاصطناعي، مفعّلًا بالكامل على حسابك الخاص.",
+      "features": ["تفعيل رسمي على بريدك الإلكتروني الخاص", "جميع التحديثات مشمولة طوال مدة الاشتراك", "يعمل على ويندوز وماك", "دعم فني عند أي مشكلة في التفعيل"],
+      "duration": "شهر واحد",
+      "price": "2200",
+      "oldPrice": "2800",
+      "currency": "دج",
+      "badge": "الأكثر طلبًا",
+      "image": ""
+    },
+    {
+      "id": "cc-all-12m",
+      "brandId": "adobe",
+      "name": "Creative Cloud - جميع التطبيقات",
+      "description": "أكثر من 20 برنامج من Adobe بما فيها فوتوشوب وإليستريتور وبريمير.",
+      "longDescription": "باقة Creative Cloud الكاملة تمنحك وصولًا لأكثر من 20 تطبيقًا من Adobe في مكان واحد: فوتوشوب، إليستريتور، بريمير برو، أفتر إفكتس، إنديزاين وغيرها. الخيار الأمثل للمصممين والمبدعين الذين يحتاجون أكثر من أداة واحدة.",
+      "features": ["أكثر من 20 تطبيق Adobe في اشتراك واحد", "100 جيجابايت تخزين سحابي", "تفعيل على حسابك الشخصي", "أفضل قيمة مقابل السعر مقارنة بالاشتراك الفردي"],
+      "duration": "12 شهرًا",
+      "price": "13500",
+      "oldPrice": "16900",
+      "currency": "دج",
+      "badge": "أفضل قيمة",
+      "image": ""
+    },
+    {
+      "id": "ai-1m",
+      "brandId": "adobe",
+      "name": "Illustrator",
+      "description": "تصميم فيكتور احترافي للشعارات والهوية البصرية.",
+      "longDescription": "إليستريتور هو برنامج الرسم الاتجاهي (Vector) الأول عالميًا، مثالي لتصميم الشعارات والأيقونات والهوية البصرية بجودة تكبير غير محدودة.",
+      "features": ["تفعيل رسمي على بريدك الإلكتروني", "متوافق مع جميع ملفات Adobe الأخرى", "تحديثات مستمرة", "دعم فني كامل"],
+      "duration": "شهر واحد",
+      "price": "2200",
+      "oldPrice": "",
+      "currency": "دج",
+      "badge": "",
+      "image": ""
+    },
+    {
+      "id": "pr-1m",
+      "brandId": "adobe",
+      "name": "Premiere Pro",
+      "description": "مونتاج فيديو احترافي بجودة سينمائية.",
+      "longDescription": "بريمير برو هو برنامج المونتاج الاحترافي المعتمد في صناعة الأفلام والمحتوى الرقمي، يدعم جميع صيغ الفيديو الحديثة ويعمل بسلاسة حتى مع مشاريع 4K.",
+      "features": ["دعم كامل لمقاطع 4K و8K", "أدوات تصحيح ألوان احترافية", "تكامل مباشر مع باقي برامج Adobe", "تفعيل على حسابك الخاص"],
+      "duration": "شهر واحد",
+      "price": "2200",
+      "oldPrice": "",
+      "currency": "دج",
+      "badge": "",
+      "image": ""
+    },
+    {
+      "id": "acad-12m",
+      "brandId": "autodesk",
+      "name": "AutoCAD",
+      "description": "الرسم الهندسي ثنائي وثلاثي الأبعاد لجميع التخصصات.",
+      "longDescription": "أوتوكاد هو المرجع الأول في الرسم الهندسي بمختلف تخصصاته: معماري، ميكانيكي، كهربائي ومدني. يدعم الرسم ثنائي وثلاثي الأبعاد بدقة احترافية.",
+      "features": ["ترخيص أصلي سنوي كامل", "يشمل جميع أدوات الرسم 2D و3D", "تحديثات Autodesk الرسمية", "مناسب للطلاب والمهندسين الممارسين"],
+      "duration": "12 شهرًا",
+      "price": "18500",
+      "oldPrice": "22000",
+      "currency": "دج",
+      "badge": "طلاب وموظفون",
+      "image": ""
+    },
+    {
+      "id": "revit-12m",
+      "brandId": "autodesk",
+      "name": "Revit",
+      "description": "نمذجة معلومات البناء BIM للمهندسين المعماريين.",
+      "longDescription": "Revit هو برنامج نمذجة معلومات البناء (BIM) الأكثر استخدامًا عالميًا من طرف المهندسين المعماريين والإنشائيين، يتيح تصميم وتوثيق المشاريع بنموذج ثلاثي الأبعاد متكامل.",
+      "features": ["ترخيص أصلي سنوي كامل", "تصميم معماري وإنشائي متكامل", "تحديثات Autodesk الرسمية", "دعم فني عند التفعيل"],
+      "duration": "12 شهرًا",
+      "price": "19500",
+      "oldPrice": "",
+      "currency": "دج",
+      "badge": "",
+      "image": ""
+    },
+    {
+      "id": "3dsmax-12m",
+      "brandId": "autodesk",
+      "name": "3ds Max",
+      "description": "نمذجة ثلاثية الأبعاد ورندر احترافي.",
+      "longDescription": "3ds Max هو أحد أقوى برامج النمذجة ثلاثية الأبعاد والرندر، يستخدم في التصميم المعماري، الألعاب، والمؤثرات البصرية.",
+      "features": ["ترخيص أصلي سنوي كامل", "أدوات نمذجة ورندر احترافية", "تحديثات Autodesk الرسمية", "تفعيل على حسابك الخاص"],
+      "duration": "12 شهرًا",
+      "price": "19500",
+      "oldPrice": "",
+      "currency": "دج",
+      "badge": "",
+      "image": ""
+    }
+  ]
+};
+let SITE = JSON.parse(JSON.stringify(DEFAULT_DATA));
+
+async function sha256(text){
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
 }
 
-function closeProductModal() {
-  document.getElementById('productModal').classList.remove('active');
-}
-
-function saveProduct(e) {
-  e.preventDefault();
-  const product = {
-    id: editingIndex !== null ? siteData.products[editingIndex].id : 'prod-' + Date.now(),
-    brandId: document.getElementById('pBrand').value,
-    name: document.getElementById('pName').value,
-    description: document.getElementById('pDesc').value,
-    longDescription: document.getElementById('pLongDesc').value,
-    features: document.getElementById('pFeatures').value.split('\n').filter(f => f.trim()),
-    duration: document.getElementById('pDuration').value,
-    price: document.getElementById('pPrice').value,
-    oldPrice: document.getElementById('pOldPrice').value,
-    currency: document.getElementById('pCurrency').value || 'دج',
-    badge: document.getElementById('pBadge').value,
-    image: currentImage || ''
-  };
-  
-  if (editingIndex !== null) {
-    siteData.products[editingIndex] = product;
-  } else {
-    siteData.products.push(product);
-  }
-  
-  closeProductModal();
-  loadProducts();
-  showToast('✓ تم حفظ المنتج');
-}
-
-function deleteProduct(i) {
-  if (!confirm('حذف هذا المنتج؟')) return;
-  siteData.products.splice(i, 1);
-  loadProducts();
-  showToast('✓ تم الحذف');
-}
-
-function handleImage(e) {
-  const file = e.target.files[0];
-  if (!file) return;
-  if (!file.type.startsWith('image/')) { showToast('❌ اختر صورة صالحة', 'error'); return; }
-  
-  showToast('جاري ضغط الصورة...');
-  
-  const reader = new FileReader();
-  reader.onload = function(ev) {
-    const img = new Image();
-    img.onload = function() {
-      const canvas = document.createElement('canvas');
-      let w = img.width, h = img.height;
-      const maxW = 600;
-      if (w > maxW) { h = (h * maxW) / w; w = maxW; }
-      canvas.width = w;
-      canvas.height = h;
-      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-      
-      currentImage = canvas.toDataURL('image/jpeg', 0.75);
-      document.getElementById('imgPreviewSrc').src = currentImage;
-      document.getElementById('imgPreview').style.display = 'block';
-      
-      const origKB = (file.size / 1024).toFixed(1);
-      const newKB = (currentImage.length * 0.75 / 1024).toFixed(1);
-      document.getElementById('imgInfo').innerHTML = `✓ تم الضغط: ${origKB}KB → ${newKB}KB (${w}×${h})`;
-      showToast('✓ تم ضغط الصورة بنجاح');
+function compressImage(file, maxDim=900, quality=0.78){
+  return new Promise((resolve, reject)=>{
+    if(!file.type.startsWith('image/')){ reject(new Error('الملف ليس صورة')); return; }
+    const reader = new FileReader();
+    reader.onload = e => {
+      const img = new Image();
+      img.onload = () => {
+        let w = img.width, h = img.height;
+        if(w > h){ if(w > maxDim){ h = Math.round(h * maxDim / w); w = maxDim; } }
+        else { if(h > maxDim){ w = Math.round(w * maxDim / h); h = maxDim; } }
+        const canvas = document.createElement('canvas');
+        canvas.width = w; canvas.height = h;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, w, h);
+        resolve(canvas.toDataURL('image/jpeg', quality));
+      };
+      img.onerror = () => reject(new Error('تعذّر قراءة الصورة، جرّب صورة أخرى (JPG أو PNG)'));
+      img.src = e.target.result;
     };
-    img.src = ev.target.result;
-  };
-  reader.readAsDataURL(file);
+    reader.onerror = () => reject(new Error('تعذّر قراءة الملف من الجهاز'));
+    reader.readAsDataURL(file);
+  });
 }
 
-function removeImage(e) {
-  e.stopPropagation();
-  currentImage = null;
-  document.getElementById('imgPreview').style.display = 'none';
-  document.getElementById('imgInput').value = '';
+async function loadData(){
+  try{
+    const res = await fetch('data.json?t=' + Date.now(), {cache:'no-store'});
+    if(res.ok) SITE = await res.json();
+  }catch(e){}
+  const local = localStorage.getItem('rjtech_draft');
+  if(local){ try{ SITE = JSON.parse(local); }catch(e){} }
+  if(!SITE.brands) SITE.brands = [];
 }
 
-function loadBanners() {
-  const c = document.getElementById('bannersList');
-  if (!siteData.banners || !siteData.banners.length) { c.innerHTML = '<p style="color:var(--muted);text-align:center;padding:2rem">لا توجد إعلانات</p>'; return; }
-  c.innerHTML = siteData.banners.map((b, i) => `
-    <div class="list-item">
-      <div class="placeholder-icon" style="background:linear-gradient(135deg,var(--warning),#d97706);color:white"><i class="fas fa-bullhorn"></i></div>
-      <div class="list-item-info"><h4>${b.title}</h4><p>${b.subtitle}</p></div>
-      <button class="btn btn-danger" onclick="siteData.banners.splice(${i},1);loadBanners();showToast('✓ تم الحذف')"><i class="fas fa-trash"></i></button>
-    </div>`).join('');
-}
-
-function addBanner() {
-  const title = prompt('عنوان الإعلان:');
-  if (!title) return;
-  if (!siteData.banners) siteData.banners = [];
-  siteData.banners.push({ title, subtitle: prompt('الوصف:') || '', badge: prompt('الشارة (اختياري):') || '' });
-  loadBanners(); showToast('✓ تمت الإضافة');
-}
-
-function loadContact() {
-  document.getElementById('telegramUsername').value = siteData.site.telegramUsername || '';
-  document.getElementById('messengerLink').value = siteData.site.messengerLink || '';
-  document.getElementById('facebookPageUrl').value = siteData.site.facebookPageUrl || '';
-}
-
-function saveContact() {
-  siteData.site.telegramUsername = document.getElementById('telegramUsername').value;
-  siteData.site.messengerLink = document.getElementById('messengerLink').value;
-  siteData.site.facebookPageUrl = document.getElementById('facebookPageUrl').value;
-}
-
-function loadGitHub() {
-  const gh = JSON.parse(localStorage.getItem('githubConfig') || '{}');
-  document.getElementById('ghOwner').value = gh.owner || '';
-  document.getElementById('ghRepo').value = gh.repo || '';
-  document.getElementById('ghBranch').value = gh.branch || 'main';
-  document.getElementById('ghPath').value = gh.path || 'data.json';
-  document.getElementById('ghToken').value = gh.token || '';
-}
-
-function updateGitHubStatus() {
-  const gh = JSON.parse(localStorage.getItem('githubConfig') || '{}');
-  const el = document.getElementById('githubStatus');
-  const txt = document.getElementById('githubStatusText');
-  if (gh.token && gh.owner && gh.repo) {
-    el.className = 'github-status connected';
-    txt.textContent = `متصل بـ GitHub: ${gh.owner}/${gh.repo}`;
+document.getElementById('loginBtn').addEventListener('click', async ()=>{
+  await loadData();
+  const pw = document.getElementById('pwInput').value;
+  const hash = await sha256(pw);
+  const msg = document.getElementById('loginMsg');
+  if(hash === SITE.site.adminPasswordHash){
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    fillForm();
+    loadGithubConfig();
   } else {
-    el.className = 'github-status disconnected';
-    txt.textContent = 'غير متصل بـ GitHub — التعديلات ستُحفظ محليًا فقط';
+    msg.textContent = 'كلمة المرور غير صحيحة';
+    msg.classList.add('show');
+  }
+});
+document.getElementById('pwInput').addEventListener('keydown', e=>{ if(e.key==='Enter') document.getElementById('loginBtn').click(); });
+
+function fillForm(){
+  const s = SITE.site;
+  const map = {
+    'f-brandName':s.brandName,'f-brandTagline':s.brandTagline,'f-logoUrl':s.logoUrl,
+    'f-heroTitle':s.heroTitle,'f-heroSubtitle':s.heroSubtitle,'f-aboutText':s.aboutText,
+    'f-supportHours':s.supportHours,'f-footerText':s.footerText,
+    'f-telegramUsername':s.telegramUsername,'f-messengerLink':s.messengerLink,'f-facebookPageUrl':s.facebookPageUrl
+  };
+  for(const [id,val] of Object.entries(map)){ document.getElementById(id).value = val || ''; }
+  renderBrands(); renderProducts(); renderBanners();
+}
+
+function readGeneralForm(){
+  const s = SITE.site;
+  s.brandName = document.getElementById('f-brandName').value.trim();
+  s.brandTagline = document.getElementById('f-brandTagline').value.trim();
+  s.logoUrl = document.getElementById('f-logoUrl').value.trim();
+  s.heroTitle = document.getElementById('f-heroTitle').value.trim();
+  s.heroSubtitle = document.getElementById('f-heroSubtitle').value.trim();
+  s.aboutText = document.getElementById('f-aboutText').value.trim();
+  s.supportHours = document.getElementById('f-supportHours').value.trim();
+  s.footerText = document.getElementById('f-footerText').value.trim();
+  s.telegramUsername = document.getElementById('f-telegramUsername').value.trim();
+  s.messengerLink = document.getElementById('f-messengerLink').value.trim();
+  s.facebookPageUrl = document.getElementById('f-facebookPageUrl').value.trim();
+}
+
+function renderBrands(){
+  document.getElementById('brandsList').innerHTML = SITE.brands.map((b,i)=>`
+    <div class="brand-item">
+      <div class="item-head"><strong>${b.name || 'ماركة جديدة'}</strong><button class="remove-btn" onclick="removeBrand(${i})">حذف</button></div>
+      <div class="grid2">
+        <div class="field"><label>اسم الماركة</label><input value="${esc(b.name)}" onchange="updateBrand(${i},'name',this.value)"></div>
+        <div class="field"><label>اللون المميز</label>
+          <div class="swatch-input"><span class="swatch-preview" style="background:${b.color}"></span><input value="${esc(b.color)}" onchange="updateBrand(${i},'color',this.value)"></div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+function slugify(name){ return 'b-' + (name||'').trim().toLowerCase().replace(/[^a-z0-9أ-ي]+/gi,'-').replace(/(^-|-$)/g,'') + '-' + Date.now().toString(36).slice(-4); }
+function updateBrand(i,key,val){ SITE.brands[i][key]=val; if(key==='name'||key==='color'){ renderBrands(); renderProducts(); } }
+function removeBrand(i){
+  const b = SITE.brands[i];
+  const used = SITE.products.some(p=>p.brandId===b.id);
+  if(used && !confirm('هذه الماركة مستخدمة في بعض البرامج، حذفها سيترك تلك البرامج بدون ماركة. متابعة؟')) return;
+  SITE.brands.splice(i,1); renderBrands(); renderProducts();
+}
+document.getElementById('addBrandBtn').addEventListener('click', ()=>{
+  SITE.brands.push({id: slugify('ماركة جديدة'), name:'', color:'#6366f1'});
+  renderBrands();
+});
+
+function brandOptions(selectedId){ return SITE.brands.map(b=>`<option value="${b.id}" ${b.id===selectedId?'selected':''}>${esc(b.name)}</option>`).join(''); }
+function renderProducts(){
+  document.getElementById('productsList').innerHTML = SITE.products.map((p,i)=>`
+    <div class="product-item" data-index="${i}">
+      <div class="item-head"><strong>${p.name || 'برنامج جديد'}</strong><button class="remove-btn" onclick="removeProduct(${i})">حذف</button></div>
+
+      <div class="image-uploader">
+        <div class="image-preview" id="prev-${i}">${p.image ? `<img src="${p.image}">` : '<i class="fas fa-image" style="font-size:22px;opacity:.4"></i>'}</div>
+        <div class="image-actions">
+          <label class="upload-label"><i class="fas fa-upload"></i> رفع صورة من الحاسوب
+            <input type="file" accept="image/*" onchange="handleImageUpload(${i}, this)">
+          </label>
+          ${p.image ? `<button class="remove-btn" onclick="removeProductImage(${i})" style="align-self:flex-start;">إزالة الصورة</button>` : ''}
+          <span class="image-size-note">اضغط الزر واختر صورة JPG أو PNG من جهازك — تُضغط وتُصغَّر تلقائيًا (حتى 900px)</span>
+        </div>
+      </div>
+
+      <div class="grid3">
+        <div class="field"><label>الماركة</label><select onchange="updateProduct(${i},'brandId',this.value)">${brandOptions(p.brandId)}</select></div>
+        <div class="field"><label>اسم البرنامج</label><input value="${esc(p.name)}" onchange="updateProduct(${i},'name',this.value)"></div>
+        <div class="field"><label>شارة (اختياري)</label><input value="${esc(p.badge)}" onchange="updateProduct(${i},'badge',this.value)"></div>
+      </div>
+      <div class="field"><label>وصف قصير (بطاقة المنتج)</label><input value="${esc(p.description)}" onchange="updateProduct(${i},'description',this.value)"></div>
+      <div class="field"><label>وصف تفصيلي (عند فتح المنتج) — اختياري</label><textarea onchange="updateProduct(${i},'longDescription',this.value)">${esc(p.longDescription)}</textarea></div>
+      <div class="field"><label>مزايا البرنامج (كل ميزة في سطر) — اختياري</label><textarea onchange="updateProductFeatures(${i},this.value)">${(p.features||[]).join('\n')}</textarea></div>
+      <div class="grid3">
+        <div class="field"><label>المدة</label><input value="${esc(p.duration)}" onchange="updateProduct(${i},'duration',this.value)"></div>
+        <div class="field"><label>السعر الحالي</label><input value="${esc(p.price)}" onchange="updateProduct(${i},'price',this.value)"></div>
+        <div class="field"><label>السعر قبل الخصم (اختياري)</label><input value="${esc(p.oldPrice)}" onchange="updateProduct(${i},'oldPrice',this.value)"></div>
+      </div>
+      <div class="field" style="max-width:200px;"><label>العملة</label><input value="${esc(p.currency)}" onchange="updateProduct(${i},'currency',this.value)"></div>
+    </div>
+  `).join('');
+}
+function updateProduct(i, key, val){ SITE.products[i][key] = val; if(key==='name') renderProducts(); }
+function updateProductFeatures(i, val){ SITE.products[i].features = val.split('\n').map(s=>s.trim()).filter(Boolean); }
+async function handleImageUpload(i, input){
+  const file = input.files[0];
+  if(!file) return;
+  const preview = document.getElementById(`prev-${i}`);
+  preview.innerHTML = '<i class="fas fa-spinner fa-spin" style="font-size:18px;opacity:.6"></i>';
+  try{
+    const dataUrl = await compressImage(file, 900, 0.78);
+    SITE.products[i].image = dataUrl;
+    renderProducts();
+  }catch(err){
+    alert('تعذّر معالجة الصورة: ' + err.message);
+    renderProducts();
   }
 }
+function removeProductImage(i){ SITE.products[i].image = ''; renderProducts(); }
+function removeProduct(i){ if(confirm('حذف هذا البرنامج؟')){ SITE.products.splice(i,1); renderProducts(); } }
+document.getElementById('addProductBtn').addEventListener('click', ()=>{
+  const firstBrand = SITE.brands[0] ? SITE.brands[0].id : '';
+  SITE.products.push({id:'p-'+Date.now(), brandId:firstBrand, name:'', description:'', longDescription:'', features:[], duration:'شهر واحد', price:'', oldPrice:'', currency:'دج', badge:'', image:''});
+  renderProducts();
+});
 
-async function testGitHub() {
-  const owner = document.getElementById('ghOwner').value.trim();
-  const repo = document.getElementById('ghRepo').value.trim();
-  const branch = document.getElementById('ghBranch').value.trim() || 'main';
-  const path = document.getElementById('ghPath').value.trim() || 'data.json';
-  const token = document.getElementById('ghToken').value.trim();
-  
-  if (!owner || !repo || !token) { showToast('❌ املأ جميع الحقول', 'error'); return; }
-  
-  showToast('جاري اختبار الاتصال...');
-  
-  try {
-    const r = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}?ref=${branch}`, {
-      headers: { 'Authorization': 'Bearer ' + token, 'Accept': 'application/vnd.github.v3+json' }
-    });
-    
-    if (r.ok) {
-      localStorage.setItem('githubConfig', JSON.stringify({ owner, repo, branch, path, token }));
-      updateGitHubStatus();
-      showToast('✓ الاتصال ناجح!');
-    } else {
-      const err = await r.json();
-      showToast('❌ فشل: ' + (err.message || r.status), 'error');
-    }
-  } catch (e) {
-    showToast('❌ خطأ في الاتصال: ' + e.message, 'error');
+function renderBanners(){
+  document.getElementById('bannersList').innerHTML = SITE.banners.map((b,i)=>`
+    <div class="banner-item">
+      <div class="item-head"><strong>${b.title || 'إعلان جديد'}</strong><button class="remove-btn" onclick="removeBanner(${i})">حذف</button></div>
+      <div class="grid3">
+        <div class="field"><label>الشارة</label><input value="${esc(b.badge)}" onchange="updateBanner(${i},'badge',this.value)"></div>
+        <div class="field" style="grid-column: span 2;"><label>العنوان</label><input value="${esc(b.title)}" onchange="updateBanner(${i},'title',this.value)"></div>
+      </div>
+      <div class="field"><label>الوصف</label><input value="${esc(b.subtitle)}" onchange="updateBanner(${i},'subtitle',this.value)"></div>
+    </div>
+  `).join('');
+}
+function updateBanner(i,key,val){ SITE.banners[i][key]=val; if(key==='title') renderBanners(); }
+function removeBanner(i){ if(confirm('حذف هذا الإعلان؟')){ SITE.banners.splice(i,1); renderBanners(); } }
+document.getElementById('addBannerBtn').addEventListener('click', ()=>{ SITE.banners.push({title:'', subtitle:'', badge:'جديد'}); renderBanners(); });
+
+function esc(v){ return (v===undefined||v===null) ? '' : String(v).replace(/"/g,'&quot;'); }
+
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('panel-'+btn.dataset.tab).classList.add('active');
+  });
+});
+
+async function collectAndValidate(){
+  readGeneralForm();
+  const pw1 = document.getElementById('f-newPassword').value;
+  const pw2 = document.getElementById('f-newPassword2').value;
+  if(pw1 || pw2){
+    if(pw1.length < 6){ alert('كلمة المرور الجديدة يجب أن تكون 6 أحرف على الأقل'); return false; }
+    if(pw1 !== pw2){ alert('كلمتا المرور غير متطابقتين'); return false; }
+    SITE.site.adminPasswordHash = await sha256(pw1);
+    document.getElementById('f-newPassword').value = '';
+    document.getElementById('f-newPassword2').value = '';
   }
+  localStorage.setItem('rjtech_draft', JSON.stringify(SITE));
+  document.getElementById('saveNote').textContent = 'آخر حفظ محلي: ' + new Date().toLocaleTimeString('ar-DZ');
+  return true;
 }
 
-function clearGitHub() {
-  localStorage.removeItem('githubConfig');
-  document.getElementById('ghOwner').value = '';
-  document.getElementById('ghRepo').value = '';
-  document.getElementById('ghToken').value = '';
-  updateGitHubStatus();
-  showToast('✓ تم مسح بيانات GitHub');
+function downloadJson(){
+  const blob = new Blob([JSON.stringify(SITE, null, 2)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'data.json';
+  a.click();
 }
+document.getElementById('downloadBtn').addEventListener('click', async ()=>{ if(await collectAndValidate()) downloadJson(); });
+document.getElementById('downloadBtn2').addEventListener('click', async ()=>{ if(await collectAndValidate()) downloadJson(); });
 
-async function saveAndPublish() {
-  saveGeneral();
-  saveContact();
-  
-  localStorage.setItem('siteData', JSON.stringify(siteData));
-  
-  const gh = JSON.parse(localStorage.getItem('githubConfig') || '{}');
-  if (!gh.token || !gh.owner || !gh.repo) {
-    showToast('⚠️ تم الحفظ محلياً فقط. اربط GitHub للنشر على الموقع.', 'error');
+function loadGithubConfig(){
+  const cfg = JSON.parse(localStorage.getItem('rjtech_gh_config') || '{}');
+  document.getElementById('f-ghOwner').value = cfg.owner || '';
+  document.getElementById('f-ghRepo').value = cfg.repo || '';
+  document.getElementById('f-ghBranch').value = cfg.branch || 'main';
+  document.getElementById('f-ghPath').value = cfg.path || 'data.json';
+  document.getElementById('f-ghToken').value = cfg.token || '';
+  updateConnStatus(!!cfg.token);
+}
+function readGithubConfig(){
+  return {
+    owner: document.getElementById('f-ghOwner').value.trim(),
+    repo: document.getElementById('f-ghRepo').value.trim(),
+    branch: document.getElementById('f-ghBranch').value.trim() || 'main',
+    path: document.getElementById('f-ghPath').value.trim() || 'data.json',
+    token: document.getElementById('f-ghToken').value.trim()
+  };
+}
+function saveGithubConfig(cfg){ localStorage.setItem('rjtech_gh_config', JSON.stringify(cfg)); }
+function updateConnStatus(connected){
+  document.getElementById('connDot').classList.toggle('connected', connected);
+  document.getElementById('connStatusText').textContent = connected
+    ? 'متصل بمستودع GitHub — الحفظ سيُنشر مباشرة على الموقع'
+    : 'غير متصل بـ GitHub — التعديلات ستُحفظ محليًا فقط حتى تُهيّئ الاتصال';
+}
+function showSyncMsg(text, ok){
+  const el = document.getElementById('syncMsg');
+  el.textContent = text;
+  el.className = 'msg show ' + (ok ? 'ok' : 'err');
+}
+async function githubGetSha(cfg){
+  const url = `https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/${cfg.path}?ref=${cfg.branch}`;
+  const res = await fetch(url, { headers:{ Authorization:`Bearer ${cfg.token}`, Accept:'application/vnd.github+json' } });
+  if(res.status === 404) return null;
+  if(!res.ok) throw new Error('تعذّر الوصول إلى الملف (تحقق من اسم المستودع والفرع)');
+  const data = await res.json();
+  return data.sha;
+}
+document.getElementById('testConnBtn').addEventListener('click', async ()=>{
+  const cfg = readGithubConfig();
+  saveGithubConfig(cfg);
+  try{
+    const sha = await githubGetSha(cfg);
+    showSyncMsg(sha ? 'الاتصال ناجح، الملف موجود وجاهز للتحديث.' : 'الاتصال ناجح، لكن لم يُعثر على data.json في هذا المسار (سيُنشأ عند أول حفظ).', true);
+    updateConnStatus(true);
+  }catch(err){
+    showSyncMsg('فشل الاتصال: ' + err.message, false);
+    updateConnStatus(false);
+  }
+});
+document.getElementById('forgetTokenBtn').addEventListener('click', ()=>{
+  localStorage.removeItem('rjtech_gh_config');
+  document.getElementById('f-ghToken').value = '';
+  updateConnStatus(false);
+  showSyncMsg('تم نسيان الرمز من هذا المتصفح.', true);
+});
+async function saveToGithub(){
+  if(!(await collectAndValidate())) return;
+  const cfg = readGithubConfig();
+  if(!cfg.owner || !cfg.repo || !cfg.token){
+    alert('أكمل بيانات الاتصال بـ GitHub من تبويب "الاتصال بـ GitHub" أولاً، أو استخدم زر "تنزيل data.json" للحفظ اليدوي.');
     return;
   }
-  
-  showToast('جاري النشر على GitHub...');
-  
-  try {
-    const getR = await fetch(`https://api.github.com/repos/${gh.owner}/${gh.repo}/contents/${gh.path}?ref=${gh.branch}`, {
-      headers: { 'Authorization': 'Bearer ' + gh.token, 'Accept': 'application/vnd.github.v3+json' }
+  saveGithubConfig(cfg);
+  try{
+    const sha = await githubGetSha(cfg);
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(SITE, null, 2))));
+    const url = `https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/${cfg.path}`;
+    const body = { message: 'تحديث محتوى الموقع من لوحة التحكم', content, branch: cfg.branch };
+    if(sha) body.sha = sha;
+    const res = await fetch(url, {
+      method:'PUT',
+      headers:{ Authorization:`Bearer ${cfg.token}`, Accept:'application/vnd.github+json', 'Content-Type':'application/json' },
+      body: JSON.stringify(body)
     });
-    
-    let sha = '';
-    if (getR.ok) {
-      const data = await getR.json();
-      sha = data.sha;
+    if(!res.ok){
+      const errData = await res.json().catch(()=>({}));
+      throw new Error(errData.message || 'فشل الحفظ');
     }
-    
-    const content = btoa(unescape(encodeURIComponent(JSON.stringify(siteData, null, 2))));
-    const putR = await fetch(`https://api.github.com/repos/${gh.owner}/${gh.repo}/contents/${gh.path}`, {
-      method: 'PUT',
-      headers: {
-        'Authorization': 'Bearer ' + gh.token,
-        'Accept': 'application/vnd.github.v3+json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        message: 'تحديث data.json من لوحة التحكم',
-        content: content,
-        sha: sha || undefined,
-        branch: gh.branch
-      })
-    });
-    
-    if (putR.ok) {
-      showToast('✓ تم النشر على الموقع بنجاح!
+    updateConnStatus(true);
+    alert('تم الحفظ بنجاح! سيظهر التحديث على الموقع خلال دقيقة تقريبًا بعد إعادة النشر التلقائي.');
+  }catch(err){
+    alert('تعذّر الحفظ على GitHub: ' + err.message + '\n\nيمكنك استخدام زر "تنزيل data.json" ورفع الملف يدويًا كحل بديل.');
+  }
+}
+document.getElementById('saveGithubBtn').addEventListener('click', saveToGithub);
+document.getElementById('saveGithubBtn2').addEventListener('click', saveToGithub);
+</script>
+</body>
+</html>
